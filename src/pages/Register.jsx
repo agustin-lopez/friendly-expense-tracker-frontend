@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { login } from "../services/authService";
+import { useNavigate, Link } from "react-router-dom";
+import { register, login } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Register() {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -16,6 +16,7 @@ export default function Login() {
         setError("");
 
         try {
+            await register(name, email, password);
             const token = await login(email, password);
             loginUser(token);
             navigate("/dashboard");
@@ -30,11 +31,20 @@ export default function Login() {
                 onSubmit={handleSubmit}
                 className="bg-white p-8 rounded-lg shadow-md w-80"
             >
-                <h1 className="text-2xl font-bold mb-6 text-center">Log in</h1>
+                <h1 className="text-2xl font-bold mb-6 text-center">Register</h1>
 
                 {error && (
                     <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
                 )}
+
+                <label className="block text-sm font-medium mb-1">Name</label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full border rounded px-3 py-2 mb-4"
+                    required
+                />
 
                 <label className="block text-sm font-medium mb-1">Email</label>
                 <input
@@ -58,13 +68,13 @@ export default function Login() {
                     type="submit"
                     className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
                 >
-                    Submit
+                    Register
                 </button>
 
                 <p className="text-sm text-center mt-4">
-                    Don't have an account?{" "}
-                    <Link to="/register" className="text-blue-600 hover:underline">
-                        Sign up
+                    Already have an account?{" "}
+                    <Link to="/login" className="text-blue-600 hover:underline">
+                        Log in
                     </Link>
                 </p>
             </form>

@@ -1,15 +1,28 @@
 import { useState } from "react";
 
-export default function TransactionForm({ categories, onSubmit, onCancel, onCreateCategory }) {
-    const [categoryId, setCategoryId] = useState("");
-    const [amount, setAmount] = useState("");
-    const [description, setDescription] = useState("");
-    const [date, setDate] = useState("");
+function formatDateForInput(apiDate) {
+    if (!apiDate) return "";
+    const [day, month, year] = apiDate.split("/");
+    return `${year}-${month}-${day}`;
+}
+
+export default function TransactionForm({ categories, onSubmit, onCancel, onCreateCategory, initialData }) {
+    const [categoryId, setCategoryId] = useState(initialData?.category?.id || "");
+    const [amount, setAmount] = useState(initialData?.amount || "");
+    const [description, setDescription] = useState(initialData?.description || "");
+    const [date, setDate] = useState(formatDateForInput(initialData?.transactionDate));
     const [error, setError] = useState("");
 
     function formatDateForApi(isoDate) {
         const [year, month, day] = isoDate.split("-");
         return `${day}/${month}/${year}`;
+    }
+
+    function sortCategories(categories) {
+        return [...categories].sort((a, b) => {
+            if (a.type !== b.type) return a.type === "EXPENSE" ? -1 : 1;
+            return a.name.localeCompare(b.name);
+        });
     }
 
     async function handleSubmit(e) {
@@ -28,6 +41,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
         }
     }
 
+
     return (
         <form onSubmit={handleSubmit}>
             {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
@@ -36,11 +50,11 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
             <select
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
-                className="w-full border rounded px-3 py-2 mb-4"
+                className="w-full border rounded px-3 py-2 mb-1"
                 required
             >
-                <option value="" disabled>Select category</option>
-                {categories.map((c) => (
+                <option value="" disabled>Select</option>
+                {sortCategories(categories).map((c) => (
                     <option key={c.id} value={c.id}>
                         {c.name} ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"})
                     </option>
@@ -94,7 +108,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                     type="submit"
                     className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
                 >
-                    Save
+                    {initialData ? "Save changes" : "Save"}
                 </button>
             </div>
         </form>

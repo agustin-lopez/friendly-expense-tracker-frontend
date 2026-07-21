@@ -1,8 +1,9 @@
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
-const COLORS = ["#eb8f8f", "#ebbe8f", "#ede9a8", "#b2e394", "#b3fce5",
-                        "#8dbac4", "#9fb6ed", "#9a9ae6", "#baace3", "#9079ab",
-                        "#debae3", "#f5b0dd", "#ed5c88", "#768c77", "#9bb06d"];
+const COLORS = ["#e87979", "#ebbe8f", "#bdb87e", "#b2e394",
+                        "#b3fce5", "#8dbac4", "#eff8be", "#9a9ae6",
+                        "#baace3", "#9079ab", "#9aa8ad", "#f5b0dd",
+                        "#ed5c88", "#768c77", "#d9f1ab", "#5b7bf3"];
 
 export default function ExpensesByCategoryChart({ transactions }) {
     const expensesByCategory = {};

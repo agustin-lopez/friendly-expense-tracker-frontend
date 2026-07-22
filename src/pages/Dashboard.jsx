@@ -11,6 +11,7 @@ import BalanceSummary from "../components/BalanceSummary";
 import TransactionsByMonth from "../components/TransactionsByMonth";
 import TransactionTypeFilter from "../components/TransactionTypeFilter";
 import title from "../assets/title.png";
+import { X } from 'lucide-react';
 
 export default function Dashboard() {
     const { logoutUser } = useAuth();
@@ -92,7 +93,14 @@ export default function Dashboard() {
 
             {/*MAIN CONTAINER*/}
             <div className="max-w-[40rem] mx-auto blue-window p-1.5">
-                <h2 className="text-white m-0.5 mb-1.5">My transactions</h2>
+
+                <div className={"w-100% flex flex-row justify-between content-center p-1 mb-1"}>
+                    <h2 className="text-white">My transactions</h2>
+                    <div className="bg-red-400 p-0.5 rounded-[5px] border-solid border-1 border-white">
+                        <X size={20} color={"#fff"}/>
+                    </div>
+                </div>
+
                 <div>
                     {error && <p className="text-red-500 mb-4">{error}</p>}
 

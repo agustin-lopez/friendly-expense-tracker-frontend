@@ -67,7 +67,7 @@ export default function TransactionsByMonth({ transactions, onDelete, onEdit }) 
                                     <td className="p-2">{t.description}</td>
                                     <td
                                         className={`p-2 text-right font-medium ${
-                                            t.category.type === "EXPENSE" ? "text-red-600" : "text-green-600"
+                                            t.category.type === "EXPENSE" ? "text-red-600" : "text-green-700"
                                         }`}
                                     >
                                         {t.category.type === "EXPENSE" ? "-" : "+"}${t.amount}
@@ -77,7 +77,7 @@ export default function TransactionsByMonth({ transactions, onDelete, onEdit }) 
                                             className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <button
                                                 onClick={() => onEdit(t)}
-                                                className="text-gray-400 hover:text-blue-600"
+                                                className="text-yellow-700 hover:text-blue-600"
                                             >
                                                 <Pencil size={16}/>
                                             </button>

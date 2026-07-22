@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const FACES = [":)",  "XD", ":D",  "B)", ":P", ":O", ";)", ":v"];
+const FACES = [":)",  "XD", ":D",  " B)", ":P", ":O", ";)", ":v", ":>"];
 const INTERVAL_MS = 5000;
 
 export default function FaceOverlay() {
@@ -16,10 +16,12 @@ export default function FaceOverlay() {
 
     return (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-            <div className="w-30 h-30 bg-yellow-400 border-6 border-black rounded-full flex items-center justify-center">
-                <span className="text-5xl font-bold text-black select-none">
-                    {FACES[faceIndex]}
-                </span>
+            <div className="bg-white rounded-full flex items-center justify-center p-1.5">
+                <div className="w-30 h-30 bg-yellow-400 border-6 border-black rounded-full flex items-center justify-center">
+                    <span className="text-5xl font-bold text-black select-none font-[DotGothic16] relative -top-1">
+                        {FACES[faceIndex]}
+                    </span>
+                </div>
             </div>
         </div>
     );

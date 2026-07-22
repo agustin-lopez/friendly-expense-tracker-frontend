@@ -4,3 +4,38 @@
 .recharts-wrapper svg *:focus {
     outline: none;
 }
+
+.recharts-tooltip-wrapper {
+    z-index: 10;
+}
+
+@theme {
+    --font-sans: "Geist Pixel", sans-serif;
+}
+
+body {
+    background-image: url("/background_blur.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.blue-window {
+    background: linear-gradient(180deg, #124DFF 0%, #153CB2 100%);
+    border: 2px solid #FFFFFF;
+    box-shadow: 8px 9px 9px 5px rgba(0, 0, 0, 0.25), inset 0px 24px 4px rgba(118, 134, 255, 0.25);
+    border-radius: 5px;
+}
+
+.balance-container {
+    box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.transactions-list {
+    background: linear-gradient(180deg, #B2C5FF 0%, #7894EA 100%);
+}
+
+.button {
+    box-shadow: inset 0px 23px 4px #2A5AFD;
+}

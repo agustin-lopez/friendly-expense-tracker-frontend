@@ -16,19 +16,19 @@ export default function BalanceSummary({ transactions }) {
 
     return (
         <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="bg-white rounded-lg shadow-md p-4 text-center">
+            <div className="balance-container bg-[#E7E7E7] rounded[5px] shadow-md p-4 text-center">
                 <p className="text-sm text-gray-500">Income</p>
                 <p className="text-xl font-bold text-green-600">
                     +${totals.income.toFixed(2)}
                 </p>
             </div>
-            <div className="bg-white rounded-lg shadow-md p-4 text-center">
+            <div className="balance-container bg-[#E7E7E7] rounded[5px] shadow-md p-4 text-center">
                 <p className="text-sm text-gray-500">Expenses</p>
                 <p className="text-xl font-bold text-red-600">
                     -${totals.expenses.toFixed(2)}
                 </p>
             </div>
-            <div className="bg-white rounded-lg shadow-md p-4 text-center">
+            <div className="balance-container bg-[#E7E7E7] rounded[5px] shadow-md p-4 text-center">
                 <p className="text-sm text-gray-500">Total balance</p>
                 <p className={`text-xl font-bold ${balance >= 0 ? "text-green-600" : "text-red-600"}`}>
                     {balance >= 0 ? "" : "-"} ${Math.abs(balance).toFixed(2)}

@@ -27,17 +27,17 @@ export default function TransactionTypeFilter({ value, onChange }) {
                     key={option.value}
                     ref={(el) => (buttonRefs.current[option.value] = el)}
                     onClick={() => onChange(option.value)}
-                    className={`pb-2 text-sm font-medium transition-colors w-17 ${
+                    className={`pb-2 text-sm font-medium transition-colors w-17 font-semibold ${
                         value === option.value
                             ? "text-gray-900"
-                            : "text-gray-400 hover:text-gray-600"
+                            : "text-gray-600 hover:text-gray-700"
                     }`}
                 >
                     {option.label}
                 </button>
             ))}
             <span
-                className="absolute bottom-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out"
+                className="absolute bottom-0 h-1 bg-blue-600 transition-all duration-300 ease-out"
                 style={{ left: indicatorStyle.left, width: indicatorStyle.width }}
             />
         </div>

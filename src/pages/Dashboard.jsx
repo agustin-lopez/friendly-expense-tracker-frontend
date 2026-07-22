@@ -10,7 +10,7 @@ import CategoryForm from "../components/CategoryForm";
 import BalanceSummary from "../components/BalanceSummary";
 import TransactionsByMonth from "../components/TransactionsByMonth";
 import TransactionTypeFilter from "../components/TransactionTypeFilter";
-
+import title from "../assets/title.png";
 
 export default function Dashboard() {
     const { logoutUser } = useAuth();
@@ -79,9 +79,9 @@ export default function Dashboard() {
     if (loading) return <p className="p-8 text-gray-500">Loading...</p>;
 
     return (
-        <div className="min-h-screen bg-gray-100 p-8">
+        <div className="min-h-screen p-4">
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Friendly Expense Tracker</h1>
+                <img src={title} alt="Friendly Expense Tracker title" className="h-20"/>
                 <button
                     onClick={logoutUser}
                     className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
@@ -91,40 +91,45 @@ export default function Dashboard() {
             </div>
 
             {/*MAIN CONTAINER*/}
-            <div className="max-w-[40rem] mx-auto">
+            <div className="max-w-[40rem] mx-auto blue-window p-1.5">
+                <h2 className="text-white m-0.5 mb-1.5">My transactions</h2>
+                <div>
+                    {error && <p className="text-red-500 mb-4">{error}</p>}
 
-                {error && <p className="text-red-500 mb-4">{error}</p>}
+                    {/*TRANSACTIONS CONTAINER*/}
+                    <div className="bg-white rounded-lg shadow-md p-6">
+                        {/*BALANCE*/}
+                        <BalanceSummary transactions={transactions}/>
 
-                {/*BALANCE*/}
-                <BalanceSummary transactions={transactions}/>
+                        {/*CHART*/}
+                        <div className="bg-white rounded-lg p-6">
+                            <ExpensesByCategoryChart transactions={transactions}/>
+                        </div>
 
-                {/*TRANSACTIONS CONTAINER*/}
-                <div className="bg-white rounded-lg shadow-md p-6">
-                    {/*CHART*/}
-                    <div className="bg-white rounded-lg p-6">
-                        <ExpensesByCategoryChart transactions={transactions}/>
-                    </div>
-
-                    {/*NEW TRANSACTION BUTTON*/}
-                    <div className="flex justify-between items-center mb-4 place-self-center">
-                        <button
-                            onClick={() => {
-                                setEditingTransaction(null);
-                                setIsModalOpen(true);
-                            }}
-                            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                            + New Transaction
-                        </button>
+                        {/*NEW TRANSACTION BUTTON*/}
+                        <div className="flex justify-between items-center place-self-center">
+                            <button
+                                onClick={() => {
+                                    setEditingTransaction(null);
+                                    setIsModalOpen(true);
+                                }}
+                                className="button bg-[#124CFB] text-white px-4 py-2 rounded-[5px]"
+                            >
+                                + New transaction
+                            </button>
+                        </div>
                     </div>
 
                     {/*TRANSACTION LIST*/}
-                    <TransactionTypeFilter value={typeFilter} onChange={setTypeFilter}/>
-                    <TransactionsByMonth
-                        transactions={filteredTransactions}
-                        onDelete={handleDeleteTransaction}
-                        onEdit={handleEditClick}
-                    />
+                    <div className="transactions-list rounded-[5px] mt-1.5 p-2 pt-4">
+                        <TransactionTypeFilter value={typeFilter} onChange={setTypeFilter}/>
+                        <TransactionsByMonth
+                            transactions={filteredTransactions}
+                            onDelete={handleDeleteTransaction}
+                            onEdit={handleEditClick}
+                        />
+                    </div>
+
                 </div>
             </div>
 

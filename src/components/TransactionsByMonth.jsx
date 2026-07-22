@@ -45,8 +45,8 @@ export default function TransactionsByMonth({ transactions, onDelete, onEdit }) 
                 return (
                     <div key={key}>
 
-                        <div className="flex justify-between items-center mb-2 bg-gray-200 p-2">
-                            <h3 className="font-semibold text-gray-700">
+                        <div className="flex justify-between rounded-[5px] items-center mb-2 bg-[#124DFF] px-3 py-2">
+                            <h3 className="font-semibold text-white">
                                 {formatMonthLabel(key)}
                             </h3>
                             <span

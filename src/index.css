@@ -18,6 +18,11 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.shadow {
+    box-shadow: 8px 9px 9px 5px rgba(0, 0, 0, 0.25);
 }
 
 .blue-window {
@@ -33,7 +38,27 @@ body {
 }
 
 .transactions-list {
-    background: linear-gradient(180deg, #B2C5FF 0%, #8aa4f6 100%);
+    background: linear-gradient(180deg, #7489ff 0%, #4158d3 100%);
+}
+
+.transaction-month-card {
+    background: linear-gradient(90deg, #b4c8fb 0%, #7c97f1 100%);
+}
+
+.transaction-month-bar {
+    background: linear-gradient(90deg, #f0f0ff 0%, #a6b7f1 100%);
+}
+
+.top-bar {
+    background-color: #edead6;
+    border-bottom: 2px solid #ded7c3;
+    box-shadow: inset 0px -4px 4px #e5e2d4;
+
+}
+
+.yellow-face {
+    background: linear-gradient(180deg, #ffcf00 50%, #a19100 100%);
+
 }
 
 .button {

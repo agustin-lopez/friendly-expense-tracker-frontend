@@ -21,23 +21,23 @@ export default function TransactionTypeFilter({ value, onChange }) {
     }, [value]);
 
     return (
-        <div className="relative flex gap-6 border-b border-gray-200 mb-4 place-self-center">
+        <div className="relative w-[100%] rounded-t-[3px] flex justify-center gap-6 mb-4 top-bar p-2">
             {OPTIONS.map((option) => (
                 <button
                     key={option.value}
                     ref={(el) => (buttonRefs.current[option.value] = el)}
                     onClick={() => onChange(option.value)}
-                    className={`pb-2 text-sm font-medium transition-colors w-17 font-semibold ${
+                    className={`text-sm font-medium transition-colors w-17 font-semibold ${
                         value === option.value
                             ? "text-gray-900"
-                            : "text-gray-600 hover:text-gray-700"
+                            : "text-gray-600 hover:text-gray-800"
                     }`}
                 >
                     {option.label}
                 </button>
             ))}
             <span
-                className="absolute bottom-0 h-1 bg-blue-600 transition-all duration-300 ease-out"
+                className="absolute bottom-0 h-1 bg-blue-600"
                 style={{ left: indicatorStyle.left, width: indicatorStyle.width }}
             />
         </div>

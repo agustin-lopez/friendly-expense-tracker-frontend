@@ -10,8 +10,11 @@ import CategoryForm from "../components/CategoryForm";
 import BalanceSummary from "../components/BalanceSummary";
 import TransactionsByMonth from "../components/TransactionsByMonth";
 import TransactionTypeFilter from "../components/TransactionTypeFilter";
+import Tooltip from "../components/Tooltip";
+
 import title from "../assets/title.png";
 import { X } from 'lucide-react';
+import { CircleDollarSign } from 'lucide-react';
 
 export default function Dashboard() {
     const { logoutUser } = useAuth();
@@ -92,20 +95,23 @@ export default function Dashboard() {
             </div>
 
             {/*MAIN CONTAINER*/}
-            <div className="max-w-[40rem] mx-auto blue-window p-1.5">
+            <div className="max-w-[40rem] min- mx-auto blue-window p-1.5">
 
                 <div className={"w-100% flex flex-row justify-between content-center p-1 mb-1"}>
-                    <h2 className="text-white">My transactions</h2>
-                    <div className="bg-red-400 p-0.5 rounded-[5px] border-solid border-1 border-white">
-                        <X size={20} color={"#fff"}/>
-                    </div>
+                    <h2 className="text-white flex flex-row"> My transactions </h2>
+                    <Tooltip text={"This one is for decoration only! x.x"}>
+                        <div className="bg-red-400 p-0.5 rounded-[3px] border-solid border-1 border-white">
+                            <X size={20} color={"white"}/>
+                        </div>
+                    </Tooltip>
                 </div>
 
+                {/*WHITE BOX*/}
                 <div>
                     {error && <p className="text-red-500 mb-4">{error}</p>}
 
                     {/*TRANSACTIONS CONTAINER*/}
-                    <div className="bg-white rounded-lg shadow-md p-6">
+                    <div className="bg-white rounded-b-[3px] shadow-md">
                         {/*BALANCE*/}
                         <BalanceSummary transactions={transactions}/>
 
@@ -121,15 +127,16 @@ export default function Dashboard() {
                                     setEditingTransaction(null);
                                     setIsModalOpen(true);
                                 }}
-                                className="button bg-[#124CFB] text-white px-4 py-2 rounded-[5px]"
+                                className="button bg-[#124CFB] text-white px-4 py-2 rounded-[3px] flex flex-row mb-3"
                             >
-                                + New transaction
+                            <CircleDollarSign color={"white"} className={"mr-1"} size={"22px"}/>
+                            New transaction
                             </button>
                         </div>
                     </div>
 
                     {/*TRANSACTION LIST*/}
-                    <div className="transactions-list rounded-[5px] mt-1.5 p-2 pt-4">
+                    <div className="transactions-list rounded-[3px] mt-1.5 pb-1.5">
                         <TransactionTypeFilter value={typeFilter} onChange={setTypeFilter}/>
                         <TransactionsByMonth
                             transactions={filteredTransactions}

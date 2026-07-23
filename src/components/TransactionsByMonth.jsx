@@ -1,5 +1,5 @@
 import { Trash2, Pencil } from "lucide-react";
-
+import Tooltip from "./Tooltip";
 
 function getMonthKey(dateStr) {
     const [day, month, year] = dateStr.split("/");
@@ -39,21 +39,18 @@ export default function TransactionsByMonth({ transactions, onDelete, onEdit }) 
     if (sortedKeys.length === 0) return <p className="text-gray-500 place-self-center">Your transactions will show up here.</p>;
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 m-2">
             {sortedKeys.map((key) => {
                 const group = groups[key];
                 return (
-                    <div key={key}>
+                    /*MONTH CARD*/
+                    <div key={key} className="transaction-month-card rounded-t-[3px]">
 
-                        <div className="flex justify-between rounded-[5px] items-center mb-2 bg-[#124DFF] px-3 py-2">
-                            <h3 className="font-semibold text-white">
+                        <div className="flex justify-between items-center mb-2 bg-[#124DFF] rounded-t-[3px] px-3 py-2 transaction-month-bar border-b-2 border-gray-600">
+                            <h3 className="font-semibold text-[#153CB2]">
                                 {formatMonthLabel(key)}
                             </h3>
-                            <span
-                                className={`font-semibold ${
-                                    group.total >= 0 ? "text-green-600" : "text-red-600"
-                                }`}
-                            >
+                            <span className={"font-semibold text-[#153CB2]"}>
                                 {group.total >= 0 ? "+" : "-"}${Math.abs(group.total).toFixed(0)}
                             </span>
                         </div>
@@ -61,29 +58,31 @@ export default function TransactionsByMonth({ transactions, onDelete, onEdit }) 
                         <table className="w-full text-left p-3">
                             <tbody>
                             {group.transactions.map((t) => (
-                                <tr key={t.id} className="group border-b border-gray-300 last:border-0">
+                                <tr key={t.id} className="group border-b border-gray-600 last:border-0">
                                     <td className="p-2">{t.transactionDate}</td>
                                     <td className="p-2">{t.category.name}</td>
-                                    <td className="p-2">{t.description}</td>
-                                    <td
-                                        className={`p-2 text-right font-medium ${
-                                            t.category.type === "EXPENSE" ? "text-red-600" : "text-green-700"
-                                        }`}
-                                    >
-                                        {t.category.type === "EXPENSE" ? "-" : "+"}${t.amount}
+                                    <td className="py-2 max-w-[200px]">
+                                        <Tooltip text={t.description}>
+                                            <span className="block truncate">{t.description}</span>
+                                        </Tooltip>
+                                    </td>
+                                    <td className={"p-2 text-right font-medium"}>
+                                        <span className={`p-0.5 text-white ${t.category.type === "EXPENSE" ? "bg-red-600" : "bg-[#21a336]"}`}>
+                                            {t.category.type === "EXPENSE" ? "-" : "+"}${t.amount}
+                                        </span>
                                     </td>
                                     <td className="p-2 w-16 text-right">
                                         <div
                                             className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <button
                                                 onClick={() => onEdit(t)}
-                                                className="text-yellow-700 hover:text-blue-600"
+                                                className="hover:text-yellow-400"
                                             >
                                                 <Pencil size={16}/>
                                             </button>
                                             <button
                                                 onClick={() => onDelete(t.id)}
-                                                className="text-red-500 hover:text-red-700"
+                                                className="hover:text-red-500"
                                             >
                                                 <Trash2 size={16}/>
                                             </button>

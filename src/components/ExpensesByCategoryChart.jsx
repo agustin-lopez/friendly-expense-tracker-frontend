@@ -1,7 +1,7 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import FaceOverlay from "./FaceOverlay";
 
-const COLORS = ["#ec6464", "#c48539", "#84d9b5", "#79af57",
+const COLORS = ["#ec6464", "#925df1", "#84d9b5", "#79af57",
                         "#b3fce5", "#8dbac4", "#eff8be", "#9a9ae6",
                         "#baace3", "#9079ab", "#9aa8ad", "#f5b0dd",
                         "#ed5c88", "#768c77", "#d9f1ab", "#5b7bf3"];

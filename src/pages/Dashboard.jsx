@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { getTransactions, createTransaction, updateTransaction, deleteTransaction } from "../services/transactionService";
+import { getSummary, getExpensesByCategory, createTransaction, getGroupedTransactions, updateTransaction, deleteTransaction } from "../services/transactionService";
 import { getCategories } from "../services/categoryService";
 import Modal from "../components/Modal";
 import TransactionForm from "../components/TransactionForm";
@@ -15,10 +15,14 @@ import Tooltip from "../components/Tooltip";
 import title from "../assets/title.png";
 import { X } from 'lucide-react';
 import { CircleDollarSign } from 'lucide-react';
+import Pagination from "../components/Pagination.jsx";
 
 export default function Dashboard() {
-    const { logoutUser } = useAuth();
-    const [transactions, setTransactions] = useState([]);
+    const [summary, setSummary] = useState({ totalIncome: 0, totalExpenses: 0, balance: 0 });
+    const [categoryTotals, setCategoryTotals] = useState([]);
+    const [monthGroups, setMonthGroups] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -26,15 +30,19 @@ export default function Dashboard() {
     const [modalView, setModalView] = useState("transaction");
     const [typeFilter, setTypeFilter] = useState("ALL");
     const [editingTransaction, setEditingTransaction] = useState(null);
+    const { logoutUser } = useAuth();
 
-    async function loadData() {
+    async function loadDashboardData() {
         try {
-            const [transactionsData, categoriesData] = await Promise.all([
-                getTransactions(),
+            const [summaryData, categoryTotalsData, categoriesData] = await Promise.all([
+                getSummary(),
+                getExpensesByCategory(),
                 getCategories(),
             ]);
-            setTransactions(transactionsData);
+            setSummary(summaryData);
+            setCategoryTotals(categoryTotalsData);
             setCategories(categoriesData);
+            await loadPage(0);
         } catch (err) {
             setError(err.message);
         } finally {
@@ -42,9 +50,26 @@ export default function Dashboard() {
         }
     }
 
+    async function loadPage(page, type = typeFilter) {
+        const result = await getGroupedTransactions(page, type);
+        setMonthGroups(result.content);
+        setCurrentPage(result.currentPage);
+        setTotalPages(result.totalPages);
+    }
+
     useEffect(() => {
-        loadData();
+        loadDashboardData();
     }, []);
+
+    async function refreshAll() {
+        const [summaryData, categoryTotalsData] = await Promise.all([
+            getSummary(),
+            getExpensesByCategory(),
+        ]);
+        setSummary(summaryData);
+        setCategoryTotals(categoryTotalsData);
+        await loadPage(currentPage);
+    }
 
     async function handleSaveTransaction(transactionData) {
         if (editingTransaction) {
@@ -54,19 +79,19 @@ export default function Dashboard() {
         }
         setIsModalOpen(false);
         setEditingTransaction(null);
-        await loadData();
+        await refreshAll()
     }
 
     async function handleCreateCategory(categoryData) {
         await createCategory(categoryData);
-        await loadData();
+        await refreshAll();
         setModalView("transaction");
     }
 
     async function handleDeleteTransaction(id) {
         if (!window.confirm("Are you sure you want to delete this transaction?")) return;
         await deleteTransaction(id);
-        await loadData();
+        await refreshAll()
     }
 
     function handleEditClick(transaction) {
@@ -75,10 +100,10 @@ export default function Dashboard() {
         setIsModalOpen(true);
     }
 
-    const filteredTransactions = transactions.filter((t) => {
-        if (typeFilter === "ALL") return true;
-        return t.category.type === typeFilter;
-    });
+    function handleFilterChange(newType) {
+        setTypeFilter(newType);
+        loadPage(0, newType);
+    }
 
     if (loading) return <p className="p-8 text-gray-500">Loading...</p>;
 
@@ -113,13 +138,17 @@ export default function Dashboard() {
                     {/*TRANSACTIONS CONTAINER*/}
                     <div className="bg-white rounded-b-[3px] shadow-md">
                         {/*BALANCE*/}
-                        <BalanceSummary transactions={transactions}/>
+                        <BalanceSummary summary={summary}/>
 
                         {/*CHART*/}
                         <div className="bg-white rounded-lg p-6">
-                            <ExpensesByCategoryChart transactions={transactions}/>
+                            <ExpensesByCategoryChart categoryTotals={categoryTotals}/>
                         </div>
+                    </div>
 
+                    {/*TRANSACTION LIST*/}
+                    <div className="transactions-list rounded-[3px] mt-1.5 pb-1.5">
+                        <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange} />
                         {/*NEW TRANSACTION BUTTON*/}
                         <div className="flex justify-between items-center place-self-center">
                             <button
@@ -129,19 +158,19 @@ export default function Dashboard() {
                                 }}
                                 className="button bg-[#124CFB] text-white px-4 py-2 rounded-[3px] flex flex-row mb-3"
                             >
-                            <CircleDollarSign color={"white"} className={"mr-1"} size={"22px"}/>
-                            New transaction
+                                <CircleDollarSign color={"white"} className={"mr-1"} size={"22px"}/>
+                                New transaction
                             </button>
                         </div>
-                    </div>
-
-                    {/*TRANSACTION LIST*/}
-                    <div className="transactions-list rounded-[3px] mt-1.5 pb-1.5">
-                        <TransactionTypeFilter value={typeFilter} onChange={setTypeFilter}/>
                         <TransactionsByMonth
-                            transactions={filteredTransactions}
+                            monthGroups={monthGroups}
                             onDelete={handleDeleteTransaction}
                             onEdit={handleEditClick}
+                        />
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={(page) => loadPage(page)}
                         />
                     </div>
 

@@ -66,7 +66,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                 onClick={onCreateCategory}
                 className="text-sm text-blue-600 hover:underline mb-4"
             >
-                + Add new category
+                + New category
             </button>
 
             <label className="block text-sm font-medium mb-1">Amount</label>
@@ -80,12 +80,14 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
             />
 
             <label className="block text-sm font-medium mb-1">Description</label>
-            <input
-                type="text"
+            <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full border rounded px-3 py-2 mb-4"
+                rows={3}
+                maxLength={120}
+                className="w-full border rounded px-3 py-2 mb-1 resize-none"
             />
+            <p className="text-xs text-gray-400 text-right mb-3">{description.length}/120</p>
 
             <label className="block text-sm font-medium mb-1">Date</label>
             <input
@@ -96,17 +98,17 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                 required
             />
 
-            <div className="flex gap-2">
+            <div className="flex flex-row justify-center gap-6">
                 <button
                     type="button"
                     onClick={onCancel}
-                    className="flex-1 border border-gray-300 py-2 rounded hover:bg-gray-50"
+                    className="border border-gray-300 rounded hover:bg-gray-50 px-2 py-2"
                 >
                     Cancel
                 </button>
                 <button
                     type="submit"
-                    className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                    className="blue-button"
                 >
                     {initialData ? "Save changes" : "Save"}
                 </button>

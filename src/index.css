@@ -35,6 +35,7 @@ html {
     border: 2px solid #FFFFFF;
     box-shadow: 8px 9px 9px 5px rgba(0, 0, 0, 0.25), inset 0px 24px 4px rgba(118, 134, 255, 0.25);
     border-radius: 5px;
+    padding: 6px;
 }
 
 .balance-container {
@@ -66,8 +67,20 @@ html {
 
 }
 
-.button {
+.blue-button {
+    display: flex;
+    flex-direction: row;
+    background-color: #124CFB;
     box-shadow: inset 0px 23px 4px #2A5AFD;
+    color: #fff;
+    padding: 8px 16px 8px 16px;
+    border-radius: 3px;
+    border: #fff solid 1px;
+}
+
+.blue-button:hover {
+    background-color: #3c6bff;
+    box-shadow: inset 0px 23px 4px #5074f8;
 }
 
 .button-pressed {

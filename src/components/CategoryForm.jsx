@@ -39,17 +39,17 @@ export default function CategoryForm({ onSubmit, onCancel }) {
                 <option value="INCOME">Income</option>
             </select>
 
-            <div className="flex gap-2">
+            <div className="flex flex-row justify-center gap-6">
                 <button
                     type="button"
                     onClick={onCancel}
-                    className="flex-1 border border-gray-300 py-2 rounded hover:bg-gray-50"
+                    className="border border-gray-300 rounded hover:bg-gray-50 px-2 py-2"
                 >
                     Cancel
                 </button>
                 <button
                     type="submit"
-                    className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                    className="blue-button"
                 >
                     Save
                 </button>

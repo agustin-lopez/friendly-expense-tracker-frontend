@@ -120,7 +120,7 @@ export default function Dashboard() {
             </div>
 
             {/*MAIN CONTAINER*/}
-            <div className="max-w-[40rem] min- mx-auto blue-window p-1.5">
+            <div className="max-w-[40rem] mx-auto blue-window">
 
                 <div className={"w-100% flex flex-row justify-between content-center p-1 mb-1"}>
                     <h2 className="text-white flex flex-row"> My transactions </h2>
@@ -150,18 +150,16 @@ export default function Dashboard() {
                     <div className="transactions-list rounded-[3px] mt-1.5 pb-1.5">
                         <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange} />
                         {/*NEW TRANSACTION BUTTON*/}
-                        <div className="flex justify-between items-center place-self-center">
-                            <button
-                                onClick={() => {
-                                    setEditingTransaction(null);
-                                    setIsModalOpen(true);
-                                }}
-                                className="button bg-[#124CFB] text-white px-4 py-2 rounded-[3px] flex flex-row mb-3"
-                            >
-                                <CircleDollarSign color={"white"} className={"mr-1"} size={"22px"}/>
-                                New transaction
-                            </button>
-                        </div>
+                        <button
+                            onClick={() => {
+                                setEditingTransaction(null);
+                                setIsModalOpen(true);
+                            }}
+                            className="blue-button place-self-center mb-3"
+                        >
+                            <CircleDollarSign color={"white"} className={"mr-1"} size={"22px"}/>
+                            New transaction
+                        </button>
                         <TransactionsByMonth
                             monthGroups={monthGroups}
                             onDelete={handleDeleteTransaction}

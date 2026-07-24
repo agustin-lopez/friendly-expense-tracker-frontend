@@ -16,7 +16,14 @@ async function request(endpoint, options = {}) {
 
     if (!response.ok) {
         const errorBody = await response.json().catch(() => null);
-        throw new Error(errorBody?.error || `Error ${response.status}`);
+        if (errorBody?.error) {
+            throw new Error(errorBody.error);
+        }
+        if (errorBody && typeof errorBody === "object") {
+            const firstError = Object.values(errorBody)[0];
+            throw new Error(firstError || `Error ${response.status}`);
+        }
+        throw new Error(`Error ${response.status}`);
     }
 
     if (response.status === 204) return null;

@@ -5,7 +5,7 @@ export default function Modal({ isOpen, onClose, title, children }) {
 
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="blue-window p-1.5">
+            <div className="blue-window">
                 {/*TITLE + BUTTON*/}
 
                 <div className={"w-100% flex flex-row justify-between content-center p-1 mb-1"}>

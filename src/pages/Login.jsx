@@ -19,7 +19,7 @@ export default function Login() {
 
         try {
             const token = await login(email, password);
-            loginUser(token);
+            await loginUser(token);
             navigate("/dashboard");
         } catch (err) {
             setError(err.message);

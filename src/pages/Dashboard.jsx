@@ -11,11 +11,12 @@ import BalanceSummary from "../components/BalanceSummary";
 import TransactionsByMonth from "../components/TransactionsByMonth";
 import TransactionTypeFilter from "../components/TransactionTypeFilter";
 import Tooltip from "../components/Tooltip";
-
+import SettingsModal from "../components/SettingsModal";
+import Pagination from "../components/Pagination.jsx";
 import title from "../assets/title.png";
 import { X } from 'lucide-react';
 import { CircleDollarSign } from 'lucide-react';
-import Pagination from "../components/Pagination.jsx";
+import { Settings } from "lucide-react";
 
 export default function Dashboard() {
     const [summary, setSummary] = useState({ totalIncome: 0, totalExpenses: 0, balance: 0 });
@@ -31,6 +32,7 @@ export default function Dashboard() {
     const [typeFilter, setTypeFilter] = useState("ALL");
     const [editingTransaction, setEditingTransaction] = useState(null);
     const { logoutUser } = useAuth();
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     async function loadDashboardData() {
         try {
@@ -112,12 +114,21 @@ export default function Dashboard() {
             <div className="flex justify-between items-center mb-6">
                 <img src={title} alt="Friendly Expense Tracker title" className="h-20"/>
                 <button
+                    onClick={() => setIsSettingsOpen(true)}
+                    className="text-gray-500 hover:text-gray-700"
+                >
+                    <Settings size={20}/>
+                </button>
+                <button
                     onClick={logoutUser}
                     className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                 >
                     Log out
                 </button>
             </div>
+
+
+
 
             {/*MAIN CONTAINER*/}
             <div className="max-w-[40rem] mx-auto blue-window">
@@ -147,24 +158,24 @@ export default function Dashboard() {
                     </div>
 
                     {/*TRANSACTION LIST*/}
-                    <div className="transactions-list rounded-[3px] mt-1.5 pb-1.5">
-                        <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange} />
+                    <div className="custom-bg-1 rounded-[3px] mt-1.5 pb-1.5">
+                        <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange}/>
                         {/*NEW TRANSACTION BUTTON*/}
-                        <button
-                            onClick={() => {
-                                setEditingTransaction(null);
-                                setIsModalOpen(true);
-                            }}
-                            className="blue-button place-self-center mb-3"
-                        >
-                            <CircleDollarSign color={"white"} className={"mr-1"} size={"22px"}/>
-                            New transaction
-                        </button>
                         <TransactionsByMonth
                             monthGroups={monthGroups}
                             onDelete={handleDeleteTransaction}
                             onEdit={handleEditClick}
                         />
+                        <button
+                            onClick={() => {
+                                setEditingTransaction(null);
+                                setIsModalOpen(true);
+                            }}
+                            className="blue-button place-self-center my-3"
+                        >
+                            <CircleDollarSign color={"white"} className={"mr-1"} size={"22px"}/>
+                            New transaction
+                        </button>
                         <Pagination
                             currentPage={currentPage}
                             totalPages={totalPages}
@@ -175,6 +186,7 @@ export default function Dashboard() {
                 </div>
             </div>
 
+            <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => {

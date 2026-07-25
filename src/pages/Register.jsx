@@ -18,7 +18,7 @@ export default function Register() {
         try {
             await register(name, email, password);
             const token = await login(email, password);
-            loginUser(token);
+            await loginUser(token);
             navigate("/dashboard");
         } catch (err) {
             setError(err.message);

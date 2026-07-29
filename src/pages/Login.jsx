@@ -70,6 +70,12 @@ export default function Login() {
                         Submit
                     </button>
 
+                    <p className="text-sm text-center mt-2">
+                        <Link to="/forgot-password" className="text-blue-600 hover:underline">
+                            Forgot your password?
+                        </Link>
+                    </p>
+
                     <p className="text-sm text-center mt-4">
                         Don't have an account?{" "}
                         <Link to="/register" className="text-blue-600 hover:underline">

@@ -30,3 +30,26 @@ export async function login(email, password) {
     return data.token;
 }
 
+export async function requestPasswordReset(email) {
+    const response = await fetch(`${API_URL}/forgot-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+    });
+    if (!response.ok) throw new Error("The request couldn't be processed");
+    return await response.json();
+}
+
+export async function resetPassword(token, newPassword) {
+    const response = await fetch(`${API_URL}/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, newPassword }),
+    });
+    if (!response.ok) {
+        const errorBody = await response.json().catch(() => null);
+        throw new Error(errorBody?.error || "Password change failed");
+    }
+    return await response.json();
+}
+

@@ -10,11 +10,10 @@ import CategoryForm from "../components/CategoryForm";
 import BalanceSummary from "../components/BalanceSummary";
 import TransactionsByMonth from "../components/TransactionsByMonth";
 import TransactionTypeFilter from "../components/TransactionTypeFilter";
-import Tooltip from "../components/Tooltip";
 import SettingsModal from "../components/SettingsModal";
 import Pagination from "../components/Pagination.jsx";
+import BlueWindow from "../components/BlueWindow.jsx";
 import title from "../assets/title.png";
-import { X } from 'lucide-react';
 import { CircleDollarSign } from 'lucide-react';
 import { Settings } from "lucide-react";
 
@@ -119,28 +118,13 @@ export default function Dashboard() {
                 >
                     <Settings size={20}/>
                 </button>
-                <button
-                    onClick={logoutUser}
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                >
-                    Log out
-                </button>
             </div>
 
 
 
 
             {/*MAIN CONTAINER*/}
-            <div className="max-w-[40rem] mx-auto blue-window">
-
-                <div className={"w-100% flex flex-row justify-between content-center p-1 mb-1"}>
-                    <h2 className="text-white flex flex-row"> My transactions </h2>
-                    <Tooltip text={"This one is for decoration only! x.x"}>
-                        <div className="bg-red-400 p-0.5 rounded-[3px] border-solid border-1 border-white">
-                            <X size={20} color={"white"}/>
-                        </div>
-                    </Tooltip>
-                </div>
+            <BlueWindow title="My transactions" className="max-w-[40rem]">
 
                 {/*WHITE BOX*/}
                 <div>
@@ -158,7 +142,7 @@ export default function Dashboard() {
                     </div>
 
                     {/*TRANSACTION LIST*/}
-                    <div className="custom-bg-1 rounded-[3px] mt-1.5 pb-1.5">
+                    <div className="custom-bg-1 pb-1.5">
                         <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange}/>
                         {/*NEW TRANSACTION BUTTON*/}
                         <TransactionsByMonth
@@ -184,7 +168,7 @@ export default function Dashboard() {
                     </div>
 
                 </div>
-            </div>
+            </BlueWindow>
 
             <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
             <Modal

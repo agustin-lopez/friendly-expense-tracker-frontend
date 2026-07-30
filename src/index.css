@@ -31,11 +31,32 @@ html {
 }
 
 .blue-window {
-    background: linear-gradient(180deg, #124DFF 0%, #153CB2 100%);
-    border: 1px solid #FFFFFF;
-    box-shadow: 8px 9px 9px 5px rgba(0, 0, 0, 0.25), inset 0px 24px 4px rgba(118, 134, 255, 0.25);
+    background: #006fea;
+    background-image:
+            linear-gradient(to right, #034fe1, #1682f2 1px, #006ee4 2px, rgba(0,0,0,0) 3px),
+            linear-gradient(to left, #0034b0, #0056e1 1px, #0064f4 2px, rgba(0,0,0,0) 3px),
+            linear-gradient(to top, #0034b1, #0056e1 1px, #0064f4 2px, rgba(0,0,0,0) 3px);
     border-radius: 5px;
-    padding: 6px;
+    border: 1px solid #fff;
+    border-color: #0072ef #01279e #01279e #0236d8;
+}
+
+.blue-window-bar {
+    background: #006fea;
+    background-image:
+            linear-gradient(to right, #0050db, rgba(255,255,255,.1) 4px, rgba(255,255,255,0) 200px),
+            linear-gradient(to left, #0034b0, #0056e1 1px, #0064f4 2px, rgba(0,0,0,0) 3px),
+            linear-gradient(to bottom, #4aa9ff, #33a4ff 1px, #008aff 2px, #007ef4 3px, #0075f0 4px, rgba(0,0,0,0) 5px),
+            linear-gradient(to top, #005dd9, #0067e9 1px, #007afb 2px, #0081fb 3px, rgba(0,0,0,0) 4px);
+}
+
+.red-close {
+    background:
+            radial-gradient(circle at 20px 20px, #e84f00, rgba(255,255,255,0)),
+            radial-gradient(circle at -5px -5px, white, rgba(255,255,255,.3), rgba(255,255,255,0)),
+            linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0)),
+            linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0));
+    background-color: #e81000;
 }
 
 .balance-container {
@@ -47,19 +68,18 @@ html {
     background: linear-gradient(180deg, #7489ff 0%, #4158d3 100%);
 }
 
+.custom-bg-2 {
+    background-color: #edead6;
+    box-shadow: inset 0px -4px 4px #e5e2d4;
+
+}
+
 .transaction-month-card {
     background: linear-gradient(90deg, #b4c8fb 0%, #7c97f1 100%);
 }
 
 .transaction-month-bar {
     background: linear-gradient(90deg, #f0f0ff 0%, #a6b7f1 100%);
-}
-
-.top-bar {
-    background-color: #edead6;
-    /*border-bottom: 2px solid #ded7c3;*/
-    box-shadow: inset 0px -4px 4px #e5e2d4;
-
 }
 
 .yellow-face {

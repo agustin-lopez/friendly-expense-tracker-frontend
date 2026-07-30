@@ -3,8 +3,7 @@ import { login } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Tooltip from "../components/Tooltip.jsx";
-import {X} from "lucide-react";
+import BlueWindow from "../components/BlueWindow.jsx";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -28,15 +27,7 @@ export default function Login() {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <div className="blue-window">
-                <div className={"w-100% flex flex-row justify-between content-center p-1 mb-1"}>
-                    <h2 className="text-white flex flex-row">Login</h2>
-                    <Tooltip text={"This one is for decoration only! x.x"}>
-                        <div className="bg-red-400 p-0.5 rounded-[3px] border-solid border-1 border-white">
-                            <X size={20} color={"white"}/>
-                        </div>
-                    </Tooltip>
-                </div>
+            <BlueWindow title="Login">
                 <form
                     onSubmit={handleSubmit}
                     className="bg-white p-8 rounded-b-[3px] shadow-md w-80"
@@ -69,21 +60,24 @@ export default function Login() {
                     >
                         Submit
                     </button>
+                </form>
+                <div className="custom-bg-2 w-[100%] p-6 flex flex-col">
+                    <p className="text-sm">
+                        - Don't have an account?{" "}
+                        <Link to="/register" className="text-blue-600 hover:underline">
+                            Sign up
+                        </Link>
+                        {"!!"}
+                    </p>
 
-                    <p className="text-sm text-center mt-2">
+                    <p className="text-sm">
+                        - {" "}
                         <Link to="/forgot-password" className="text-blue-600 hover:underline">
                             Forgot your password?
                         </Link>
                     </p>
-
-                    <p className="text-sm text-center mt-4">
-                        Don't have an account?{" "}
-                        <Link to="/register" className="text-blue-600 hover:underline">
-                            Sign up
-                        </Link>
-                    </p>
-                </form>
-            </div>
+                </div>
+            </BlueWindow>
         </div>
     );
 }

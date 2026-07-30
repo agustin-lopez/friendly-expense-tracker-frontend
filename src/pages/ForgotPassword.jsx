@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { requestPasswordReset } from "../services/authService";
+import BlueWindow from "../components/BlueWindow.jsx";
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState("");
@@ -19,10 +20,8 @@ export default function ForgotPassword() {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-md w-80">
-                <h1 className="text-2xl font-bold mb-6 text-center">Password recovery</h1>
-
+        <div className="flex items-center justify-center min-h-screen">
+            <BlueWindow title="Sign up">
                 {sent ? (
                     <p className="text-green-600 text-sm text-center"> You'll receive a link to reset your password. </p>
                 ) : (
@@ -52,7 +51,7 @@ export default function ForgotPassword() {
                         Back to login
                     </Link>
                 </p>
-            </div>
+            </BlueWindow>
         </div>
     );
 }

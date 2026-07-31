@@ -1,21 +1,16 @@
 @import "tailwindcss";
 
-body {
-    scrollbar-gutter: stable;
-    background-image: url("/background_blur.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-html {
-    overflow-y: scroll;
-}
-
 .recharts-wrapper svg:focus,
 .recharts-wrapper svg *:focus {
     outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+    -webkit-text-fill-color: #000;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .recharts-tooltip-wrapper {
@@ -26,8 +21,17 @@ html {
     --font-sans: "Geist Pixel", sans-serif;
 }
 
-.shadow {
-    box-shadow: 8px 9px 9px 5px rgba(0, 0, 0, 0.25);
+html {
+    overflow-y: scroll;
+}
+
+body {
+    scrollbar-gutter: stable;
+    background-image: url("/background_blur.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .blue-window {
@@ -59,11 +63,6 @@ html {
     background-color: #e81000;
 }
 
-.balance-container {
-    box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-}
-
 .custom-bg-1 {
     background: linear-gradient(180deg, #7489ff 0%, #4158d3 100%);
 }
@@ -78,8 +77,8 @@ html {
     background: linear-gradient(90deg, #6286e1 0%, #9fbbf6 65%, #9fbbf6 70%, #6286e1 100%);
 }
 
-/*.transaction-month-card {
-    background: linear-gradient(90deg, #b4c8fb 0%, #7c97f1 100%);
+/*.custom-bg-3 {
+    background: linear-gradient(90deg, #7362e1 0%, #9a90f5 65%, #9b91ef 70%, #7362e1 100%);
 }*/
 
 .transaction-month-card {
@@ -91,10 +90,10 @@ html {
 }
 
 .yellow-face {
-    background: linear-gradient(180deg, #ffcf00 50%, #c5af00 100%);
-
+    background: radial-gradient(circle at 35% 35%, #ffffff 0%, #ffd324 50%, #504700 100%);
 }
 
+/* BUTTONS */
 .blue-button {
     display: flex;
     flex-direction: row;
@@ -115,4 +114,32 @@ html {
     background: linear-gradient(180deg, #d8d8d8 0%, #f0f0f0 25%);
     /*border: 1px solid #8f8f8f;*/
     border-bottom: none;
+}
+
+.white-button-wrap {
+    border: 1px solid RGB(1, 63, 102);
+    border-radius: 3px;
+    background: #f6f6f6;
+    background: -moz-linear-gradient(top, #f6f6f6 0%, #ffffff 6%, #fffdfe 12%, #fbf9fa 18%, #f8f7f5 41%, #f7f3f0 47%, #f8f3ef 82%, #e7e0d8 94%, #dad3c9 100%);
+    background: -webkit-linear-gradient(top, #f6f6f6 0%, #ffffff 6%, #fffdfe 12%, #fbf9fa 18%, #f8f7f5 41%, #f7f3f0 47%, #f8f3ef 82%, #e7e0d8 94%, #dad3c9 100%);
+    background: linear-gradient(to bottom, #f6f6f6 0%, #ffffff 6%, #fffdfe 12%, #fbf9fa 18%, #f8f7f5 41%, #f7f3f0 47%, #f8f3ef 82%, #e7e0d8 94%, #dad3c9 100%);
+}
+
+.white-button {
+    border: 2px solid transparent;
+    padding: 3px 8px 3px 8px;
+    font-size: 14px;
+}
+
+.white-button:hover,
+.white-button:focus {
+    outline: 0;
+    border: 2px solid #B9D0F0;
+}
+
+.white-button:active {
+    background: #dad3c9;
+    background: -moz-linear-gradient(top, #dad3c9 0%, #e7e0d8 6%, #f8f3ef 18%, #f7f3f0 53%, #f8f7f5 59%, #fbf9fa 82%, #fffdfe 88%, #ffffff 94%, #f6f6f6 100%);
+    background: -webkit-linear-gradient(top, #dad3c9 0%, #e7e0d8 6%, #f8f3ef 18%, #f7f3f0 53%, #f8f7f5 59%, #fbf9fa 82%, #fffdfe 88%, #ffffff 94%, #f6f6f6 100%);
+    background: linear-gradient(to bottom, #dad3c9 0%, #e7e0d8 6%, #f8f3ef 18%, #f7f3f0 53%, #f8f7f5 59%, #fbf9fa 82%, #fffdfe 88%, #ffffff 94%, #f6f6f6 100%);
 }

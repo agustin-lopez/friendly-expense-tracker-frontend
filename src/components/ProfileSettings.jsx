@@ -47,69 +47,82 @@ export default function ProfileSettings() {
     }
 
     return (
-        <div className="space-y-6">
-            <form onSubmit={handleProfileSubmit}>
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">User data</h3>
+        <div className="space-y-6 place-self-center">
+            <form onSubmit={handleProfileSubmit}
+                  className="bg-white flex flex-col gap-5"
+            >
+                <h3 className="text-sl font-semibold text-gray-700">User data</h3>
+
+                <div className="flex flex-row items-center gap-3 place-content-between">
+                    <label className="text-sm font-medium">Name</label>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                        required
+                    />
+                </div>
+
+                <div className="flex flex-row items-center gap-3 place-content-between">
+                    <label className="text-sm font-medium">Email</label>
+                    <p>{email}</p>
+                </div>
+
+                <div className="white-button-wrap place-self-center">
+                    <button
+                        type="submit"
+                        className="white-button"
+                    >
+                        Save
+                    </button>
+                </div>
+
                 {profileError && <p className="text-red-500 text-sm mb-2">{profileError}</p>}
                 {profileMessage && <p className="text-green-600 text-sm mb-2">{profileMessage}</p>}
 
-                <label className="block text-sm font-medium mb-1">Name</label>
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full border rounded px-3 py-2 mb-3"
-                    required
-                />
-
-                <label className="block text-sm font-medium mb-1">Email</label>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full border rounded px-3 py-2 mb-3"
-                    required
-                />
-
-                <button
-                    type="submit"
-                    className="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700"
-                >
-                    Save
-                </button>
             </form>
 
-            <hr />
+            <hr/>
 
-            <form onSubmit={handlePasswordSubmit}>
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">Change password</h3>
+            <form onSubmit={handlePasswordSubmit}
+                  className="bg-white flex flex-col gap-5"
+            >
+                <h3 className="text-sl font-semibold text-gray-700 mb-3">Change password</h3>
                 {passwordError && <p className="text-red-500 text-sm mb-2">{passwordError}</p>}
                 {passwordMessage && <p className="text-green-600 text-sm mb-2">{passwordMessage}</p>}
 
-                <label className="block text-sm font-medium mb-1">New password</label>
-                <input
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full border rounded px-3 py-2 mb-3"
-                    required
-                />
+                <div className="flex flex-row items-center gap-3 place-content-between">
+                    <label className="block text-sm font-medium mb-1">Choose a new password</label>
+                    <input
+                        type="password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                        required
+                    />
+                </div>
 
-                <label className="block text-sm font-medium mb-1">Password confirm</label>
-                <input
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full border rounded px-3 py-2 mb-3"
-                    required
-                />
+                <div className="flex flex-row items-center gap-3 place-content-between">
+                    <label className="block text-sm font-medium mb-1">Re-type your new password</label>
+                    <input
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                        required
+                    />
+                </div>
 
-                <button
-                    type="submit"
-                    className="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700"
-                >
-                    Update password
-                </button>
+                <div className="white-button-wrap place-self-center">
+                    <button
+                        type="submit"
+                        className="white-button"
+                    >
+                        Save
+                    </button>
+                </div>
+
             </form>
         </div>
     );

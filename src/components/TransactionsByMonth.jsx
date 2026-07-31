@@ -4,7 +4,7 @@ import { WindowsXPShell322, WordpadXP } from "react-old-icons";
 function formatMonthLabel(monthKey) {
     const [year, month] = monthKey.split("-");
     const date = new Date(year, month - 1);
-    const label = date.toLocaleDateString("es-AR", { month: "long", year: "numeric" });
+    const label = date.toLocaleDateString("en", { month: "long", year: "numeric" });
     return label.charAt(0).toUpperCase() + label.slice(1);
 }
 
@@ -15,8 +15,8 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
         <div className="space-y-6 m-4">
             {monthGroups.map((group) => (
                 /*MONTH CARD*/
-                <div key={group.month} className="transaction-month-card rounded-t-[3px]">
-                    <div className="flex justify-between items-center mb-2 bg-[#124DFF] rounded-t-[3px] px-3 py-2 transaction-month-bar border-b-2 border-gray-600">
+                <div key={group.month} className="transaction-month-card rounded-t-[3px] border-[1px] border-gray-500">
+                    <div className="flex justify-between items-center mb-2 bg-[#124DFF] rounded-t-[3px] px-3 py-2 transaction-month-bar border-b-2 border-gray-500">
                         <h3 className="font-semibold text-[#153CB2]">
                             {formatMonthLabel(group.month)}
                         </h3>
@@ -28,7 +28,7 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
                     <table className="w-full text-left p-3 table-auto">
                         <tbody>
                         {group.transactions.map((t) => (
-                            <tr key={t.id} className="group border-b border-gray-600 last:border-0">
+                            <tr key={t.id} className="group border-b border-gray-500 last:border-0">
                                 <td className="p-1.5 text-[14px] text-center">{t.transactionDate}</td>
                                 <td className="p-1.5 text-[14px] text-center">{t.category.name}</td>
                                 <td className="p-1.5 text-[14px]">

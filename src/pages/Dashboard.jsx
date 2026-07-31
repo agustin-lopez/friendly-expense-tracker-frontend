@@ -13,8 +13,7 @@ import SettingsModal from "../components/SettingsModal";
 import Pagination from "../components/Pagination.jsx";
 import BlueWindow from "../components/BlueWindow.jsx";
 import Title from "../assets/title.png";
-import { Settings } from "lucide-react";
-import {WindowsXPAddressBook} from "react-old-icons";
+import {WindowsXPAddressBook, WindowsXPShell32Icon274} from "react-old-icons";
 
 export default function Dashboard() {
     const [summary, setSummary] = useState({ totalIncome: 0, totalExpenses: 0, balance: 0 });
@@ -108,33 +107,39 @@ export default function Dashboard() {
 
     return (
         <div className="min-h-screen p-4">
-            <div className="flex justify-between items-center mb-6">
-                <img src={Title} alt="Friendly Expense Tracker title" className="h-20"/>
-                <button
-                    onClick={() => setIsSettingsOpen(true)}
-                    className="text-gray-500 hover:text-gray-700"
-                >
-                    <Settings size={20}/>
-                </button>
-            </div>
-
-
-
 
             {/*MAIN CONTAINER*/}
-            <BlueWindow title="My transactions" className="max-w-[40rem]">
+            <BlueWindow title="FET - My transactions" className="max-w-[40rem]">
 
                 {/*WHITE BOX*/}
                 <div>
                     {error && <p className="text-red-500 mb-4">{error}</p>}
 
-                    {/*TRANSACTIONS CONTAINER*/}
+                    {/* TOP TITLE */}
+                    <div className="custom-bg-2 border-b-[3px] border-gray-300 p-4 flex flex-row place-content-between">
+                        <img src={Title}
+                             alt="Friendly Expense Tracker title"
+                             draggable="false"
+                             className="w-[70%]"
+                        />
+                        <div className="white-button-wrap place-self-center">
+                            <button
+                                onClick={() => setIsSettingsOpen(true)}
+                                className="white-button flex flex-row items-center gap-1"
+                            >
+                                <WindowsXPShell32Icon274 size={20}/>
+                                Settings
+                            </button>
+                        </div>
+                    </div>
+
+                    {/*SUMMARY CONTAINER*/}
                     <div className="bg-white rounded-b-[3px] shadow-md">
                         {/*BALANCE*/}
                         <BalanceSummary summary={summary}/>
 
                         {/*CHART*/}
-                        <div className="bg-white rounded-lg p-6">
+                        <div className="bg-white rounded-lg p-5">
                             <ExpensesByCategoryChart categoryTotals={categoryTotals}/>
                         </div>
                     </div>

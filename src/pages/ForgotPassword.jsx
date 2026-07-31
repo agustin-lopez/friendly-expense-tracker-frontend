@@ -21,37 +21,47 @@ export default function ForgotPassword() {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <BlueWindow title="Sign up">
+            <BlueWindow title="Password recovery">
                 {sent ? (
-                    <p className="text-green-600 text-sm text-center"> You'll receive a link to reset your password. </p>
+                    <p className="text-green-600 text-sm text-center"> You'll receive a link to reset your
+                        password. </p>
                 ) : (
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}
+                          className="bg-white p-6 pt-10 rounded-b-[3px] w-100 flex flex-col gap-5"
+                    >
                         {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
 
-                        <label className="block text-sm font-medium mb-1">Email</label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="w-full border rounded px-3 py-2 mb-6"
-                            required
-                        />
+                        <div className="flex flex-row items-center gap-3 place-content-between">
+                            <label className="block text-sm font-medium mb-1">Email</label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                                required
+                            />
+                        </div>
 
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-                        >
-                            Send recovery link
-                        </button>
+                        <div className="white-button-wrap place-self-center">
+                            <button
+                                type="submit"
+                                className="white-button"
+                            >
+                                Send recovery link
+                            </button>
+                        </div>
                     </form>
                 )}
 
-                <p className="text-sm text-center mt-4">
-                    <Link to="/login" className="text-blue-600 hover:underline">
-                        Back to login
-                    </Link>
-                </p>
+                <div className="custom-bg-2 w-[100%] p-6 flex flex-col">
+                    <p className="text-sm">
+                        • {" "}
+                        <Link to="/login" className="text-blue-600 hover:underline">
+                            Back to login
+                        </Link>
+                    </p>
+                </div>
             </BlueWindow>
         </div>
-    );
+);
 }

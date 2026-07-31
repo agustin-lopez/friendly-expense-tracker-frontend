@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
 import { getSummary, getExpensesByCategory, createTransaction, getGroupedTransactions, updateTransaction, deleteTransaction } from "../services/transactionService";
 import { getCategories } from "../services/categoryService";
 import Modal from "../components/Modal";
@@ -13,9 +12,9 @@ import TransactionTypeFilter from "../components/TransactionTypeFilter";
 import SettingsModal from "../components/SettingsModal";
 import Pagination from "../components/Pagination.jsx";
 import BlueWindow from "../components/BlueWindow.jsx";
-import title from "../assets/title.png";
-import { CircleDollarSign } from 'lucide-react';
+import Title from "../assets/title.png";
 import { Settings } from "lucide-react";
+import {WindowsXPAddressBook} from "react-old-icons";
 
 export default function Dashboard() {
     const [summary, setSummary] = useState({ totalIncome: 0, totalExpenses: 0, balance: 0 });
@@ -30,7 +29,6 @@ export default function Dashboard() {
     const [modalView, setModalView] = useState("transaction");
     const [typeFilter, setTypeFilter] = useState("ALL");
     const [editingTransaction, setEditingTransaction] = useState(null);
-    const { logoutUser } = useAuth();
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     async function loadDashboardData() {
@@ -111,7 +109,7 @@ export default function Dashboard() {
     return (
         <div className="min-h-screen p-4">
             <div className="flex justify-between items-center mb-6">
-                <img src={title} alt="Friendly Expense Tracker title" className="h-20"/>
+                <img src={Title} alt="Friendly Expense Tracker title" className="h-20"/>
                 <button
                     onClick={() => setIsSettingsOpen(true)}
                     className="text-gray-500 hover:text-gray-700"
@@ -142,7 +140,7 @@ export default function Dashboard() {
                     </div>
 
                     {/*TRANSACTION LIST*/}
-                    <div className="custom-bg-1 pb-1.5">
+                    <div className="bg-[#f0f0f0] pb-1.5">
                         <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange}/>
                         {/*NEW TRANSACTION BUTTON*/}
                         <TransactionsByMonth
@@ -155,9 +153,9 @@ export default function Dashboard() {
                                 setEditingTransaction(null);
                                 setIsModalOpen(true);
                             }}
-                            className="blue-button place-self-center my-3"
+                            className="blue-button place-self-center my-3 flex flex-row items-center gap-1"
                         >
-                            <CircleDollarSign color={"white"} className={"mr-1"} size={"22px"}/>
+                            <WindowsXPAddressBook size={26} />
                             New transaction
                         </button>
                         <Pagination

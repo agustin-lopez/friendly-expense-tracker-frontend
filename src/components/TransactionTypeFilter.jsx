@@ -23,7 +23,7 @@ export default function TransactionTypeFilter({ value, onChange }) {
     }, [value]);
 
     return (
-        <div className="relative w-[100%] rounded-t-[3px] flex items-center justify-left mb-4 custom-bg-2">
+        <div className="relative w-[100%] rounded-t-[3px] flex items-center justify-left mb-4 custom-bg-2 border-t-3 border-gray-300">
             <span
                 className="absolute button-pressed"
                 style={{

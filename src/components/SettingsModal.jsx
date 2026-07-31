@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { LogOut } from "lucide-react";
+import {WindowsXPShutDown, WindowsXPUsers} from 'react-old-icons';
 import { useAuth } from "../context/AuthContext";
-import { User} from "lucide-react";
 import ProfileSettings from "./ProfileSettings";
 import BlueWindow from "../components/BlueWindow.jsx";
 
 const SECTIONS = [
-    { id: "profile", label: "Profile", icon: User },
+    { id: "profile", label: "Profile", icon: WindowsXPUsers },
 ];
 
 export default function SettingsModal({ isOpen, onClose }) {
@@ -27,13 +26,13 @@ export default function SettingsModal({ isOpen, onClose }) {
                                     <button
                                         key={section.id}
                                         onClick={() => setActiveSection(section.id)}
-                                        className={`flex items-center gap-2 px-3 py-2 text-sm text-left ${
+                                        className={`flex items-center gap-3 px-3 py-2 text-m text-left ${
                                             activeSection === section.id
-                                                ? "bg-blue-100 text-blue-700 font-medium"
+                                                ? "bg-white text-blue-700 font-medium"
                                                 : "text-gray-600 hover:bg-slate-200"
                                         }`}
                                     >
-                                        <Icon size={16}/>
+                                        <Icon size={28}/>
                                         {section.label}
                                     </button>
                                 );
@@ -44,14 +43,14 @@ export default function SettingsModal({ isOpen, onClose }) {
                             onClick={logoutUser}
                             className="flex items-center gap-2 px-3 py-2 text-sm text-left text-red-600 hover:bg-red-50 border-t border-gray-300"
                         >
-                            <LogOut size={16}/>
+                            <WindowsXPShutDown size={28} />
                             Log out
                         </button>
                     </div>
 
                     <div className="flex-1 flex flex-col">
                         <div className="flex justify-between items-center p-4 border-b">
-                            <h2 className="font-semibold">
+                            <h2 className="font-semibold text-right">
                                 {SECTIONS.find((s) => s.id === activeSection)?.label}
                             </h2>
                         </div>

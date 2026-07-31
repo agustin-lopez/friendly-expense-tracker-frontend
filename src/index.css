@@ -74,16 +74,24 @@ html {
 
 }
 
-.transaction-month-card {
+.custom-bg-3 {
+    background: linear-gradient(90deg, #6286e1 0%, #9fbbf6 65%, #9fbbf6 70%, #6286e1 100%);
+}
+
+/*.transaction-month-card {
     background: linear-gradient(90deg, #b4c8fb 0%, #7c97f1 100%);
+}*/
+
+.transaction-month-card {
+    background: linear-gradient(90deg, #b4c8fb 0%, #a0b3ef 100%);
 }
 
 .transaction-month-bar {
-    background: linear-gradient(90deg, #f0f0ff 0%, #a6b7f1 100%);
+    background: linear-gradient(90deg, #e1e1fd 0%, #a6b7f1 100%);
 }
 
 .yellow-face {
-    background: linear-gradient(180deg, #ffcf00 50%, #a19100 100%);
+    background: linear-gradient(180deg, #ffcf00 50%, #c5af00 100%);
 
 }
 
@@ -104,9 +112,7 @@ html {
 }
 
 .button-pressed {
-    background: linear-gradient(180deg, #d8d8d8 0%, #f0f0f0 100%);
-    box-shadow:
-            inset 1px 1px 2px rgba(0, 0, 0, 0.4),
-            inset -1px -1px 1px rgba(255, 255, 255, 0.7);
-    border: 1px solid #8f8f8f;
+    background: linear-gradient(180deg, #d8d8d8 0%, #f0f0f0 25%);
+    /*border: 1px solid #8f8f8f;*/
+    border-bottom: none;
 }

@@ -77,9 +77,15 @@ body {
     background: linear-gradient(90deg, #6286e1 0%, #9fbbf6 65%, #9fbbf6 70%, #6286e1 100%);
 }
 
-/*.custom-bg-3 {
+.custom-bg-4 {
     background: linear-gradient(90deg, #7362e1 0%, #9a90f5 65%, #9b91ef 70%, #7362e1 100%);
-}*/
+}
+
+.custom-underline {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, #6286e1 0%, #9fbbf6 15%, #9fbbf6 25%, #ffffff 40%);
+}
 
 .transaction-month-card {
     background: linear-gradient(90deg, #b4c8fb 0%, #a0b3ef 100%);
@@ -129,6 +135,10 @@ body {
     border: 2px solid transparent;
     padding: 3px 8px 3px 8px;
     font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: calc(var(--spacing) * 1);
 }
 
 .white-button:hover,

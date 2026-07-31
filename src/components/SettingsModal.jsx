@@ -41,7 +41,8 @@ export default function SettingsModal({ isOpen, onClose }) {
 
                         <button
                             onClick={logoutUser}
-                            className="flex items-center gap-2 px-3 py-2 text-sm bg-red-400 hover:bg-red-300 text-white"
+                            /*className="flex items-center gap-2 px-3 py-2 text-sm bg-red-400 hover:bg-red-300 text-white"*/
+                            className="red-close flex items-center gap-2 px-3 py-2 text-sm text-white"
                         >
                             <WindowsXPShutDown size={28} />
                             Log out
@@ -49,7 +50,7 @@ export default function SettingsModal({ isOpen, onClose }) {
                     </div>
 
 
-                    <div className="flex-1 overflow-y-auto py-4 px-8">
+                    <div className="flex-1 overflow-y-auto">
                         {activeSection === "profile" && <ProfileSettings/>}
                     </div>
 

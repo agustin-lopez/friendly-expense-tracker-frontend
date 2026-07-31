@@ -125,7 +125,7 @@ export default function Dashboard() {
                         <div className="white-button-wrap place-self-center">
                             <button
                                 onClick={() => setIsSettingsOpen(true)}
-                                className="white-button flex flex-row items-center gap-1"
+                                className="white-button"
                             >
                                 <WindowsXPShell32Icon274 size={20}/>
                                 Settings

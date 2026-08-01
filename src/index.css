@@ -123,6 +123,7 @@ body {
 }
 
 .white-button-wrap {
+    width: fit-content;
     border: 1px solid RGB(1, 63, 102);
     border-radius: 3px;
     background: #f6f6f6;
@@ -132,10 +133,11 @@ body {
 }
 
 .white-button {
+    height: 100%;
     border: 2px solid transparent;
     padding: 3px 8px 3px 8px;
-    font-size: 14px;
-    display: flex;
+    font-size: 12px;
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
     gap: calc(var(--spacing) * 1);

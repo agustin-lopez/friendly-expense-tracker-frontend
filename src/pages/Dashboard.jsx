@@ -13,6 +13,7 @@ import SettingsModal from "../components/SettingsModal";
 import Pagination from "../components/Pagination.jsx";
 import BlueWindow from "../components/BlueWindow.jsx";
 import Title from "../assets/title.png";
+import ConfirmDialog from "../components/ConfirmDialog";
 import {WindowsXPAddressBook, WindowsXPShell32Icon274} from "react-old-icons";
 
 export default function Dashboard() {
@@ -29,6 +30,7 @@ export default function Dashboard() {
     const [typeFilter, setTypeFilter] = useState("ALL");
     const [editingTransaction, setEditingTransaction] = useState(null);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [transactionToDelete, setTransactionToDelete] = useState(null);
 
     async function loadDashboardData() {
         try {
@@ -60,12 +62,14 @@ export default function Dashboard() {
     }, []);
 
     async function refreshAll() {
-        const [summaryData, categoryTotalsData] = await Promise.all([
+        const [summaryData, categoryTotalsData, categoriesData] = await Promise.all([
             getSummary(),
             getExpensesByCategory(),
+            getCategories(),
         ]);
         setSummary(summaryData);
         setCategoryTotals(categoryTotalsData);
+        setCategories(categoriesData);
         await loadPage(currentPage);
     }
 
@@ -86,10 +90,18 @@ export default function Dashboard() {
         setModalView("transaction");
     }
 
-    async function handleDeleteTransaction(id) {
-        if (!window.confirm("Are you sure you want to delete this transaction?")) return;
-        await deleteTransaction(id);
-        await refreshAll()
+    function handleDeleteClick(id) {
+        setTransactionToDelete(id);
+    }
+
+    async function confirmDeleteTransaction() {
+        await deleteTransaction(transactionToDelete);
+        setTransactionToDelete(null);
+        await refreshAll();
+    }
+
+    function cancelDeleteTransaction() {
+        setTransactionToDelete(null);
     }
 
     function handleEditClick(transaction) {
@@ -106,7 +118,7 @@ export default function Dashboard() {
     if (loading) return <p className="p-8 text-gray-500">Loading...</p>;
 
     return (
-        <div className="min-h-screen p-4">
+        <div className="min-h-screen p-4 mt-20">
 
             {/*MAIN CONTAINER*/}
             <BlueWindow title="FET - My transactions" className="max-w-[40rem]">
@@ -150,7 +162,7 @@ export default function Dashboard() {
                         {/*NEW TRANSACTION BUTTON*/}
                         <TransactionsByMonth
                             monthGroups={monthGroups}
-                            onDelete={handleDeleteTransaction}
+                            onDelete={handleDeleteClick}
                             onEdit={handleEditClick}
                         />
                         <button
@@ -205,6 +217,14 @@ export default function Dashboard() {
                     />
                 )}
             </Modal>
+            <ConfirmDialog
+                isOpen={transactionToDelete !== null}
+                title="Delete transaction?"
+                message="Are you sure you want to delete this transaction?"
+                onConfirm={confirmDeleteTransaction}
+                onCancel={cancelDeleteTransaction}
+                confirmIcon="WindowsXPExplorer"
+            />
         </div>
     );
 }

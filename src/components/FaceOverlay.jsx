@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const FACES = [":)",  "XD", ":D",  " B)", ":P", ":O", ";)", ":v", ":>"];
-const INTERVAL_MS = 5000;
+const INTERVAL_MS = 4000;
 
 export default function FaceOverlay() {
     const [faceIndex, setFaceIndex] = useState(0);

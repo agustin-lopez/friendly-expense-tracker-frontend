@@ -16,7 +16,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
             <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage >= totalPages - 1}
-                className=""
+                className="disabled:opacity-0"
             >
                 →
             </button>

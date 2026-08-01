@@ -8,12 +8,16 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    async function refreshUser() {
+        const currentUser = await apiClient.get("/users/me");
+        setUser(currentUser);
+    }
+
     useEffect(() => {
         async function loadUser() {
             if (token) {
                 try {
-                    const currentUser = await apiClient.get("/users/me");
-                    setUser(currentUser);
+                    await refreshUser();
                 } catch (err) {
                     localStorage.removeItem("token");
                     setToken(null);
@@ -29,8 +33,7 @@ export function AuthProvider({ children }) {
     async function loginUser(newToken) {
         localStorage.setItem("token", newToken);
         setToken(newToken);
-        const currentUser = await apiClient.get("/users/me");
-        setUser(currentUser);
+        await refreshUser();
     }
 
     function logoutUser() {
@@ -46,6 +49,7 @@ export function AuthProvider({ children }) {
         loading,
         loginUser,
         logoutUser,
+        refreshUser,
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

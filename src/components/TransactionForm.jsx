@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {FloppyDriveXP} from "react-old-icons";
 
 function formatDateForInput(apiDate) {
     if (!apiDate) return "";
@@ -44,40 +45,46 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
 
     return (
         <form onSubmit={handleSubmit}
-              className="bg-white flex flex-col gap-5"
+              className="flex flex-col gap-4 p-4 border-[1px] border-gray-300"
         >
             {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
 
-            <div className="flex flex-row items-center gap-3 place-content-between">
+            <div className="flex flex-row items-center place-content-between">
                 <label className="text-sm">Category</label>
-                <select
-                    value={categoryId}
-                    onChange={(e) => setCategoryId(e.target.value)}
-                    className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
-                    required
-                >
-                    <option value="" disabled>Select</option>
-                    {sortCategories(categories).map((c) => (
-                        <option key={c.id} value={c.id}>
-                            {c.name} ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"})
-                        </option>
-                    ))}
-                </select>
-            </div>
+                <div className="w-[260px] flex flex-row place-content-between">
+                    <select
+                        value={categoryId}
+                        onChange={(e) => setCategoryId(e.target.value)}
+                        className="w-[60%] border rounded-[2px] p-1 pr-4 text-[15px] h-[32.5px]"
+                        required
+                    >
+                        <option value="" disabled>Select</option>
+                        {sortCategories(categories).map((c) => (
+                            <option key={c.id} value={c.id}>
+                                {c.name} ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"})
+                            </option>
+                        ))}
+                    </select>
+                    <div className="white-button-wrap w-[42%]">
+                        <button
+                            type="button"
+                            onClick={onCreateCategory}
+                            className="white-button"
+                        >
+                            Add category
+                        </button>
+                    </div>
+                </div>
 
-            <button
-                type="button"
-                onClick={onCreateCategory}
-                className="text-sm text-blue-600 hover:underline"
-            >
-                + New category
-            </button>
+            </div>
 
             <div className="flex flex-row items-center gap-3 place-content-between">
                 <label className="text-sm">Amount</label>
                 <input
                     type="number"
-                    step="0.01"
+                    step="1"
+                    min="0"
+                    max="99999999"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
@@ -85,14 +92,14 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                 />
             </div>
 
-            <div className="flex flex-row items-center gap-3 place-content-between">
+            <div className="flex flex-row gap-3 place-content-between items-start">
                 <label className="text-sm">Description</label>
                 <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     rows={3}
                     maxLength={120}
-                    className="w-full border rounded px-3 py-2 mb-1 resize-none"
+                    className="w-[260px] text-sm border rounded-[2px] px-3 py-2 resize-none"
                 />
             </div>
 
@@ -107,21 +114,26 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                 />
             </div>
 
-                <div className="flex flex-row justify-center gap-6">
+            <div className="flex flex-row justify-center gap-4 p-2">
+                <div className="white-button-wrap">
                     <button
                         type="button"
                         onClick={onCancel}
-                        className="border border-gray-300 rounded hover:bg-gray-50 px-2 py-2"
+                        className="white-button"
                     >
                         Cancel
                     </button>
+                </div>
+                <div className="white-button-wrap">
                     <button
                         type="submit"
-                        className="blue-button"
+                        className="white-button"
                     >
+                        <FloppyDriveXP size={20} />
                         {initialData ? "Save changes" : "Save"}
                     </button>
                 </div>
+            </div>
         </form>
-);
+    );
 }

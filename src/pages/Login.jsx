@@ -30,7 +30,7 @@ export default function Login() {
         <div className="flex items-center justify-center min-h-screen">
             <BlueWindow title="Login">
                 <div className="flex flex-col place-content-center w-full h-50 custom-bg-3 border-b-4 border-[#0c3eb6] gap-3">
-                    <img src={Title} alt="Friendly Expense Tracker title" draggable="false" className="w-70 vertical-align middle place-self-center"/>
+                    <img src={Title} alt="Friendly Expense Tracker title" draggable="false" className="w-70 vertical-align middle place-self-center select-none"/>
                     {/*<p className="text-white ml-4">by Agustín E. López</p>*/}
                 </div>
                 <form

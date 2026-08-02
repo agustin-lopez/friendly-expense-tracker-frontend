@@ -87,6 +87,16 @@ body {
     background: linear-gradient(90deg, #6286e1 0%, #9fbbf6 15%, #9fbbf6 25%, #ffffff 40%);
 }
 
+.msg-bg-red {
+    background: #d44848;
+    background: linear-gradient(90deg, rgba(212, 72, 72, 1) 0%, rgba(245, 140, 140, 1) 15%, rgba(212, 72, 72, 1) 45%, rgba(138, 56, 56, 1) 100%);
+}
+
+.msg-bg-green {
+    background: #2ba141;
+    background: linear-gradient(90deg, rgba(43, 161, 65, 1) 0%, rgba(116, 242, 139, 1) 15%, rgba(43, 161, 65, 1) 45%, rgba(19, 110, 35, 1) 100%);
+}
+
 .transaction-month-card {
     background: linear-gradient(90deg, #b4c8fb 0%, #a0b3ef 100%);
 }
@@ -118,7 +128,6 @@ body {
 
 .button-pressed {
     background: linear-gradient(180deg, #d8d8d8 0%, #f0f0f0 25%);
-    /*border: 1px solid #8f8f8f;*/
     border-bottom: none;
 }
 

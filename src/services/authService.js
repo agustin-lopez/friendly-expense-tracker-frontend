@@ -53,3 +53,26 @@ export async function resetPassword(token, newPassword) {
     return await response.json();
 }
 
+export async function verifyEmail(token) {
+    const response = await fetch(`${API_URL}/verify-email`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+    });
+    if (!response.ok) {
+        const errorBody = await response.json().catch(() => null);
+        throw new Error(errorBody?.error || "The email couldn't be verified");
+    }
+    return await response.json();
+}
+
+export async function resendVerification(email) {
+    const response = await fetch(`${API_URL}/resend-verification`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+    });
+    if (!response.ok) throw new Error("The verification link couldn't be resent");
+    return await response.json();
+}
+

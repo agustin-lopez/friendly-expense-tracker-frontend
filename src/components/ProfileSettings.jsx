@@ -40,7 +40,7 @@ export default function ProfileSettings() {
 
         try {
             await changePassword(user.id, currentPassword, newPassword);
-            setPasswordMessage("Password updated succesfully!");
+            setPasswordMessage("Password updated successfully!");
             setCurrentPassword("");
             setNewPassword("");
             setConfirmPassword("");
@@ -77,6 +77,11 @@ export default function ProfileSettings() {
                     <p>{email}</p>
                 </div>
 
+                <div className="w-full h-7 flex items-center">
+                    {profileError && <p className="w-full px-3 py-1 text-white msg-bg-red text-sm text-center">{profileError}</p>}
+                    {profileMessage && <p className="w-full px-3 py-1 text-white msg-bg-green text-sm text-center">{profileMessage}</p>}
+                </div>
+
                 <div className="flex flex-row place-content-between items-center">
                     <div className="h-[2px] w-[65%] bg-gray-300"/>
                     <div className="white-button-wrap">
@@ -84,15 +89,11 @@ export default function ProfileSettings() {
                             type="submit"
                             className="white-button"
                         >
-                            <FloppyDriveXP size={20}/>
+                            <FloppyDriveXP size={20} draggable="false"/>
                             Save data
                         </button>
                     </div>
                 </div>
-
-
-                {profileError && <p className="text-red-500 text-sm mb-2">{profileError}</p>}
-                {profileMessage && <p className="text-green-600 text-sm mb-2">{profileMessage}</p>}
 
             </form>
 
@@ -137,6 +138,11 @@ export default function ProfileSettings() {
                     />
                 </div>
 
+                <div className="w-full h-7 flex items-center">
+                    {passwordError && <p className="w-full px-3 py-1 text-white msg-bg-red text-sm text-center">{passwordError}</p>}
+                    {passwordMessage && <p className="w-full px-3 py-1 text-white msg-bg-green text-sm text-center">{passwordMessage}</p>}
+                </div>
+
                 <div className="flex flex-row place-content-between items-center">
                     <div className="h-[2px] w-[65%] bg-gray-300"/>
                     <div className="white-button-wrap">
@@ -144,14 +150,11 @@ export default function ProfileSettings() {
                             type="submit"
                             className="white-button"
                         >
-                            <FloppyDriveXP size={20}/>
+                            <FloppyDriveXP size={20} draggable="false"/>
                             Save password
                         </button>
                     </div>
                 </div>
-
-                {passwordError && <p className="text-red-500 text-sm mb-2">{passwordError}</p>}
-                {passwordMessage && <p className="text-green-600 text-sm mb-2">{passwordMessage}</p>}
 
             </form>
         </div>

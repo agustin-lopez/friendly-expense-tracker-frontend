@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { login } from "../services/authService";
+import {login, resendVerification} from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -12,16 +12,19 @@ export default function Login() {
     const [error, setError] = useState("");
     const { loginUser } = useAuth();
     const navigate = useNavigate();
+    const [needsVerification, setNeedsVerification] = useState(false);
 
     async function handleSubmit(e) {
         e.preventDefault();
         setError("");
+        setNeedsVerification(false);
 
         try {
             const token = await login(email, password);
             await loginUser(token);
             navigate("/dashboard");
         } catch (err) {
+            if (err.message.includes("verify")) setNeedsVerification(true);
             setError(err.message);
         }
     }
@@ -71,6 +74,16 @@ export default function Login() {
                             Submit
                         </button>
                     </div>
+
+                    {needsVerification && (
+                        <button
+                            type="button"
+                            onClick={() => resendVerification(email)}
+                            className="text-sm text-blue-600 hover:underline"
+                        >
+                            Resend verification email
+                        </button>
+                    )}
 
                 </form>
                 <div className="custom-bg-2 w-[100%] p-6 flex flex-col">

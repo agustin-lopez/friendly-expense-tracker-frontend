@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import VerifyEmail from "./pages/VerifyEmail.jsx";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
         </Routes>
       </BrowserRouter>
   );

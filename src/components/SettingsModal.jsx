@@ -32,7 +32,7 @@ export default function SettingsModal({ isOpen, onClose }) {
                                                 : "text-gray-600 hover:bg-slate-200"
                                         }`}
                                     >
-                                        <Icon size={28}/>
+                                        <Icon size={28} draggable="false" />
                                         {section.label}
                                     </button>
                                 );
@@ -44,7 +44,7 @@ export default function SettingsModal({ isOpen, onClose }) {
                             /*className="flex items-center gap-2 px-3 py-2 text-sm bg-red-400 hover:bg-red-300 text-white"*/
                             className="red-close flex items-center gap-2 px-3 py-2 text-sm text-white"
                         >
-                            <WindowsXPShutDown size={28} />
+                            <WindowsXPShutDown size={28} draggable="false" />
                             Log out
                         </button>
                     </div>

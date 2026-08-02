@@ -139,7 +139,7 @@ export default function Dashboard() {
                                 onClick={() => setIsSettingsOpen(true)}
                                 className="white-button"
                             >
-                                <WindowsXPShell32Icon274 size={20}/>
+                                <WindowsXPShell32Icon274 size={20} draggable="false"/>
                                 Settings
                             </button>
                         </div>
@@ -172,7 +172,7 @@ export default function Dashboard() {
                             }}
                             className="blue-button place-self-center my-3 flex flex-row items-center gap-1"
                         >
-                            <WindowsXPAddressBook size={26} />
+                            <WindowsXPAddressBook size={26} draggable="false" />
                             New transaction
                         </button>
                         <Pagination

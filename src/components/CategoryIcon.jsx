@@ -6,5 +6,5 @@ export default function CategoryIcon({ name, size = 16, className = "" }) {
 
     if (!IconComponent) return null;
 
-    return <IconComponent size={size} className={className} />;
+    return <IconComponent size={size} className={className} draggable="false" />;
 }

@@ -16,6 +16,7 @@ import ManageCategoriesModal from "../components/ManageCategoriesModal";
 import Title from "../assets/title.png";
 import ConfirmDialog from "../components/ConfirmDialog";
 import {WindowsXPShell32Icon274, WindowsXPmmcndmgr7, OutlookExpressXP} from "react-old-icons";
+import MonthsPerPageSelector from "../components/MonthsPerPageSelector.jsx";
 
 export default function Dashboard() {
     const [summary, setSummary] = useState({ totalIncome: 0, totalExpenses: 0, balance: 0 });
@@ -33,6 +34,10 @@ export default function Dashboard() {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [transactionToDelete, setTransactionToDelete] = useState(null);
     const [isManageCategoriesOpen, setIsManageCategoriesOpen] = useState(false);
+    const [pageSize, setPageSize] = useState(() => {
+        const saved = localStorage.getItem("monthsPerPage");
+        return saved ? Number(saved) : 2;
+    });
 
     async function loadDashboardData() {
         try {
@@ -52,8 +57,8 @@ export default function Dashboard() {
         }
     }
 
-    async function loadPage(page, type = typeFilter) {
-        const result = await getGroupedTransactions(page, type);
+    async function loadPage(page, type = typeFilter, size = pageSize) {
+        const result = await getGroupedTransactions(page, type, size);
         setMonthGroups(result.content);
         setCurrentPage(result.currentPage);
         setTotalPages(result.totalPages);
@@ -129,7 +134,13 @@ export default function Dashboard() {
 
     function handleFilterChange(newType) {
         setTypeFilter(newType);
-        loadPage(0, newType);
+        loadPage(0, newType, pageSize);
+    }
+
+    function handlePageSizeChange(newSize) {
+        setPageSize(newSize);
+        localStorage.setItem("monthsPerPage", newSize);
+        loadPage(0, typeFilter, newSize);
     }
 
     if (loading) return <p className="p-8 text-gray-500">Loading...</p>;
@@ -176,6 +187,8 @@ export default function Dashboard() {
                     {/*TRANSACTION LIST*/}
                     <div className="bg-[#f0f0f0] pb-1.5">
                         <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange}/>
+                        <MonthsPerPageSelector value={pageSize} onChange={handlePageSizeChange}/>
+
                         {/*NEW TRANSACTION BUTTON*/}
                         <TransactionsByMonth
                             monthGroups={monthGroups}
@@ -188,7 +201,7 @@ export default function Dashboard() {
                                     onClick={() => setIsManageCategoriesOpen(true)}
                                     className="white-button text-[13px]!"
                                 >
-                                    <WindowsXPmmcndmgr7 size={22} draggable="false" />
+                                    <WindowsXPmmcndmgr7 size={22} draggable="false"/>
                                     Manage categories
                                 </button>
                             </div>
@@ -200,7 +213,7 @@ export default function Dashboard() {
                                     }}
                                     className="white-button text-[13px]!"
                                 >
-                                    <OutlookExpressXP size={22} draggable="false" />
+                                    <OutlookExpressXP size={22} draggable="false"/>
                                     New transaction
                                 </button>
                             </div>

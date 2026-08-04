@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { register } from "../services/authService";
-import { useAuth } from "../context/AuthContext";
 import BlueWindow from "../components/BlueWindow.jsx";
 import Title from "../assets/title-alt.png";
 
@@ -9,12 +8,18 @@ export default function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const [registered, setRegistered] = useState(false);
 
     async function handleSubmit(e) {
         e.preventDefault();
         setError("");
+
+        if (password !== confirmPassword) {
+            setError("Passwords don't match");
+            return;
+        }
 
         try {
             await register(name, email, password);
@@ -26,7 +31,7 @@ export default function Register() {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <BlueWindow title="Sign up" className="max-w-[30rem]">
+            <BlueWindow title="Sign up" className="w-[30rem]">
                 <div
                     className="flex flex-col place-content-center w-full h-50 custom-bg-3 border-b-4 border-[#0c3eb6] gap-3">
                     <img src={Title} alt="Friendly Expense Tracker title" draggable="false"
@@ -46,17 +51,14 @@ export default function Register() {
 
                     </div>
                 ) : (
-                    <div>
+                    <div className="w-full">
                         <form
                             onSubmit={handleSubmit}
-                            className="bg-white p-6 pt-10 rounded-b-[3px] w-100 flex flex-col gap-5"
+                            className="bg-white p-8 pt-10 rounded-b-[3px] w-full flex flex-col gap-5 mx-auto"
                         >
-                            {error && (
-                                <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
-                            )}
 
                             <div className="flex flex-row items-center gap-3 place-content-between">
-                                <label className="block text-sm font-medium mb-1">Name</label>
+                                <label className="block text-sm font-medium">Name</label>
                                 <input
                                     type="text"
                                     value={name}
@@ -67,7 +69,7 @@ export default function Register() {
                             </div>
 
                             <div className="flex flex-row items-center gap-3 place-content-between">
-                                <label className="block text-sm font-medium mb-1">Email</label>
+                                <label className="block text-sm font-medium">Email</label>
                                 <input
                                     type="email"
                                     value={email}
@@ -79,7 +81,7 @@ export default function Register() {
                             </div>
 
                             <div className="flex flex-row items-center gap-3 place-content-between">
-                                <label className="block text-sm font-medium mb-1">Password</label>
+                                <label className="block text-sm font-medium">Password</label>
                                 <input
                                     type="password"
                                     value={password}
@@ -90,6 +92,22 @@ export default function Register() {
                                 />
                             </div>
 
+                            <div className="flex flex-row items-center gap-3 place-content-between">
+                                <label className="block text-sm font-medium">Confirm password</label>
+                                <input
+                                    type="password"
+                                    value={confirmPassword}
+                                    autoComplete="new-password"
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                                    required
+                                />
+                            </div>
+
+                            {error && (
+                                <p className="text-sm text-white p-1 msg-bg-red w-full text-center">{error}</p>
+                            )}
+
                             <div className="white-button-wrap place-self-center">
                                 <button
                                     type="submit"
@@ -99,7 +117,7 @@ export default function Register() {
                                 </button>
                             </div>
                         </form>
-                        <div className="custom-bg-2 w-[100%] p-6 flex flex-col">
+                        <div className="custom-bg-2 w-full p-6 flex flex-col">
                             <p className="text-sm">
                                 • Already have an account?{" "}
                                 <Link to="/login" className="text-blue-600 hover:underline">

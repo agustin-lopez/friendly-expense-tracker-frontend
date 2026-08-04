@@ -104,7 +104,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
             </div>
 
             <div className="flex flex-row items-center gap-3 place-content-between">
-                <label className="block text-sm font-medium mb-1">Date</label>
+                <label className="block text-sm font-medium">Date</label>
                 <input
                     type="date"
                     value={date}

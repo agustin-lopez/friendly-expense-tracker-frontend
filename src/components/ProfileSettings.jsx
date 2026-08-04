@@ -77,10 +77,8 @@ export default function ProfileSettings() {
                     <p>{email}</p>
                 </div>
 
-                <div className="w-full h-7 flex items-center">
-                    {profileError && <p className="w-full px-3 py-1 text-white msg-bg-red text-sm text-center">{profileError}</p>}
-                    {profileMessage && <p className="w-full px-3 py-1 text-white msg-bg-green text-sm text-center">{profileMessage}</p>}
-                </div>
+                {profileError && <p className="w-full px-3 py-1 text-white msg-bg-red text-sm text-center">{profileError}</p>}
+                {profileMessage && <p className="w-full px-3 py-1 text-white msg-bg-green text-sm text-center">{profileMessage}</p>}
 
                 <div className="flex flex-row place-content-between items-center">
                     <div className="h-[2px] w-[65%] bg-gray-300"/>

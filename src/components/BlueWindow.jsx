@@ -22,7 +22,7 @@ export default function XPWindow({ title, closable = false, onClose, children, c
                 )}
             </div>
 
-            <div className="bg-white m-1 mt-0 border-solid border-[#0034b0] border-1">
+            <div className="bg-white m-1 mt-0 border-solid border-[#0034b0] border-1 flex flex-col items-center">
                 {children}
             </div>
         </div>

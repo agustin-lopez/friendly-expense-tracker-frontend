@@ -51,7 +51,7 @@ export default function ResetPassword() {
                     <form onSubmit={handleSubmit}>
                         {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
 
-                        <label className="block text-sm font-medium mb-1">New password</label>
+                        <label className="block text-sm font-medium">New password</label>
                         <input
                             type="password"
                             value={newPassword}
@@ -60,7 +60,7 @@ export default function ResetPassword() {
                             required
                         />
 
-                        <label className="block text-sm font-medium mb-1">Confirm password</label>
+                        <label className="block text-sm font-medium">Confirm password</label>
                         <input
                             type="password"
                             value={confirmPassword}

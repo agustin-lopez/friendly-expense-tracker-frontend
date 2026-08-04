@@ -32,7 +32,7 @@ export default function ForgotPassword() {
                         {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
 
                         <div className="flex flex-row items-center gap-3 place-content-between">
-                            <label className="block text-sm font-medium mb-1">Email</label>
+                            <label className="block text-sm font-medium">Email</label>
                             <input
                                 type="email"
                                 value={email}

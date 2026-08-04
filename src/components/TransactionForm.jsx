@@ -56,7 +56,6 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                         value={categoryId}
                         onChange={(e) => setCategoryId(e.target.value)}
                         className="w-[60%] border rounded-[2px] p-1 pr-4 text-[15px] h-[32.5px]"
-                        required
                     >
                         <option value="" disabled>Select</option>
                         {sortCategories(categories).map((c) => (

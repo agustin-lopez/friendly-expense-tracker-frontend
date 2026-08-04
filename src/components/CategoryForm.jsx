@@ -3,10 +3,10 @@ import { CATEGORY_ICONS } from "../constants/categoryIcons.js";
 import CategoryIcon from "./CategoryIcon.jsx";
 import {FloppyDriveXP} from "react-old-icons";
 
-export default function CategoryForm({ onSubmit, onCancel }) {
-    const [name, setName] = useState("");
-    const [type, setType] = useState("EXPENSE");
-    const [icon, setIcon] = useState(CATEGORY_ICONS[0].name);
+export default function CategoryForm({ onSubmit, onCancel, initialData }) {
+    const [name, setName] = useState(initialData?.name || "");
+    const [type, setType] = useState(initialData?.type || "EXPENSE");
+    const [icon, setIcon] = useState(initialData?.icon || CATEGORY_ICONS[0].name);
     const [error, setError] = useState("");
 
     async function handleSubmit(e) {

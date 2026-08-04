@@ -132,6 +132,8 @@ body {
 }
 
 .white-button-wrap {
+    display: inline-flex;
+    align-items: center;
     width: fit-content;
     border: 1px solid RGB(1, 63, 102);
     border-radius: 3px;

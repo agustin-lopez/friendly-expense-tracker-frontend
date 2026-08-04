@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getSummary, getExpensesByCategory, createTransaction, getGroupedTransactions, updateTransaction, deleteTransaction } from "../services/transactionService";
-import { getCategories } from "../services/categoryService";
+import {deleteCategory, getCategories, updateCategory} from "../services/categoryService";
 import Modal from "../components/Modal";
 import TransactionForm from "../components/TransactionForm";
 import ExpensesByCategoryChart from "../components/ExpensesByCategoryChart";
@@ -12,9 +12,10 @@ import TransactionTypeFilter from "../components/TransactionTypeFilter";
 import SettingsModal from "../components/SettingsModal";
 import Pagination from "../components/Pagination.jsx";
 import BlueWindow from "../components/BlueWindow.jsx";
+import ManageCategoriesModal from "../components/ManageCategoriesModal";
 import Title from "../assets/title.png";
 import ConfirmDialog from "../components/ConfirmDialog";
-import {WindowsXPAddressBook, WindowsXPShell32Icon274} from "react-old-icons";
+import {WindowsXPAddressBook, WindowsXPShell32Icon274, WindowsXPmmcndmgr7, OutlookExpressXP} from "react-old-icons";
 
 export default function Dashboard() {
     const [summary, setSummary] = useState({ totalIncome: 0, totalExpenses: 0, balance: 0 });
@@ -31,6 +32,7 @@ export default function Dashboard() {
     const [editingTransaction, setEditingTransaction] = useState(null);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [transactionToDelete, setTransactionToDelete] = useState(null);
+    const [isManageCategoriesOpen, setIsManageCategoriesOpen] = useState(false);
 
     async function loadDashboardData() {
         try {
@@ -88,6 +90,21 @@ export default function Dashboard() {
         await createCategory(categoryData);
         await refreshAll();
         setModalView("transaction");
+    }
+
+    async function handleCreateCategoryFromManager(data) {
+        await createCategory(data);
+        await refreshAll();
+    }
+
+    async function handleUpdateCategory(id, data) {
+        await updateCategory(id, data);
+        await refreshAll();
+    }
+
+    async function handleDeleteCategory(id) {
+        await deleteCategory(id);
+        await refreshAll();
     }
 
     function handleDeleteClick(id) {
@@ -165,16 +182,30 @@ export default function Dashboard() {
                             onDelete={handleDeleteClick}
                             onEdit={handleEditClick}
                         />
-                        <button
-                            onClick={() => {
-                                setEditingTransaction(null);
-                                setIsModalOpen(true);
-                            }}
-                            className="blue-button place-self-center my-3 flex flex-row items-center gap-1"
-                        >
-                            <WindowsXPAddressBook size={26} draggable="false" />
-                            New transaction
-                        </button>
+                        <div className="flex flex-row items-center place-content-center gap-3 my-2">
+                            <div className="white-button-wrap">
+                                <button
+                                    onClick={() => setIsManageCategoriesOpen(true)}
+                                    className="white-button text-[13px]!"
+                                >
+                                    <WindowsXPmmcndmgr7 size={22} draggable="false" />
+                                    Manage categories
+                                </button>
+                            </div>
+                            <div className="white-button-wrap">
+                                <button
+                                    onClick={() => {
+                                        setEditingTransaction(null);
+                                        setIsModalOpen(true);
+                                    }}
+                                    className="white-button text-[13px]!"
+                                >
+                                    <OutlookExpressXP size={22} draggable="false" />
+                                    New transaction
+                                </button>
+                            </div>
+                        </div>
+
                         <Pagination
                             currentPage={currentPage}
                             totalPages={totalPages}
@@ -185,7 +216,7 @@ export default function Dashboard() {
                 </div>
             </BlueWindow>
 
-            <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+            <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)}/>
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => {
@@ -196,7 +227,7 @@ export default function Dashboard() {
                 title={
                     modalView === "transaction"
                         ? (editingTransaction ? "Edit transaction" : "New transaction")
-                        : "New Category"
+                        : "New category"
                 }
             >
                 {modalView === "transaction" ? (
@@ -217,6 +248,14 @@ export default function Dashboard() {
                     />
                 )}
             </Modal>
+            <ManageCategoriesModal
+                isOpen={isManageCategoriesOpen}
+                onClose={() => setIsManageCategoriesOpen(false)}
+                categories={categories}
+                onCreate={handleCreateCategoryFromManager}
+                onUpdate={handleUpdateCategory}
+                onDelete={handleDeleteCategory}
+            />
             <ConfirmDialog
                 isOpen={transactionToDelete !== null}
                 title="Delete transaction?"

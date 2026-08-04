@@ -55,13 +55,11 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
                                     <div className="flex justify-center gap-1 opacity-0 group-hover:opacity-100">
                                         <button
                                             onClick={() => onEdit(t)}
-                                            className="hover:text-yellow-400"
                                         >
                                             <WordpadXP size={20}/>
                                         </button>
                                         <button
                                             onClick={() => onDelete(t.id)}
-                                            className="hover:text-red-500"
                                         >
                                             <WindowsXPShell322 size={20}/>
                                         </button>

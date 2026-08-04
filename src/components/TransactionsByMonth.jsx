@@ -1,7 +1,7 @@
 import Tooltip from "./Tooltip";
 import { WindowsXPShell322, WordpadXP } from "react-old-icons";
-import CategoryIcon from "./CategoryIcon";
 import { formatCurrency } from "../utils/formatCurrency";
+import CategoryLabel from "./CategoryLabel";
 
 function formatMonthLabel(monthKey) {
     const [year, month] = monthKey.split("-");
@@ -32,25 +32,26 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
                         {group.transactions.map((t) => (
                             <tr key={t.id} className="group border-b border-gray-500 last:border-0">
                                 <td className="py-1.5 px-3 text-[14px] text-left w-px whitespace-nowrap">{t.transactionDate}</td>
-                                <td className="p-1.5 text-[14px] text-left">
-                                    <div className="flex gap-2 max-w-[120px]">
-                                        <CategoryIcon name={t.category.icon} size={25}/>
-                                        <Tooltip text={t.category.name}>
-                                            <span className="flex truncate">{t.category.name}</span>
-                                        </Tooltip>
-                                    </div>
+
+                                <td className="py-1.5 w-px whitespace-nowrap">
+                                        <CategoryLabel category={t.category} size={25}/>
                                 </td>
+
                                 <td className="p-1.5 text-[14px]">
                                     <Tooltip text={t.description}>
-                                        <span className="flex items-center truncate max-w-[110px]">{t.description}</span>
+                                        <span
+                                            className="flex items-center truncate">{t.description}</span>
                                     </Tooltip>
                                 </td>
-                                <td className={"p-1.5 text-right text-[14px] w-px whitespace-nowrap"}>
-                                    <span
-                                        className={`bg-[#f0f0ff] ${t.category.type === "EXPENSE" ? "text-red-600" : "text-green-600"}`}>
-                                        {t.category.type === "EXPENSE" ? "-" : "+"}${formatCurrency(t.amount)}
+
+                                <td className={`p-1.5 text-right text-[14px] w-px whitespace-nowrap ${
+                                    !t.category ? "text-gray-500" : t.category.type === "EXPENSE" ? "text-red-600" : "text-green-700"
+                                }`}>
+                                    <span className="bg-white p-0.5">
+                                        {t.category ? (t.category.type === "EXPENSE" ? "- " : "+ ") : ""}${formatCurrency(t.amount)}
                                     </span>
                                 </td>
+
                                 <td className="pr-2 text-right w-[52px]">
                                     <div className="flex justify-center gap-1 opacity-0 group-hover:opacity-100">
                                         <button

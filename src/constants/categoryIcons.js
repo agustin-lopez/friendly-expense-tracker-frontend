@@ -31,3 +31,5 @@ export const CATEGORY_ICONS = [
     { name: "ThreeThousandIcons9", label: "Food" },
     { name: "VisualStudioCARS", label: "Cars" }
 ];
+
+export const NO_CATEGORY = { name: null, label: "No category", icon: "Windows31ProgmanIcon" };

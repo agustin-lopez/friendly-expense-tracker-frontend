@@ -15,7 +15,7 @@ import BlueWindow from "../components/BlueWindow.jsx";
 import ManageCategoriesModal from "../components/ManageCategoriesModal";
 import Title from "../assets/title.png";
 import ConfirmDialog from "../components/ConfirmDialog";
-import {WindowsXPAddressBook, WindowsXPShell32Icon274, WindowsXPmmcndmgr7, OutlookExpressXP} from "react-old-icons";
+import {WindowsXPShell32Icon274, WindowsXPmmcndmgr7, OutlookExpressXP} from "react-old-icons";
 
 export default function Dashboard() {
     const [summary, setSummary] = useState({ totalIncome: 0, totalExpenses: 0, balance: 0 });

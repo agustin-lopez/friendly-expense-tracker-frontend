@@ -32,7 +32,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
 
         try {
             await onSubmit({
-                category: { id: categoryId },
+                category: categoryId ? { id: categoryId } : null,
                 amount: parseFloat(amount),
                 description,
                 transactionDate: formatDateForApi(date),
@@ -57,7 +57,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                         onChange={(e) => setCategoryId(e.target.value)}
                         className="w-[60%] border rounded-[2px] p-1 pr-4 text-[15px] h-[32.5px]"
                     >
-                        <option value="" disabled>Select</option>
+                        <option value="">No category</option>
                         {sortCategories(categories).map((c) => (
                             <option key={c.id} value={c.id}>
                                 {c.name} ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"})

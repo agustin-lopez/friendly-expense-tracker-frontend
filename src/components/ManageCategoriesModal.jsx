@@ -66,15 +66,15 @@ export default function ManageCategoriesModal({
                                             key={c.id}
                                             className="group flex items-center justify-between py-2 px-3 border-b border-gray-300 last:border-0"
                                         >
-                                            <div className="flex items-center gap-3">
+                                            <div className="flex items-center gap-4">
                                                 <span
-                                                    className={`text-sm p-1 rounded-[2px] w-[65px] text-center ${
+                                                    className={`text-xs p-1 rounded-[2px] w-[65px] text-center ${
                                                         c.type === "EXPENSE"
                                                             ? "bg-red-100 text-red-700"
                                                             : "bg-green-100 text-green-700"
                                                     }`}
                                                 >
-                                                    {c.type === "EXPENSE" ? "Expense" : "Income"}
+                                                    {c.type}
                                                 </span>
                                                 <CategoryIcon name={c.icon} size={22}/>
                                                 <Tooltip text={c.name}>
@@ -123,8 +123,9 @@ export default function ManageCategoriesModal({
             <ConfirmDialog
                 isOpen={categoryToDelete !== null}
                 title="Delete category"
-                message="Are you sure you want to delete this category? Transactions using it may be affected."
+                message="Are you sure you want to delete this category? Transactions using it wii be marked as 'Uncategorized' and won't affect your balance."
                 onConfirm={confirmDelete}
+                confirmIcon="WindowsXPExplorer"
                 onCancel={() => setCategoryToDelete(null)}
             />
         </div>

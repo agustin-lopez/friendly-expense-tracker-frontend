@@ -4,10 +4,10 @@ import Tooltip from "./Tooltip";
 export default function CategoryLabel({ category, size = 16 }) {
     if (!category) {
         return (
-            <Tooltip text="No category">
+            <Tooltip text="Uncategorized">
                 <div className="flex flex-row h-full gap-3">
                     <CategoryIcon name="Windows31ProgmanIcon" size={size} />
-                    <span className="flex items-center text-[14px]">No category</span>
+                    <span className="flex items-center text-[14px]">Uncategorized</span>
                 </div>
             </Tooltip>
         );

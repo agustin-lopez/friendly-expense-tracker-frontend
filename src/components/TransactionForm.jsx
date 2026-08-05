@@ -61,7 +61,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                         className="w-[60%] border rounded-[2px] p-1 pr-4 text-[15px] h-[32.5px]"
                         required
                     >
-                        <option value="" disabled selected hidden>No category</option>
+                        <option value="" disabled selected hidden>Uncategorized</option>
                         {sortCategories(categories).map((c) => (
                             <option key={c.id} value={c.id}>
                                 ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"}) {c.name}

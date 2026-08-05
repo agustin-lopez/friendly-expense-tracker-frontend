@@ -48,4 +48,4 @@ export const CATEGORY_ICONS = [
 
 ];
 
-export const NO_CATEGORY = { name: null, label: "No category", icon: "Windows31ProgmanIcon" };
+export const NO_CATEGORY = { name: null, label: "Uncategorized", icon: "Windows31ProgmanIcon" };

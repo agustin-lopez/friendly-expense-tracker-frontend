@@ -16,7 +16,7 @@ export default function ConfirmDialog({
 
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <BlueWindow title={title} closable={true} onClose={onCancel} className="w-80">
+            <BlueWindow title={title} closable={true} onClose={onCancel} className="w-100">
                 <div className="p-4">
                     <p className="text-sm text-gray-700 mb-6">{message}</p>
 

@@ -29,7 +29,7 @@ export const CATEGORY_ICONS = [
     { name: "Windows31Progman", label: "Cassette" },
     { name: "Windows31ProgmanIcon", label: "QuestionMark" },
     { name: "WindowsVistaLiveMessenger", label: "People" },
-    { name: "PepsiThemeMyComputer", label: "Food" },
+    { name: "PepsiThemeMyComputer", label: "SodaCan" },
     { name: "VisualStudioCARS", label: "Cars" },
     { name: "Bejeweled", label: "Diamond" },
     { name: "FashionTheme2", label: "Lipstick" },
@@ -42,7 +42,7 @@ export const CATEGORY_ICONS = [
     { name: "RNRNetworkNeighborhood", label: "Drums" },
     { name: "RollerCoasterTycoon", label: "Panda" },
     { name: "VisualStudioPlane", label: "Airplane" },
-    { name: "WindowsPifmgr8", label: "Sport" },
+    { name: "WindowsPifmgr8", label: "Football" },
     { name: "Windows95SavedSearch", label: "Paper" },
     { name: "Windows95Pifmgr13", label: "Domino" }
 

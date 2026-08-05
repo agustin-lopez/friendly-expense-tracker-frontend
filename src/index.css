@@ -147,7 +147,6 @@ body {
     height: 100%;
     border: 2px solid transparent;
     padding: 3px 8px 3px 8px;
-    font-size: 12px;
     display: inline-flex;
     flex-direction: row;
     align-items: center;

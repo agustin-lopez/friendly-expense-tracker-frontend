@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CATEGORY_ICONS } from "../constants/categoryIcons.js";
 import CategoryIcon from "./CategoryIcon.jsx";
 import {FloppyDriveXP} from "react-old-icons";
+import DefaultButton from "./DefaultButton.jsx";
 
 export default function CategoryForm({ onSubmit, onCancel, initialData }) {
     const [name, setName] = useState(initialData?.name || "");
@@ -72,25 +73,15 @@ export default function CategoryForm({ onSubmit, onCancel, initialData }) {
             </div>
 
             <div className="flex flex-row justify-center gap-4 p-2">
-                <div className="white-button-wrap">
-                    <button
-                        type="button"
-                        onClick={onCancel}
-                        className="white-button"
-                    >
-                        Cancel
-                    </button>
-                </div>
-                <div className="white-button-wrap">
-                    <button
-                        type="submit"
-                        className="white-button"
-                    >
-                        <FloppyDriveXP size={20}/>
-                        Save
-                    </button>
-                </div>
+                <DefaultButton onClickAction={onCancel}>
+                    Cancel
+                </DefaultButton>
+                <DefaultButton submit={true}>
+                    <FloppyDriveXP size={20}/>
+                    Save
+                </DefaultButton>
             </div>
+
         </form>
     );
 }

@@ -5,6 +5,7 @@ import ConfirmDialog from "./ConfirmDialog";
 import CategoryIcon from "./CategoryIcon";
 import {FloppyDriveXP, WindowsXPShell322, WordpadXP} from "react-old-icons";
 import Tooltip from "./Tooltip.jsx";
+import DefaultButton from "./DefaultButton.jsx";
 
 export default function ManageCategoriesModal({
                                                   isOpen,
@@ -99,23 +100,13 @@ export default function ManageCategoriesModal({
                             </div>
 
                             <div className="flex flex-row justify-center gap-4 p-2">
-                                <div className="white-button-wrap">
-                                    <button
-                                        type="button"
-                                        onClick={onClose}
-                                        className="white-button"
-                                    >
-                                        Close
-                                    </button>
-                                </div>
-                                <div className="white-button-wrap place-self-center">
-                                    <button
-                                        onClick={handleAddClick}
-                                        className="white-button"
-                                    >
-                                        Add category
-                                    </button>
-                                </div>
+                                <DefaultButton onClickAction={onClose}>
+                                    Close
+                                </DefaultButton>
+
+                                <DefaultButton onClickAction={handleAddClick}>
+                                    Add category
+                                </DefaultButton>
                             </div>
 
                         </>

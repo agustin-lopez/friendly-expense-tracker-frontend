@@ -1,5 +1,6 @@
 import BlueWindow from "./BlueWindow";
 import CategoryIcon from "./CategoryIcon.jsx";
+import DefaultButton from "./DefaultButton.jsx";
 
 export default function ConfirmDialog({
                                           isOpen,
@@ -20,26 +21,14 @@ export default function ConfirmDialog({
                     <p className="text-sm text-gray-700 mb-6">{message}</p>
 
                     <div className="flex justify-center gap-3">
-                        <div className="white-button-wrap">
-                            <button
-                                type="button"
-                                onClick={onCancel}
-                                className="white-button"
-                            >
-                                {cancelLabel}
-                            </button>
-                        </div>
+                        <DefaultButton onClickAction={onCancel}>
+                            {cancelLabel}
+                        </DefaultButton>
 
-                        <div className="white-button-wrap">
-                            <button
-                                type="button"
-                                onClick={onConfirm}
-                                className="white-button"
-                            >
+                        <DefaultButton onClickAction={onConfirm}>
                             <CategoryIcon name={confirmIcon} size={20}/>
                             {confirmLabel}
-                            </button>
-                        </div>
+                        </DefaultButton>
                     </div>
                 </div>
             </BlueWindow>

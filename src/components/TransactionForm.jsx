@@ -2,6 +2,7 @@ import { useState } from "react";
 import {FloppyDriveXP} from "react-old-icons";
 import CategoryLabel from "./CategoryLabel.jsx";
 import CategoryIcon from "./CategoryIcon.jsx";
+import DefaultButton from "./DefaultButton.jsx";
 
 function formatDateForInput(apiDate) {
     if (!apiDate) return "";
@@ -58,23 +59,18 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                         value={categoryId}
                         onChange={(e) => setCategoryId(e.target.value)}
                         className="w-[60%] border rounded-[2px] p-1 pr-4 text-[15px] h-[32.5px]"
+                        required
                     >
-                        <option value="">No category</option>
+                        <option value="" disabled selected hidden>No category</option>
                         {sortCategories(categories).map((c) => (
                             <option key={c.id} value={c.id}>
                                 ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"}) {c.name}
                             </option>
                         ))}
                     </select>
-                    <div className="white-button-wrap w-[42%]">
-                        <button
-                            type="button"
-                            onClick={onCreateCategory}
-                            className="white-button"
-                        >
-                            Add category
-                        </button>
-                    </div>
+                    <DefaultButton onClickAction={onCreateCategory}>
+                        Add category
+                    </DefaultButton>
                 </div>
 
             </div>
@@ -116,24 +112,13 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
             </div>
 
             <div className="flex flex-row justify-center gap-4 p-2">
-                <div className="white-button-wrap">
-                    <button
-                        type="button"
-                        onClick={onCancel}
-                        className="white-button"
-                    >
-                        Cancel
-                    </button>
-                </div>
-                <div className="white-button-wrap">
-                    <button
-                        type="submit"
-                        className="white-button"
-                    >
-                        <FloppyDriveXP size={20} />
-                        {initialData ? "Save changes" : "Save"}
-                    </button>
-                </div>
+                <DefaultButton onClickAction={onCancel}>
+                    Cancel
+                </DefaultButton>
+                <DefaultButton submit={true}>
+                    <FloppyDriveXP size={20} />
+                    {initialData ? "Save changes" : "Save"}
+                </DefaultButton>
             </div>
         </form>
     );

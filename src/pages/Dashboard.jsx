@@ -17,6 +17,7 @@ import Title from "../assets/title.png";
 import ConfirmDialog from "../components/ConfirmDialog";
 import {WindowsXPShell32Icon274, WindowsXPmmcndmgr7, OutlookExpressXP} from "react-old-icons";
 import MonthsPerPageSelector from "../components/MonthsPerPageSelector.jsx";
+import DefaultButton from "../components/DefaultButton.jsx";
 
 export default function Dashboard() {
     const [summary, setSummary] = useState({ totalIncome: 0, totalExpenses: 0, balance: 0 });
@@ -162,15 +163,10 @@ export default function Dashboard() {
                              draggable="false"
                              className="w-[70%]"
                         />
-                        <div className="white-button-wrap place-self-center">
-                            <button
-                                onClick={() => setIsSettingsOpen(true)}
-                                className="white-button"
-                            >
-                                <WindowsXPShell32Icon274 size={20} draggable="false"/>
-                                Settings
-                            </button>
-                        </div>
+                        <DefaultButton onClickAction={() => setIsSettingsOpen(true)} fontSize="14">
+                            <WindowsXPShell32Icon274 size={20} draggable="false"/>
+                            Settings
+                        </DefaultButton>
                     </div>
 
                     {/*SUMMARY CONTAINER*/}
@@ -186,8 +182,16 @@ export default function Dashboard() {
 
                     {/*TRANSACTION LIST*/}
                     <div className="bg-[#f0f0f0] pb-5 flex flex-col gap-4">
+                        {/*FILTERS*/}
                         <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange}/>
-                        <MonthsPerPageSelector value={pageSize} onChange={handlePageSizeChange}/>
+                        {/*CUSTOM PAGINATION + CATEGORY MANAGEMENT*/}
+                        <div className="w-full flex flex-row place-content-between px-4">
+                            <MonthsPerPageSelector value={pageSize} onChange={handlePageSizeChange}/>
+                            <DefaultButton onClickAction={() => setIsManageCategoriesOpen(true)}>
+                                <WindowsXPmmcndmgr7 size={20} draggable="false"/>
+                                Manage categories
+                            </DefaultButton>
+                        </div>
 
                         {/*NEW TRANSACTION BUTTON*/}
                         <TransactionsByMonth
@@ -196,27 +200,16 @@ export default function Dashboard() {
                             onEdit={handleEditClick}
                         />
                         <div className="flex flex-row items-center place-content-center gap-3">
-                            <div className="white-button-wrap">
-                                <button
-                                    onClick={() => setIsManageCategoriesOpen(true)}
-                                    className="white-button text-[13px]!"
-                                >
-                                    <WindowsXPmmcndmgr7 size={22} draggable="false"/>
-                                    Manage categories
-                                </button>
-                            </div>
-                            <div className="white-button-wrap">
-                                <button
-                                    onClick={() => {
-                                        setEditingTransaction(null);
-                                        setIsModalOpen(true);
-                                    }}
-                                    className="white-button text-[13px]!"
-                                >
-                                    <OutlookExpressXP size={22} draggable="false"/>
-                                    New transaction
-                                </button>
-                            </div>
+                            <button
+                                onClick={() => {
+                                    setEditingTransaction(null);
+                                    setIsModalOpen(true);
+                                }}
+                                className="blue-button flex flex-row gap-2"
+                            >
+                                <OutlookExpressXP size={22} draggable="false"/>
+                                New transaction
+                            </button>
                         </div>
 
                         <Pagination

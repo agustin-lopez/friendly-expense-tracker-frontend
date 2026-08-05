@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { register } from "../services/authService";
 import BlueWindow from "../components/BlueWindow.jsx";
 import Title from "../assets/title-alt.png";
+import DefaultButton from "../components/DefaultButton.jsx";
 
 export default function Register() {
     const [name, setName] = useState("");
@@ -108,14 +109,9 @@ export default function Register() {
                                 <p className="text-sm text-white p-1 msg-bg-red w-full text-center">{error}</p>
                             )}
 
-                            <div className="white-button-wrap place-self-center">
-                                <button
-                                    type="submit"
-                                    className="white-button"
-                                >
-                                    Continue
-                                </button>
-                            </div>
+                            <DefaultButton submit={true} className="place-self-center">
+                                Continue
+                            </DefaultButton>
                         </form>
                         <div className="custom-bg-2 w-full p-6 flex flex-col">
                             <p className="text-sm">

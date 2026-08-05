@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { requestPasswordReset } from "../services/authService";
 import BlueWindow from "../components/BlueWindow.jsx";
+import DefaultButton from "../components/DefaultButton.jsx";
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState("");
@@ -42,14 +43,9 @@ export default function ForgotPassword() {
                             />
                         </div>
 
-                        <div className="white-button-wrap place-self-center">
-                            <button
-                                type="submit"
-                                className="white-button"
-                            >
-                                Send recovery link
-                            </button>
-                        </div>
+                        <DefaultButton submit={true} className="place-self-center" fontSize="14">
+                            Send recovery link
+                        </DefaultButton>
                     </form>
                 )}
 

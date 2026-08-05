@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import BlueWindow from "../components/BlueWindow.jsx";
 import Title from "../assets/title-alt.png";
+import {WindowsXPShell32Icon274} from "react-old-icons";
+import DefaultButton from "../components/DefaultButton.jsx";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -79,14 +81,9 @@ export default function Login() {
                         />
                     </div>
 
-                    <div className="white-button-wrap place-self-center">
-                        <button
-                            type="submit"
-                            className="white-button"
-                        >
-                            Submit
-                        </button>
-                    </div>
+                    <DefaultButton submit={true} fontSize="14" className="place-self-center">
+                        Log in
+                    </DefaultButton>
                 </form>
 
                 <div className="mb-3 w-full  flex flex-col gap-2">

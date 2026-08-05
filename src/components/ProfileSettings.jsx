@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { updateProfile, changePassword } from "../services/userService";
 import {FloppyDriveXP} from "react-old-icons";
+import DefaultButton from "./DefaultButton.jsx";
 
 export default function ProfileSettings() {
     const { user, refreshUser  } = useAuth();
@@ -82,15 +83,10 @@ export default function ProfileSettings() {
 
                 <div className="flex flex-row place-content-between items-center">
                     <div className="h-[2px] w-[65%] bg-gray-300"/>
-                    <div className="white-button-wrap">
-                        <button
-                            type="submit"
-                            className="white-button"
-                        >
-                            <FloppyDriveXP size={20} draggable="false"/>
-                            Save data
-                        </button>
-                    </div>
+                    <DefaultButton submit={true}>
+                        <FloppyDriveXP size={20} draggable="false"/>
+                        Save data
+                    </DefaultButton>
                 </div>
 
             </form>
@@ -143,15 +139,10 @@ export default function ProfileSettings() {
 
                 <div className="flex flex-row place-content-between items-center">
                     <div className="h-[2px] w-[65%] bg-gray-300"/>
-                    <div className="white-button-wrap">
-                        <button
-                            type="submit"
-                            className="white-button"
-                        >
-                            <FloppyDriveXP size={20} draggable="false"/>
-                            Save password
-                        </button>
-                    </div>
+                    <DefaultButton submit={true}>
+                        <FloppyDriveXP size={20} draggable="false"/>
+                        Save password
+                    </DefaultButton>
                 </div>
 
             </form>

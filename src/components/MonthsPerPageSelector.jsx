@@ -1,8 +1,8 @@
-const OPTIONS = [1, 2, 3, 6];
+const OPTIONS = [1, 2, 3, 6, 12];
 
 export default function MonthsPerPageSelector({ value, onChange }) {
     return (
-        <div className="flex items-center gap-2 text-sm px-4">
+        <div className="flex items-center gap-2 text-sm">
             <select
                 value={value}
                 onChange={(e) => onChange(Number(e.target.value))}

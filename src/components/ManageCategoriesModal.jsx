@@ -3,9 +3,10 @@ import BlueWindow from "./BlueWindow";
 import CategoryForm from "./CategoryForm";
 import ConfirmDialog from "./ConfirmDialog";
 import CategoryIcon from "./CategoryIcon";
-import {FloppyDriveXP, WindowsXPShell322, WordpadXP} from "react-old-icons";
+import {WindowsXPShell322, WordpadXP} from "react-old-icons";
 import Tooltip from "./Tooltip.jsx";
 import DefaultButton from "./DefaultButton.jsx";
+import { sortCategories } from "../utils/sortCategories";
 
 export default function ManageCategoriesModal({
                                                   isOpen,
@@ -61,7 +62,7 @@ export default function ManageCategoriesModal({
                                 {categories.length === 0 ? (
                                     <p className="text-gray-500 text-center text-sm">You have no categories yet :o </p>
                                 ) : (
-                                    categories.map((c) => (
+                                    sortCategories(categories).map((c) => (
                                         <div
                                             key={c.id}
                                             className="group flex items-center justify-between py-2 px-3 border-b border-gray-300 last:border-0"

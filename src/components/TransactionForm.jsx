@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {FloppyDriveXP} from "react-old-icons";
-import CategoryLabel from "./CategoryLabel.jsx";
-import CategoryIcon from "./CategoryIcon.jsx";
+import { sortCategories } from "../utils/sortCategories";
 import DefaultButton from "./DefaultButton.jsx";
 
 function formatDateForInput(apiDate) {
@@ -22,13 +21,6 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
         return `${day}/${month}/${year}`;
     }
 
-    function sortCategories(categories) {
-        return [...categories].sort((a, b) => {
-            if (a.type !== b.type) return a.type === "EXPENSE" ? -1 : 1;
-            return a.name.localeCompare(b.name);
-        });
-    }
-
     async function handleSubmit(e) {
         e.preventDefault();
         setError("");
@@ -44,7 +36,6 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
             setError(err.message);
         }
     }
-
 
     return (
         <form onSubmit={handleSubmit}

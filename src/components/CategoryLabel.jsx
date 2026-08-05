@@ -4,21 +4,20 @@ import Tooltip from "./Tooltip";
 export default function CategoryLabel({ category, size = 16 }) {
     if (!category) {
         return (
-            <div className="flex items-center gap-2 text-gray-400 italic py-2 w-px whitespace-nowrap">
-                hola
-                <Tooltip text="No category">
-                <CategoryIcon name="Windows31ProgmanIcon" size={size} />
-                    <span>No category</span>
-                </Tooltip>
-            </div>
+            <Tooltip text="No category">
+                <div className="flex flex-row h-full gap-3">
+                    <CategoryIcon name="Windows31ProgmanIcon" size={size} />
+                    <span className="flex items-center text-[14px]">No category</span>
+                </div>
+            </Tooltip>
         );
     }
 
     return (
         <Tooltip text={category.name}>
-            <div className="flex flex-row h-full">
+            <div className="flex flex-row h-full gap-3">
                 <CategoryIcon name={category.icon} size={size} />
-                <span className="flex truncate align-middle">{category.name}</span>
+                <span className="flex truncate items-center text-[14px] w-30">{category.name}</span>
             </div>
         </Tooltip>
     );

@@ -15,12 +15,12 @@ export default function BalanceSummary({ summary }) {
             <div className="text-center w-[30%]">
                 <p className="text-sm font-bold text-gray-500">Expenses</p>
                 <p className="text-xl font-bold text-red-600">
-                    -${formatCurrency(totalExpenses)}
+                    ${formatCurrency(totalExpenses)}
                 </p>
             </div>
             <span className="w-px h-12 bg-gray-400 shadow-[1px_0_0_rgba(255,255,255,0.8)]"/>
             <div className="text-center w-[30%]">
-                <p className="text-sm font-bold text-gray-500">Total balance</p>
+                <p className="text-sm font-bold text-gray-500">Balance</p>
                 <p className={`text-xl font-bold ${balance >= 0 ? "text-green-600" : "text-red-600"}`}>
                     {balance >= 0 ? "" : "-"}${formatCurrency(Math.abs(balance))}
                 </p>

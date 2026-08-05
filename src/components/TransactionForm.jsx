@@ -1,5 +1,7 @@
 import { useState } from "react";
 import {FloppyDriveXP} from "react-old-icons";
+import CategoryLabel from "./CategoryLabel.jsx";
+import CategoryIcon from "./CategoryIcon.jsx";
 
 function formatDateForInput(apiDate) {
     if (!apiDate) return "";
@@ -60,7 +62,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                         <option value="">No category</option>
                         {sortCategories(categories).map((c) => (
                             <option key={c.id} value={c.id}>
-                                {c.name} ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"})
+                                ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"}) {c.name}
                             </option>
                         ))}
                     </select>

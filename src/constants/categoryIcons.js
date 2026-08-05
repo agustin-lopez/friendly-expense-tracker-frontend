@@ -6,13 +6,14 @@ export const CATEGORY_ICONS = [
     { name: "WindowsXPmmcndmgr17", label: "Book" },
     { name: "WindowsXPPhone", label: "Phone" },
     { name: "WindowsXPAudioCD", label: "Music" },
-    { name: "WindowsXPFreeCell", label: "Game" },
+    { name: "AVGSGnintendoDS", label: "Gaming" },
+    { name: "WindowsXPFreeCell", label: "CardGame" },
+    { name: "WindowsXPmmcndmgr29", label: "Cube" },
     { name: "WindowsXPActivation", label: "Keys" },
     { name: "WindowsXPPaint", label: "Paint" },
     { name: "WindowsXPShell329", label: "PieChart" },
     { name: "WindowsXPMyComputer2", label: "Computer" },
     { name: "WordpadXP", label: "Notepad" },
-    { name: "WindowsXPmmcndmgr29", label: "Cube" },
     { name: "RegionalAndLanguageOptions", label: "Planet" },
     { name: "MysteryThemeRecycleBin", label: "Miscellaneous" },
     { name: "WindowsXPMail", label: "Mail" },
@@ -28,8 +29,23 @@ export const CATEGORY_ICONS = [
     { name: "Windows31Progman", label: "Cassette" },
     { name: "Windows31ProgmanIcon", label: "QuestionMark" },
     { name: "WindowsVistaLiveMessenger", label: "People" },
-    { name: "ThreeThousandIcons9", label: "Food" },
-    { name: "VisualStudioCARS", label: "Cars" }
+    { name: "PepsiThemeMyComputer", label: "Food" },
+    { name: "VisualStudioCARS", label: "Cars" },
+    { name: "Bejeweled", label: "Diamond" },
+    { name: "FashionTheme2", label: "Lipstick" },
+    { name: "FashionTheme", label: "Purse" },
+    { name: "IntelliPoint", label: "Gentleman" },
+    { name: "LeonardoDaVinci", label: "WritingBook" },
+    { name: "NatureTheme1", label: "Bonfire" },
+    { name: "NetscapeHome", label: "House" },
+    { name: "PhotoDiscRecycleBin", label: "Suitcase" },
+    { name: "RNRNetworkNeighborhood", label: "Drums" },
+    { name: "RollerCoasterTycoon", label: "Panda" },
+    { name: "VisualStudioPlane", label: "Airplane" },
+    { name: "WindowsPifmgr8", label: "Sport" },
+    { name: "Windows95SavedSearch", label: "Paper" },
+    { name: "Windows95Pifmgr13", label: "Domino" }
+
 ];
 
 export const NO_CATEGORY = { name: null, label: "No category", icon: "Windows31ProgmanIcon" };

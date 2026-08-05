@@ -185,7 +185,7 @@ export default function Dashboard() {
                     </div>
 
                     {/*TRANSACTION LIST*/}
-                    <div className="bg-[#f0f0f0] pb-1.5">
+                    <div className="bg-[#f0f0f0] pb-5 flex flex-col gap-4">
                         <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange}/>
                         <MonthsPerPageSelector value={pageSize} onChange={handlePageSizeChange}/>
 
@@ -195,7 +195,7 @@ export default function Dashboard() {
                             onDelete={handleDeleteClick}
                             onEdit={handleEditClick}
                         />
-                        <div className="flex flex-row items-center place-content-center gap-3 my-2">
+                        <div className="flex flex-row items-center place-content-center gap-3">
                             <div className="white-button-wrap">
                                 <button
                                     onClick={() => setIsManageCategoriesOpen(true)}

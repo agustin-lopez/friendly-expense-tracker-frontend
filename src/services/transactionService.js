@@ -10,7 +10,10 @@ export function updateTransaction(id, transaction) { return apiClient.put(`/tran
 
 export function getSummary() { return apiClient.get("/transactions/summary"); }
 
-export function getExpensesByCategory() { return apiClient.get("/transactions/by-category"); }
+export function getExpensesByCategory(type) {
+    const typeParam = type ? `?type=${type}` : "";
+    return apiClient.get(`/transactions/by-category${typeParam}`);
+}
 
 export function getGroupedTransactions(page, type, size = 2) {
     const typeParam = type && type !== "ALL" ? `&type=${type}` : "";

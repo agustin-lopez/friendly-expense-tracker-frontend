@@ -44,7 +44,7 @@ export default function Dashboard() {
         try {
             const [summaryData, categoryTotalsData, categoriesData] = await Promise.all([
                 getSummary(),
-                getExpensesByCategory(),
+                getExpensesByCategory(typeFilter),
                 getCategories(),
             ]);
             setSummary(summaryData);
@@ -58,6 +58,7 @@ export default function Dashboard() {
         }
     }
 
+
     async function loadPage(page, type = typeFilter, size = pageSize) {
         const result = await getGroupedTransactions(page, type, size);
         setMonthGroups(result.content);
@@ -70,14 +71,12 @@ export default function Dashboard() {
     }, []);
 
     async function refreshAll() {
-        const [summaryData, categoryTotalsData, categoriesData] = await Promise.all([
+        const [summaryData, categoryTotalsData] = await Promise.all([
             getSummary(),
-            getExpensesByCategory(),
-            getCategories(),
+            getExpensesByCategory(typeFilter),
         ]);
         setSummary(summaryData);
         setCategoryTotals(categoryTotalsData);
-        setCategories(categoriesData);
         await loadPage(currentPage);
     }
 
@@ -133,8 +132,10 @@ export default function Dashboard() {
         setIsModalOpen(true);
     }
 
-    function handleFilterChange(newType) {
+    async function handleFilterChange(newType) {
         setTypeFilter(newType);
+        const categoryTotalsData = await getExpensesByCategory(newType);
+        setCategoryTotals(categoryTotalsData);
         loadPage(0, newType, pageSize);
     }
 
@@ -176,6 +177,9 @@ export default function Dashboard() {
 
                         {/*CHART*/}
                         <div className="bg-white rounded-lg p-5">
+                            <h2 className="text-l mb-4">
+                                Now showing your <span className="font-bold">{typeFilter === "INCOME" ? "income" : "expenses"}</span>:
+                            </h2>
                             <ExpensesByCategoryChart categoryTotals={categoryTotals}/>
                         </div>
                     </div>

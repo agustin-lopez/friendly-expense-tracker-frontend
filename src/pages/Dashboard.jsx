@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { getSummary, getExpensesByCategory, createTransaction, getGroupedTransactions, updateTransaction, deleteTransaction } from "../services/transactionService";
+import {
+    getSummary,
+    getExpensesByCategory,
+    createTransaction,
+    getGroupedTransactions,
+    updateTransaction,
+    deleteTransaction,
+    getTransactions
+} from "../services/transactionService";
 import {deleteCategory, getCategories, updateCategory} from "../services/categoryService";
 import Modal from "../components/Modal";
 import TransactionForm from "../components/TransactionForm";
@@ -75,6 +83,7 @@ export default function Dashboard() {
             getSummary(),
             getExpensesByCategory(typeFilter),
             getCategories(),
+            getTransactions()
         ]);
         setSummary(summaryData);
         setCategoryTotals(categoryTotalsData);

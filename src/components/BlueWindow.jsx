@@ -14,7 +14,7 @@ export default function XPWindow({ title, closable = false, onClose, children, c
                         </div>
                     </button>
                 ) : (
-                    <Tooltip text="This one is for decoration only! x.x">
+                    <Tooltip text="This one is for decoration only! '(x . x )">
                         <div className="red-close p-0.3 rounded-[3px] border-solid border-1 border-white">
                             <X size={20} color="white" />
                         </div>

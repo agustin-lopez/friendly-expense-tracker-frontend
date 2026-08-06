@@ -63,6 +63,15 @@ body {
     background-color: #e81000;
 }
 
+.red-close:hover {
+    background:
+            radial-gradient(circle at 20px 20px, #ff8346, rgba(255,255,255,0)),
+            radial-gradient(circle at -5px -5px, white, rgba(183, 174, 174, 0.3), rgba(255,255,255,0)),
+            linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0)),
+            linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0));
+    background-color: #f33627;
+}
+
 .custom-bg-1 {
     background: linear-gradient(180deg, #7489ff 0%, #4158d3 100%);
 }

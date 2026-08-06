@@ -1,5 +1,5 @@
 import Tooltip from "./Tooltip";
-import { WindowsXPShell322, WordpadXP } from "react-old-icons";
+import {WindowsRecycleBin2, WordpadXP} from "react-old-icons";
 import { formatCurrency } from "../utils/formatCurrency";
 import CategoryLabel from "./CategoryLabel";
 
@@ -11,7 +11,7 @@ function formatMonthLabel(monthKey) {
 }
 
 export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
-    if (monthGroups.length === 0) return <p className="text-gray-500 m-auto text-center">Your transactions will show up here X)</p>;
+    if (monthGroups.length === 0) return <p className="text-gray-500 m-auto my-4 text-center">Your transactions will show up here X)</p>;
 
     return (
         <div className="space-y-4 px-4">
@@ -61,7 +61,7 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
                                         <button
                                             onClick={() => onDelete(t.id)}
                                         >
-                                            <WindowsXPShell322 size={20}/>
+                                            <WindowsRecycleBin2 size={20} />
                                         </button>
                                     </div>
                                 </td>

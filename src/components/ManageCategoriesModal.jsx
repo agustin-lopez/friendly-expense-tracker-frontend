@@ -57,7 +57,7 @@ export default function ManageCategoriesModal({
             >
                 <div className="flex flex-col gap-5 w-full p-6">
                     {view === "list" ? (
-                        <>
+                        <div className="border-1 border-gray-300">
                             <div className="h-100 overflow-y-auto p-4">
                                 {categories.length === 0 ? (
                                     <p className="text-gray-500 text-center text-sm">You have no categories yet :o </p>
@@ -69,10 +69,10 @@ export default function ManageCategoriesModal({
                                         >
                                             <div className="flex items-center gap-4">
                                                 <span
-                                                    className={`text-xs p-1 rounded-[2px] w-[65px] text-center ${
+                                                    className={`text-xs p-1 rounded-[2px] w-[65px] text-center bg-[#edead6] border-1 border-gray-300 ${
                                                         c.type === "EXPENSE"
-                                                            ? "bg-red-100 text-red-700"
-                                                            : "bg-green-100 text-green-700"
+                                                            ? "text-red-700"
+                                                            : "text-green-700"
                                                     }`}
                                                 >
                                                     {c.type}
@@ -100,7 +100,7 @@ export default function ManageCategoriesModal({
                                 )}
                             </div>
 
-                            <div className="flex flex-row justify-center gap-4 p-2">
+                            <div className="flex flex-row justify-center gap-4 p-4 border-t border-gray-300">
                                 <DefaultButton onClickAction={onClose}>
                                     Close
                                 </DefaultButton>
@@ -109,8 +109,7 @@ export default function ManageCategoriesModal({
                                     Add category
                                 </DefaultButton>
                             </div>
-
-                        </>
+                        </div>
                     ) : (
                         <CategoryForm
                             onSubmit={handleFormSubmit}

@@ -47,7 +47,6 @@ export default function CalculatorPopover({ currentValue, onApply }) {
             }
             const rounded = Math.round(result * 100) / 100;
             onApply(rounded);
-            setIsOpen(false);
         } catch (err) {
             setError("Invalid expression");
         }
@@ -62,6 +61,7 @@ export default function CalculatorPopover({ currentValue, onApply }) {
             {isOpen && (
                 <div className="flex flex-col gap-3 absolute left-full top-0 ml-2 z-30  custom-bg-2 border rounded-[2px] shadow-lg p-4 w-50">
                     <input
+                        autoFocus
                         type="text"
                         value={expression}
                         onChange={(e) => { setExpression(e.target.value); setError(""); }}
@@ -73,12 +73,8 @@ export default function CalculatorPopover({ currentValue, onApply }) {
                     {/*BUTTONS*/}
                     <div className="grid grid-cols-4 gap-1">
                         {BUTTONS.map((btn) => (
-                            /*<DefaultButton onClickAction={() => handleButtonClick(btn)} key={btn} className=" w-[100%]! items-center">
-                                {btn}
-                            </DefaultButton>*/
-                            <div className="white-button-wrap w-full!">
+                            <div key={btn} className="white-button-wrap w-full!">
                                 <button
-                                    key={btn}
                                     type="button"
                                     onClick={() => handleButtonClick(btn)}
                                     className="white-button text-sm w-full"
@@ -91,20 +87,13 @@ export default function CalculatorPopover({ currentValue, onApply }) {
                     </div>
 
                     <div className="flex flex-row place-content-between gap-1">
-                        {/*<button
-                            type="button"
-                            onClick={handleClear}
-                            className="border rounded py-1.5 text-sm hover:bg-gray-100 text-red-600"
-                        >
-                            C
-                        </button>*/}
-                        <DefaultButton onClickAction={() => handleBackspace} className="" fontSize="10">
+                        <DefaultButton onClickAction={handleBackspace} fontSize="10">
                             Backspace
                         </DefaultButton>
-                        <DefaultButton onClickAction={handleClear} className="">
+                        <DefaultButton onClickAction={handleClear}>
                             Clear
                         </DefaultButton>
-                        <DefaultButton onClickAction={handleEquals} className="">
+                        <DefaultButton onClickAction={handleEquals}>
                             =
                         </DefaultButton>
                         {/*<button

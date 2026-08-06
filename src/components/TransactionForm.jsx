@@ -14,8 +14,9 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
     const [categoryId, setCategoryId] = useState(initialData?.category?.id || "");
     const [amount, setAmount] = useState(initialData?.amount || "");
     const [description, setDescription] = useState(initialData?.description || "");
-    const [date, setDate] = useState(formatDateForInput(initialData?.transactionDate));
     const [error, setError] = useState("");
+    const [date, setDate] = useState(formatDateForInput(initialData?.transactionDate));
+
 
     function formatDateForApi(isoDate) {
         const [year, month, day] = isoDate.split("-");
@@ -53,7 +54,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                         className="w-[60%] border rounded-[2px] p-1 pr-4 text-[15px] h-[32.5px]"
                         required
                     >
-                        <option value="" disabled selected hidden>Uncategorized</option>
+                        <option value="" disabled hidden>Uncategorized</option>
                         {sortCategories(categories).map((c) => (
                             <option key={c.id} value={c.id}>
                                 ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"}) {c.name}
@@ -98,6 +99,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
             <div className="flex flex-row items-center gap-3 place-content-between">
                 <label className="block text-sm font-medium">Date</label>
                 <input
+                    id="dateInput"
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}

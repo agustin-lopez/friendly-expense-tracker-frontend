@@ -10,12 +10,20 @@ function formatDateForInput(apiDate) {
     return `${year}-${month}-${day}`;
 }
 
+function getTodayForInput() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
 export default function TransactionForm({ categories, onSubmit, onCancel, onCreateCategory, initialData }) {
     const [categoryId, setCategoryId] = useState(initialData?.category?.id || "");
     const [amount, setAmount] = useState(initialData?.amount || "");
     const [description, setDescription] = useState(initialData?.description || "");
     const [error, setError] = useState("");
-    const [date, setDate] = useState(formatDateForInput(initialData?.transactionDate));
+    const [date, setDate] = useState(initialData ? formatDateForInput(initialData.transactionDate) : getTodayForInput());
 
 
     function formatDateForApi(isoDate) {

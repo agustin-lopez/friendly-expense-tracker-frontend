@@ -1,4 +1,4 @@
-export default function Tooltip({ text, children }) {
+export default function Tooltip({ text, children = true }) {
     return (
         <div className="relative group/tooltip inline-block max-w-full items-center flex">
             {children}

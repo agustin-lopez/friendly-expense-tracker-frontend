@@ -2,6 +2,7 @@ import { useState } from "react";
 import {FloppyDriveXP} from "react-old-icons";
 import { sortCategories } from "../utils/sortCategories";
 import DefaultButton from "./DefaultButton.jsx";
+import CalculatorPopover from "./CalculatorPopover";
 
 function formatDateForInput(apiDate) {
     if (!apiDate) return "";
@@ -68,16 +69,19 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
 
             <div className="flex flex-row items-center gap-3 place-content-between">
                 <label className="text-sm">Amount</label>
-                <input
-                    type="number"
-                    step="1"
-                    min="0"
-                    max="99999999"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
-                    required
-                />
+                <div className="w-[260px] flex flex-row place-content-between">
+                    <input
+                        type="number"
+                        step="1"
+                        min="0"
+                        max="99999999"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        className="w-[83%] border rounded-[2px] px-3 py-1 text-[15px]"
+                        required
+                    />
+                    <CalculatorPopover currentValue={amount} onApply={(result) => setAmount(result)} />
+                </div>
             </div>
 
             <div className="flex flex-row gap-3 place-content-between items-start">

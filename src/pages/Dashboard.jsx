@@ -71,12 +71,14 @@ export default function Dashboard() {
     }, []);
 
     async function refreshAll() {
-        const [summaryData, categoryTotalsData] = await Promise.all([
+        const [summaryData, categoryTotalsData, categoriesData] = await Promise.all([
             getSummary(),
             getExpensesByCategory(typeFilter),
+            getCategories(),
         ]);
         setSummary(summaryData);
         setCategoryTotals(categoryTotalsData);
+        setCategories(categoriesData);
         await loadPage(currentPage);
     }
 

@@ -60,47 +60,67 @@ export default function CalculatorPopover({ currentValue, onApply }) {
             </DefaultButton>
 
             {isOpen && (
-                <div className="flex flex-col gap-3 absolute left-full top-0 ml-2 z-30 bg-white border rounded shadow-lg p-4 w-50">
+                <div className="flex flex-col gap-3 absolute left-full top-0 ml-2 z-30  custom-bg-2 border rounded-[2px] shadow-lg p-4 w-50">
                     <input
                         type="text"
                         value={expression}
                         onChange={(e) => { setExpression(e.target.value); setError(""); }}
-                        className="w-full border rounded px-2 py-1 text-right font-mono"
+                        className="w-full border rounded-[2px] bg-white px-2 py-0.5 text-right font-mono"
                     />
 
-                    {error && <p className="text-red-500 text-xs">{error}</p>}
+                    {/*{error && <p className="text-red-500 text-xs">{error}</p>}*/}
 
                     {/*BUTTONS*/}
                     <div className="grid grid-cols-4 gap-1">
                         {BUTTONS.map((btn) => (
-                            <DefaultButton onClickAction={() => handleButtonClick(btn)} key={btn} className="place-self-center">
+                            /*<DefaultButton onClickAction={() => handleButtonClick(btn)} key={btn} className=" w-[100%]! items-center">
                                 {btn}
-                            </DefaultButton>
+                            </DefaultButton>*/
+                            <div className="white-button-wrap w-full!">
+                                <button
+                                    key={btn}
+                                    type="button"
+                                    onClick={() => handleButtonClick(btn)}
+                                    className="white-button text-sm w-full"
+                                >
+                                    {btn}
+                                </button>
+                            </div>
+
                         ))}
                     </div>
 
-                    <div className="grid grid-cols-3 gap-1">
-                        <button
+                    <div className="flex flex-row place-content-between gap-1">
+                        {/*<button
                             type="button"
                             onClick={handleClear}
                             className="border rounded py-1.5 text-sm hover:bg-gray-100 text-red-600"
                         >
                             C
-                        </button>
-                        <button
+                        </button>*/}
+                        <DefaultButton onClickAction={() => handleBackspace} className="" fontSize="10">
+                            Backspace
+                        </DefaultButton>
+                        <DefaultButton onClickAction={handleClear} className="">
+                            Clear
+                        </DefaultButton>
+                        <DefaultButton onClickAction={handleEquals} className="">
+                            =
+                        </DefaultButton>
+                        {/*<button
                             type="button"
                             onClick={handleBackspace}
                             className="border rounded py-1.5 text-sm hover:bg-gray-100"
                         >
                             ⌫
-                        </button>
-                        <button
+                        </button>*/}
+                        {/*<button
                             type="button"
                             onClick={handleEquals}
                             className="border rounded py-1.5 text-sm bg-blue-600 text-white hover:bg-blue-700"
                         >
                             =
-                        </button>
+                        </button>*/}
                     </div>
                 </div>
             )}

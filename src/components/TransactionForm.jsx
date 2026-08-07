@@ -1,29 +1,28 @@
 import { useState } from "react";
-import {FloppyDriveXP} from "react-old-icons";
+import {FloppyDriveXP, Windows31ProgmanIcon} from "react-old-icons";
 import { sortCategories } from "../utils/sortCategories";
 import DefaultButton from "./DefaultButton.jsx";
 import CalculatorPopover from "./CalculatorPopover";
+import CategoryIcon from "./CategoryIcon.jsx";
 
-function formatDateForInput(apiDate) {
-    if (!apiDate) return "";
-    const [day, month, year] = apiDate.split("/");
-    return `${year}-${month}-${day}`;
-}
-
-function getTodayForInput() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-}
-
-export default function TransactionForm({ categories, onSubmit, onCancel, onCreateCategory, initialData }) {
-    const [categoryId, setCategoryId] = useState(initialData?.category?.id || "");
+export default function TransactionForm({
+                                            categories,
+                                            onSubmit,
+                                            onCancel,
+                                            onCreateCategory,
+                                            draft,
+                                            onDraftChange,
+                                        }) {
+    const [error, setError] = useState("");
+    const selectedCategory = categories.find((c) => c.id === draft.categoryId);
+/*    const [categoryId, setCategoryId] = useState(initialData?.category?.id || "");
     const [amount, setAmount] = useState(initialData?.amount || "");
     const [description, setDescription] = useState(initialData?.description || "");
-    const [error, setError] = useState("");
-    const [date, setDate] = useState(initialData ? formatDateForInput(initialData.transactionDate) : getTodayForInput());
+    const [date, setDate] = useState(initialData ? formatDateForInput(initialData.transactionDate) : getTodayForInput());*/
+
+    function updateDraft(field, value) {
+        onDraftChange({ ...draft, [field]: value });
+    }
 
 
     function formatDateForApi(isoDate) {
@@ -37,10 +36,10 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
 
         try {
             await onSubmit({
-                category: categoryId ? { id: categoryId } : null,
-                amount: parseFloat(amount),
-                description,
-                transactionDate: formatDateForApi(date),
+                category: draft.categoryId ? { id: draft.categoryId } : null,
+                amount: parseFloat(draft.amount),
+                description: draft.description,
+                transactionDate: formatDateForApi(draft.date),
             });
         } catch (err) {
             setError(err.message);
@@ -56,15 +55,21 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
             <div className="flex flex-row items-center place-content-between">
                 <label className="text-sm">Category</label>
                 <div className="w-[260px] flex flex-row place-content-between">
+                    <div className="w-[24px] h-[24px] m-1">
+                        {selectedCategory ? ( <CategoryIcon name={selectedCategory.icon} size={24} /> )
+                        : (
+                                <Windows31ProgmanIcon size={24} />
+                        )}
+                    </div>
                     <select
-                        value={categoryId}
-                        onChange={(e) => setCategoryId(e.target.value)}
-                        className="w-[60%] border rounded-[2px] p-1 pr-4 text-[15px] h-[32.5px]"
+                        value={draft.categoryId}
+                        onChange={(e) => updateDraft("categoryId", e.target.value)}
+                        className="w-[45%] border rounded-[2px] p-1 pr-4 text-[12.5px] h-[32.5px]"
                         required
                     >
                         <option value="" disabled hidden>Uncategorized</option>
                         {sortCategories(categories).map((c) => (
-                            <option key={c.id} value={c.id}>
+                            <option key={c.id} value={c.id} className="mx-2">
                                 ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"}) {c.name}
                             </option>
                         ))}
@@ -84,20 +89,20 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                         step="1"
                         min="0"
                         max="99999999"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
+                        value={draft.amount}
+                        onChange={(e) => updateDraft("amount", e.target.value)}
                         className="w-[83%] border rounded-[2px] px-3 py-1 text-[15px]"
                         required
                     />
-                    <CalculatorPopover currentValue={amount} onApply={(result) => setAmount(result)} />
+                    <CalculatorPopover currentValue={draft.amount} onApply={(result) => updateDraft("amount", result)} />
                 </div>
             </div>
 
             <div className="flex flex-row gap-3 place-content-between items-start">
                 <label className="text-sm">Description</label>
                 <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    value={draft.description}
+                    onChange={(e) => updateDraft("description", e.target.value)}
                     rows={3}
                     maxLength={120}
                     className="w-[260px] text-sm border rounded-[2px] px-3 py-2 resize-none"
@@ -109,8 +114,8 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                 <input
                     id="dateInput"
                     type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
+                    value={draft.date}
+                    onChange={(e) => updateDraft("date", e.target.value)}
                     className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
                     required
                 />
@@ -122,7 +127,7 @@ export default function TransactionForm({ categories, onSubmit, onCancel, onCrea
                 </DefaultButton>
                 <DefaultButton submit={true}>
                     <FloppyDriveXP size={20} />
-                    {initialData ? "Save changes" : "Save"}
+                    {draft.id ? "Save changes" : "Save"}
                 </DefaultButton>
             </div>
         </form>

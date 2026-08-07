@@ -27,6 +27,27 @@ import {WindowsXPShell32Icon274, WindowsXPmmcndmgr7, OutlookExpressXP} from "rea
 import MonthsPerPageSelector from "../components/MonthsPerPageSelector.jsx";
 import DefaultButton from "../components/DefaultButton.jsx";
 
+function formatDateForInput(apiDate) {
+    if (!apiDate) return "";
+    const [day, month, year] = apiDate.split("/");
+    return `${year}-${month}-${day}`;
+}
+
+function getTodayForInput() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+const emptyDraft = () => ({
+    categoryId: "",
+    amount: "",
+    description: "",
+    date: getTodayForInput(),
+});
+
 export default function Dashboard() {
     const [summary, setSummary] = useState({ totalIncome: 0, totalExpenses: 0, balance: 0 });
     const [categoryTotals, setCategoryTotals] = useState([]);
@@ -43,9 +64,18 @@ export default function Dashboard() {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [transactionToDelete, setTransactionToDelete] = useState(null);
     const [isManageCategoriesOpen, setIsManageCategoriesOpen] = useState(false);
+    /*const [transactionDraft, setTransactionDraft] = useState(emptyDraft());*/
+
     const [pageSize, setPageSize] = useState(() => {
         const saved = localStorage.getItem("monthsPerPage");
         return saved ? Number(saved) : 2;
+    });
+
+    const [transactionDraft, setTransactionDraft] = useState({
+        categoryId: "",
+        amount: "",
+        description: "",
+        date: getTodayForInput(),
     });
 
     async function loadDashboardData() {
@@ -65,7 +95,6 @@ export default function Dashboard() {
             setLoading(false);
         }
     }
-
 
     async function loadPage(page, type = typeFilter, size = pageSize) {
         const result = await getGroupedTransactions(page, type, size);
@@ -103,8 +132,9 @@ export default function Dashboard() {
     }
 
     async function handleCreateCategory(categoryData) {
-        await createCategory(categoryData);
+        const newCategory = await createCategory(categoryData);
         await refreshAll();
+        setTransactionDraft((prev) => ({ ...prev, categoryId: newCategory.id }));
         setModalView("transaction");
     }
 
@@ -139,6 +169,13 @@ export default function Dashboard() {
 
     function handleEditClick(transaction) {
         setEditingTransaction(transaction);
+        setTransactionDraft({
+            id: transaction.id,
+            categoryId: transaction.category?.id || "",
+            amount: transaction.amount,
+            description: transaction.description || "",
+            date: formatDateForInput(transaction.transactionDate),
+        });
         setModalView("transaction");
         setIsModalOpen(true);
     }
@@ -208,16 +245,18 @@ export default function Dashboard() {
                             </DefaultButton>
                         </div>
 
-                        {/*NEW TRANSACTION BUTTON*/}
                         <TransactionsByMonth
                             monthGroups={monthGroups}
                             onDelete={handleDeleteClick}
                             onEdit={handleEditClick}
                         />
+
+                        {/*NEW TRANSACTION BUTTON*/}
                         <div className="flex flex-row items-center place-content-center gap-3">
                             <button
                                 onClick={() => {
                                     setEditingTransaction(null);
+                                    setTransactionDraft(emptyDraft());
                                     setIsModalOpen(true);
                                 }}
                                 className="blue-button flex flex-row gap-2"
@@ -243,6 +282,7 @@ export default function Dashboard() {
                 onClose={() => {
                     setIsModalOpen(false);
                     setEditingTransaction(null);
+                    setTransactionDraft(emptyDraft());
                     setModalView("transaction");
                 }}
                 title={
@@ -258,9 +298,11 @@ export default function Dashboard() {
                         onCancel={() => {
                             setIsModalOpen(false);
                             setEditingTransaction(null);
+                            setTransactionDraft(emptyDraft());
                         }}
                         onCreateCategory={() => setModalView("category")}
-                        initialData={editingTransaction}
+                        draft={transactionDraft}
+                        onDraftChange={setTransactionDraft}
                     />
                 ) : (
                     <CategoryForm

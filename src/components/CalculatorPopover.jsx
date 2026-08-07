@@ -47,6 +47,7 @@ export default function CalculatorPopover({ currentValue, onApply }) {
             }
             const rounded = Math.round(result * 100) / 100;
             onApply(rounded);
+            setExpression(String(rounded));
         } catch (err) {
             setError("Invalid expression");
         }
@@ -86,7 +87,7 @@ export default function CalculatorPopover({ currentValue, onApply }) {
                         ))}
                     </div>
 
-                    <div className="flex flex-row place-content-between gap-1">
+                    <div className="flex flex-row place-content-between">
                         <DefaultButton onClickAction={handleBackspace} fontSize="10">
                             Backspace
                         </DefaultButton>

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { resetPassword } from "../services/authService";
+import BlueWindow from "../components/BlueWindow.jsx";
+import DefaultButton from "../components/DefaultButton.jsx";
 
 export default function ResetPassword() {
     const [searchParams] = useSearchParams();
@@ -39,51 +41,58 @@ export default function ResetPassword() {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-md w-80">
-                <h1 className="text-2xl font-bold mb-6 text-center">New password</h1>
+        <div className="flex items-center justify-center min-h-screen">
+            <BlueWindow title="Password reset" className="w-[30rem]">
 
-                {success ? (
-                    <p className="text-green-600 text-sm text-center">
-                        Password updated succesfully!
+                    {success ? (
+                        <p className="w-full px-3 py-1 text-white msg-bg-green text-sm text-center">
+                            Password updated succesfully!
+                        </p>
+                    ) : (
+                        <form onSubmit={handleSubmit}
+                              className="bg-white p-8 pt-10 rounded-b-[3px] w-full flex flex-col gap-5 mx-auto">
+
+                            <div className="flex flex-row items-center gap-3 place-content-between">
+                                <label className="block text-sm font-medium">New password</label>
+                                <input
+                                    type="password"
+                                    value={newPassword}
+                                    autoComplete="new-password"
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                                    required
+                                />
+                            </div>
+
+                            <div className="flex flex-row items-center gap-3 place-content-between">
+                                <label className="block text-sm font-medium">Re-type it</label>
+                                <input
+                                    type="password"
+                                    value={confirmPassword}
+                                    autoComplete="new-password"
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                                    required
+                                />
+                            </div>
+
+                            <DefaultButton submit={true} className="place-self-center">
+                                Confirm
+                            </DefaultButton>
+                        </form>
+                    )}
+
+                {error && <p className="text-sm mb-3 text-white p-1 msg-bg-red w-full text-center">{error}</p>}
+
+                <div className="custom-bg-2 w-full p-6 flex flex-col">
+                    <p className="text-sm">
+                        • {" "}
+                        <Link to="/login" className="text-blue-600 hover:underline">
+                            Back to login
+                        </Link>
                     </p>
-                ) : (
-                    <form onSubmit={handleSubmit}>
-                        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
-
-                        <label className="block text-sm font-medium">New password</label>
-                        <input
-                            type="password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            className="w-full border rounded px-3 py-2 mb-4"
-                            required
-                        />
-
-                        <label className="block text-sm font-medium">Confirm password</label>
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            className="w-full border rounded px-3 py-2 mb-6"
-                            required
-                        />
-
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-                        >
-                            Change password
-                        </button>
-                    </form>
-                )}
-
-                <p className="text-sm text-center mt-4">
-                    <Link to="/login" className="text-blue-600 hover:underline">
-                        Back to login
-                    </Link>
-                </p>
-            </div>
+                </div>
+            </BlueWindow>
         </div>
     );
 }

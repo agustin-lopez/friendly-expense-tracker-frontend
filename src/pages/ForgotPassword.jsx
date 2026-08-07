@@ -24,13 +24,13 @@ export default function ForgotPassword() {
         <div className="flex items-center justify-center min-h-screen">
             <BlueWindow title="Password recovery">
                 {sent ? (
-                    <p className="text-green-600 text-sm text-center"> You'll receive a link to reset your
-                        password. </p>
+                    <div className="w-100 p-6">
+                        <p className="text-sm text-center"> You'll receive a link to reset your password. Please check your email!</p>
+                    </div>
                 ) : (
                     <form onSubmit={handleSubmit}
                           className="bg-white p-6 pt-10 rounded-b-[3px] w-100 flex flex-col gap-5"
                     >
-                        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
 
                         <div className="flex flex-row items-center gap-3 place-content-between">
                             <label className="block text-sm font-medium">Email</label>
@@ -48,6 +48,8 @@ export default function ForgotPassword() {
                         </DefaultButton>
                     </form>
                 )}
+
+                {error && <p className="text-sm mb-3 text-white p-1 msg-bg-red w-full text-center">{error}</p>}
 
                 <div className="custom-bg-2 w-[100%] p-6 flex flex-col">
                     <p className="text-sm">

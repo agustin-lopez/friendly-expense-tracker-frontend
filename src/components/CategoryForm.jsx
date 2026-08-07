@@ -25,7 +25,7 @@ export default function CategoryForm({ onSubmit, onCancel, initialData }) {
         <form onSubmit={handleSubmit}
               className="flex flex-col gap-4 p-4 border-[1px] border-gray-300"
         >
-            {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
+            {error && <p className="text-sm text-white p-1 msg-bg-red w-full text-center">{error}</p>}
 
             <div className="flex flex-row items-center place-content-between">
                 <label className="text-sm">Name</label>

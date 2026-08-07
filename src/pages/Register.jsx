@@ -105,14 +105,15 @@ export default function Register() {
                                 />
                             </div>
 
-                            {error && (
-                                <p className="text-sm text-white p-1 msg-bg-red w-full text-center">{error}</p>
-                            )}
-
                             <DefaultButton submit={true} className="place-self-center">
                                 Continue
                             </DefaultButton>
                         </form>
+
+                        {error && (
+                            <p className="text-sm mb-3 text-white p-1 msg-bg-red w-full text-center">{error}</p>
+                        )}
+
                         <div className="custom-bg-2 w-full p-6 flex flex-col">
                             <p className="text-sm">
                                 • Already have an account?{" "}

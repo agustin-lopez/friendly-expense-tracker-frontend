@@ -50,16 +50,21 @@ export default function TransactionForm({
         <form onSubmit={handleSubmit}
               className="flex flex-col gap-4 p-4 border-[1px] border-gray-300"
         >
-            {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
+
+            {error &&
+                <div className="w-full h-7 flex items-center">
+                    <p className="w-full px-3 py-1 text-white msg-bg-red text-sm text-center">{error}</p>
+                </div>
+            }
 
             <div className="flex flex-row items-center place-content-between">
                 <label className="text-sm">Category</label>
                 <div className="w-[260px] flex flex-row place-content-between">
                     <div className="w-[32.5px] h-[32.5px] border-1 flex items-center place-content-center">
-                        {selectedCategory ? ( <CategoryIcon name={selectedCategory.icon} size={24} /> )
-                        : (
-                                <Windows31ProgmanIcon size={24} />
-                        )}
+                        {selectedCategory ? (<CategoryIcon name={selectedCategory.icon} size={24}/>)
+                            : (
+                                <Windows31ProgmanIcon size={24}/>
+                            )}
                     </div>
                     <select
                         value={draft.categoryId}
@@ -99,7 +104,7 @@ export default function TransactionForm({
                         className="w-[83%] border rounded-[2px] px-3 py-1 text-[15px]"
                         required
                     />
-                    <CalculatorPopover currentValue={draft.amount} onApply={(result) => updateDraft("amount", result)} />
+                    <CalculatorPopover currentValue={draft.amount} onApply={(result) => updateDraft("amount", result)}/>
                 </div>
             </div>
 
@@ -131,7 +136,7 @@ export default function TransactionForm({
                     Cancel
                 </DefaultButton>
                 <DefaultButton submit={true}>
-                    <FloppyDriveXP size={20} />
+                    <FloppyDriveXP size={20}/>
                     {draft.id ? "Save changes" : "Save"}
                 </DefaultButton>
             </div>

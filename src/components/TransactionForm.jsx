@@ -55,7 +55,7 @@ export default function TransactionForm({
             <div className="flex flex-row items-center place-content-between">
                 <label className="text-sm">Category</label>
                 <div className="w-[260px] flex flex-row place-content-between">
-                    <div className="w-[24px] h-[24px] m-1">
+                    <div className="w-[32.5px] h-[32.5px] border-1 flex items-center place-content-center">
                         {selectedCategory ? ( <CategoryIcon name={selectedCategory.icon} size={24} /> )
                         : (
                                 <Windows31ProgmanIcon size={24} />
@@ -68,11 +68,16 @@ export default function TransactionForm({
                         required
                     >
                         <option value="" disabled hidden>Uncategorized</option>
-                        {sortCategories(categories).map((c) => (
-                            <option key={c.id} value={c.id} className="mx-2">
-                                ({c.type === "EXPENSE" ? "EXPENSE" : "INCOME"}) {c.name}
-                            </option>
-                        ))}
+                        <optgroup label="EXPENSES">
+                            {sortCategories(categories).filter(c => c.type === "EXPENSE").map((c) => (
+                                <option key={c.id} value={c.id}>{c.name}</option>
+                            ))}
+                        </optgroup>
+                        <optgroup label="INCOME">
+                            {sortCategories(categories).filter(c => c.type === "INCOME").map((c) => (
+                                <option key={c.id} value={c.id}>{c.name}</option>
+                            ))}
+                        </optgroup>
                     </select>
                     <DefaultButton onClickAction={onCreateCategory}>
                         Add category

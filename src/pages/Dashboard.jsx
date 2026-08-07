@@ -26,6 +26,7 @@ import ConfirmDialog from "../components/ConfirmDialog";
 import {WindowsXPShell32Icon274, WindowsXPmmcndmgr7, OutlookExpressXP} from "react-old-icons";
 import MonthsPerPageSelector from "../components/MonthsPerPageSelector.jsx";
 import DefaultButton from "../components/DefaultButton.jsx";
+import {useAuth} from "../context/AuthContext.jsx";
 
 function formatDateForInput(apiDate) {
     if (!apiDate) return "";
@@ -64,7 +65,7 @@ export default function Dashboard() {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [transactionToDelete, setTransactionToDelete] = useState(null);
     const [isManageCategoriesOpen, setIsManageCategoriesOpen] = useState(false);
-    /*const [transactionDraft, setTransactionDraft] = useState(emptyDraft());*/
+    const { user  } = useAuth();
 
     const [pageSize, setPageSize] = useState(() => {
         const saved = localStorage.getItem("monthsPerPage");
@@ -77,6 +78,13 @@ export default function Dashboard() {
         description: "",
         date: getTodayForInput(),
     });
+
+    function getGreeting() {
+        const hour = new Date().getHours();
+        if (hour < 12) return "Good morning";
+        if (hour < 19) return "Good afternoon";
+        return "Good evening";
+    }
 
     async function loadDashboardData() {
         try {
@@ -199,7 +207,7 @@ export default function Dashboard() {
         <div className="min-h-screen p-4 pt-20">
 
             {/*MAIN CONTAINER*/}
-            <BlueWindow title="FET - My transactions" className="max-w-[40rem]">
+            <BlueWindow title={user ? (`FET - ${getGreeting()}, ${user.name}!`) : ("My transactions")} className="max-w-[40rem]">
 
                 {/*WHITE BOX*/}
                 <div>

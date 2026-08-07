@@ -4,11 +4,11 @@ export function useLockBodyScroll(isLocked) {
     useEffect(() => {
         if (!isLocked) return;
 
-        const originalOverflow = document.documentElement.style.overflow;
-        document.documentElement.style.overflow = "hidden";
+        const originalOverflowY = document.documentElement.style.overflowY;
+        document.documentElement.style.overflowY = "hidden";
 
         return () => {
-            document.documentElement.style.overflow = originalOverflow;
+            document.documentElement.style.overflowY = originalOverflowY;
         };
     }, [isLocked]);
 }

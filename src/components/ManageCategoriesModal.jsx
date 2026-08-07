@@ -3,7 +3,7 @@ import BlueWindow from "./BlueWindow";
 import CategoryForm from "./CategoryForm";
 import ConfirmDialog from "./ConfirmDialog";
 import CategoryIcon from "./CategoryIcon";
-import {WindowsXPShell322, WordpadXP} from "react-old-icons";
+import {WindowsRecycleBin2, WordpadXP} from "react-old-icons";
 import Tooltip from "./Tooltip.jsx";
 import DefaultButton from "./DefaultButton.jsx";
 import { sortCategories } from "../utils/sortCategories";
@@ -95,7 +95,7 @@ export default function ManageCategoriesModal({
                                                 <button
                                                     onClick={() => setCategoryToDelete(c.id)}
                                                 >
-                                                    <WindowsXPShell322 size={20}/>
+                                                    <WindowsRecycleBin2 size={20}/>
                                                 </button>
                                             </div>
                                         </div>

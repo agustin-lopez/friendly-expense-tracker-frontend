@@ -7,6 +7,7 @@ import {WindowsXPShell322, WordpadXP} from "react-old-icons";
 import Tooltip from "./Tooltip.jsx";
 import DefaultButton from "./DefaultButton.jsx";
 import { sortCategories } from "../utils/sortCategories";
+import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 
 export default function ManageCategoriesModal({
                                                   isOpen,
@@ -19,6 +20,8 @@ export default function ManageCategoriesModal({
     const [view, setView] = useState("list");
     const [editingCategory, setEditingCategory] = useState(null);
     const [categoryToDelete, setCategoryToDelete] = useState(null);
+
+    useLockBodyScroll(isOpen);
 
     if (!isOpen) return null;
 

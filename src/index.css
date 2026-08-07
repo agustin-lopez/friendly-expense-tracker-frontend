@@ -22,7 +22,16 @@ input:-webkit-autofill:focus {
 }
 
 html {
+    background-color: #edead6;
     overflow-y: scroll;
+    scrollbar-gutter: stable;
+    scrollbar-color: #9fbbf6 #edead6;
+    border-radius: 0px;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: #edead6;
+    border-radius: 0px;
 }
 
 body {

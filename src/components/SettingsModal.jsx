@@ -3,6 +3,7 @@ import {WindowsXPShutDown, WindowsXPUsers} from 'react-old-icons';
 import { useAuth } from "../context/AuthContext";
 import ProfileSettings from "./ProfileSettings";
 import BlueWindow from "../components/BlueWindow.jsx";
+import {useLockBodyScroll} from "../hooks/useLockBodyScroll.js";
 
 const SECTIONS = [
     { id: "profile", label: "Profile", icon: WindowsXPUsers },
@@ -11,6 +12,8 @@ const SECTIONS = [
 export default function SettingsModal({ isOpen, onClose }) {
     const [activeSection, setActiveSection] = useState("profile");
     const { logoutUser } = useAuth();
+
+    useLockBodyScroll(isOpen);
 
     if (!isOpen) return null;
 

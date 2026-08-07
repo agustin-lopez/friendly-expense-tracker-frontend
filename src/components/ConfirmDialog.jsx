@@ -1,6 +1,7 @@
 import BlueWindow from "./BlueWindow";
 import CategoryIcon from "./CategoryIcon.jsx";
 import DefaultButton from "./DefaultButton.jsx";
+import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 
 export default function ConfirmDialog({
                                           isOpen,
@@ -12,6 +13,8 @@ export default function ConfirmDialog({
                                           cancelLabel = "Cancel",
                                           confirmIcon = null
                                       }) {
+    useLockBodyScroll(isOpen);
+
     if (!isOpen) return null;
 
     return (

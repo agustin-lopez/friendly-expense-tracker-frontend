@@ -1,6 +1,10 @@
 import BlueWindow from "../components/BlueWindow.jsx";
+import {useLockBodyScroll} from "../hooks/useLockBodyScroll.js";
 
 export default function Modal({ isOpen, onClose, title, children }) {
+
+    useLockBodyScroll(isOpen);
+
     if (!isOpen) return null;
 
     return (

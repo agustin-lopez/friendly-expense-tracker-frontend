@@ -159,7 +159,7 @@ export default function Dashboard() {
     if (loading) return <p className="p-8 text-gray-500">Loading...</p>;
 
     return (
-        <div className="min-h-screen p-4 mt-20">
+        <div className="min-h-screen p-4 pt-20">
 
             {/*MAIN CONTAINER*/}
             <BlueWindow title="FET - My transactions" className="max-w-[40rem]">

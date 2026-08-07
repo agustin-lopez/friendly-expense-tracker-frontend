@@ -225,8 +225,8 @@ export default function Dashboard() {
 
                         {/*CHART*/}
                         <div className="bg-white rounded-lg p-5">
-                            <h2 className="text-l mb-4">
-                                Now showing your <span className="font-bold">{typeFilter === "INCOME" ? "income" : "expenses"}</span>:
+                            <h2 className="text-l mb-4 text-gray-500">
+                                Now showing your <span className="font-bold text-gray-500">{typeFilter === "INCOME" ? "income" : "expenses"}</span>:
                             </h2>
                             <ExpensesByCategoryChart categoryTotals={categoryTotals}/>
                         </div>

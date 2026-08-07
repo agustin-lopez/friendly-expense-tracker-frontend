@@ -24,14 +24,28 @@ input:-webkit-autofill:focus {
 html {
     background-color: #edead6;
     overflow-y: scroll;
-    scrollbar-gutter: stable;
-    scrollbar-color: #9fbbf6 #edead6;
-    border-radius: 0px;
 }
 
-html::-webkit-scrollbar-thumb {
-    background-color: #edead6;
-    border-radius: 0px;
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    /*background: #9fbbf6;*/
+    background: linear-gradient(90deg, #8ca4d9 0%, #9fbbf6 65%, #9fbbf6 100%);
+    border: 1px solid #f3f4f6;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    html {
+        scrollbar-color: #9fbbf6 #edead6;
+        scrollbar-width: thin;
+        scrollbar-gutter: stable;
+    }
 }
 
 body {
@@ -125,6 +139,11 @@ body {
 
 .yellow-face {
     background: radial-gradient(circle at 35% 35%, #ffffff 0%, #ffd324 50%, #504700 100%);
+}
+
+.yellow-ball {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
 }
 
 /* BUTTONS */

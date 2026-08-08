@@ -48,15 +48,6 @@ html {
     }
 }
 
-body {
-    scrollbar-gutter: stable;
-    background-image: url("/background_blur.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
 .blue-window {
     background: #006fea;
     background-image:

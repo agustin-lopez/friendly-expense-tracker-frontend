@@ -1,12 +1,14 @@
 import { useState } from "react";
-import {WindowsXPShutDown, WindowsXPUsers} from 'react-old-icons';
+import {WindowsXPShutDown, WindowsXPPaint, WindowsXPUsers} from 'react-old-icons';
 import { useAuth } from "../context/AuthContext";
 import ProfileSettings from "./ProfileSettings";
 import BlueWindow from "../components/BlueWindow.jsx";
 import {useLockBodyScroll} from "../hooks/useLockBodyScroll.js";
+import AppearanceSettings from "./AppearanceSettings";
 
 const SECTIONS = [
     { id: "profile", label: "Profile", icon: WindowsXPUsers },
+    { id: "appearance", label: "Appearance", icon: WindowsXPPaint },
 ];
 
 export default function SettingsModal({ isOpen, onClose }) {
@@ -21,7 +23,7 @@ export default function SettingsModal({ isOpen, onClose }) {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <BlueWindow title="Settings" closable={true} onClose={onClose}>
                 <div className="bg-white shadow-lg w-[650px] h-[600px] flex overflow-hidden">
-                    <div className="w-35 custom-bg-1 flex flex-col justify-between">
+                    <div className="w-40 custom-bg-1 flex flex-col justify-between">
                         <div className="flex flex-col">
                             {SECTIONS.map((section) => {
                                 const Icon = section.icon;
@@ -54,7 +56,8 @@ export default function SettingsModal({ isOpen, onClose }) {
 
 
                     <div className="flex-1 overflow-y-auto">
-                        {activeSection === "profile" && <ProfileSettings/>}
+                        {activeSection === "profile" && <ProfileSettings />}
+                        {activeSection === "appearance" && <AppearanceSettings />}
                     </div>
 
                 </div>

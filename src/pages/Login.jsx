@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import BlueWindow from "../components/BlueWindow.jsx";
 import Title from "../assets/title-alt.png";
-import {WindowsXPShell32Icon274} from "react-old-icons";
 import DefaultButton from "../components/DefaultButton.jsx";
 
 export default function Login() {

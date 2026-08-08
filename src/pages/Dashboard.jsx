@@ -201,13 +201,20 @@ export default function Dashboard() {
         loadPage(0, typeFilter, newSize);
     }
 
-    if (loading) return <p className="p-8 text-gray-500">Loading...</p>;
+    if (loading) return (
+        <div className="flex items-center justify-center min-h-screen">
+            <BlueWindow title="Friendly Expense Tracker" className="w-[20rem]">
+                <h2 className="m-5">Loading...</h2>
+            </BlueWindow>
+        </div>
+    );
 
     return (
         <div className="min-h-screen p-4 pt-20">
 
             {/*MAIN CONTAINER*/}
-            <BlueWindow title={user ? (`FET - ${getGreeting()}, ${user.name}!`) : ("My transactions")} className="max-w-[40rem]">
+            <BlueWindow title={user ? (`FET - ${getGreeting()}, ${user.name}!`) : ("My transactions")}
+                        className="max-w-[40rem]">
 
                 {/*WHITE BOX*/}
                 <div>

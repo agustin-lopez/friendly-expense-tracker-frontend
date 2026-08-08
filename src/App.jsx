@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail.jsx";
+import ConfirmPasswordChange from "./pages/ConfirmPasswordChange.jsx";
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/confirm-password-change" element={<ConfirmPasswordChange />} />
         </Routes>
       </BrowserRouter>
   );

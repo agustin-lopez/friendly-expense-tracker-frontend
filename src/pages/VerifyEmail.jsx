@@ -15,7 +15,7 @@ export default function VerifyEmail() {
         async function doVerify() {
             if (!token) {
                 setStatus("error");
-                setError("Invalid token");
+                setError("Invalid link");
                 return;
             }
             try {

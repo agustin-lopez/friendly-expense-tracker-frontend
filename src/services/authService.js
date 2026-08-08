@@ -24,3 +24,7 @@ export function verifyEmail(token) {
 export function resendVerification(email) {
     return apiClient.post("/auth/resend-verification", { email });
 }
+
+export function confirmPasswordChange(token) {
+    return apiClient.post("/auth/confirm-password-change", { token });
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { updateProfile, changePassword } from "../services/userService";
+import {updateProfile, requestPasswordChange} from "../services/userService";
 import {FloppyDriveXP} from "react-old-icons";
 import DefaultButton from "./DefaultButton.jsx";
 
@@ -40,8 +40,8 @@ export default function ProfileSettings() {
         }
 
         try {
-            await changePassword(user.id, currentPassword, newPassword);
-            setPasswordMessage("Password updated successfully!");
+            await requestPasswordChange(currentPassword, newPassword);
+            setPasswordMessage("We've sent you a confirmation email. Please check your inbox to confirm the change!");
             setCurrentPassword("");
             setNewPassword("");
             setConfirmPassword("");

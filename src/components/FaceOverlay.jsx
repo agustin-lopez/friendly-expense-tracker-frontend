@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import YellowBall from "../assets/yellow_ball-x32.png";
 
 const FACES = [":)",  "XD", ":D",  " B)", ":P", ":O", ";)", ":v", ":>"];
 const INTERVAL_MS = 4000;
@@ -24,10 +23,6 @@ export default function FaceOverlay() {
                     </span>
                 </div>
             </div>
-{/*            <span className="text-5xl text-gray-900 font-bold text-black select-none font-[DotGothic16] relative -top-1 z-30">
-                {FACES[faceIndex]}
-            </span>
-            <img src={YellowBall} className="yellow-ball w-35 h-35 absolute"/>*/}
         </div>
     );
 }

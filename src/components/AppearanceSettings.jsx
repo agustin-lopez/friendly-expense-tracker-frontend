@@ -11,13 +11,23 @@ export default function AppearanceSettings() {
                 <div className="custom-underline"></div>
             </div>
 
-            <div className="grid grid-cols-3 gap-2">
+            <div className="flex flex-row place-content-between">
+                <label className="block text-sm font-medium">Custom color</label>
+                <input
+                    type="color"
+                    value={background.type === "color" ? background.value : "#1e3a8a"}
+                    onChange={(e) => setCustomColor(e.target.value)}
+                    className="w-[50%] h-8 border rounded cursor-pointer"
+                />
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 w-full place-self-center">
                 {BACKGROUND_PRESETS.map((option) => (
                     <button
                         key={option.id}
                         type="button"
                         onClick={() => setBackground(option)}
-                        className={`h-20 rounded border-2 overflow-hidden ${
+                        className={`h-20 max-sm:h-18 w-30 max-sm:w-24  max-xs:w-21 rounded border-2 ${
                             background.id === option.id ? "border-blue-500" : "border-gray-200"
                         }`}
                         title={option.label}
@@ -35,14 +45,6 @@ export default function AppearanceSettings() {
                     />
                 ))}
             </div>
-
-            <label className="block text-sm font-medium">Custom color</label>
-            <input
-                type="color"
-                value={background.type === "color" ? background.value : "#1e3a8a"}
-                onChange={(e) => setCustomColor(e.target.value)}
-                className="w-full h-10 border rounded cursor-pointer"
-            />
         </div>
     );
 }

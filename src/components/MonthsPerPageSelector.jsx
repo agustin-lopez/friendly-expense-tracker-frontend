@@ -14,7 +14,7 @@ export default function MonthsPerPageSelector({ value, onChange }) {
                     </option>
                 ))}
             </select>
-            <span className="text-gray-600">Months per page</span>
+            <span className="text-gray-600 max-xs:hidden">Months per page</span>
         </div>
     );
 }

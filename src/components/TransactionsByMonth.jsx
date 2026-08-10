@@ -14,7 +14,7 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
     if (monthGroups.length === 0) return <p className="text-gray-500 m-auto my-4 text-center">Your transactions will show up here X)</p>;
 
     return (
-        <div className="space-y-4 px-4">
+        <div className="space-y-4 px-4 max-xs:px-2">
             {monthGroups.map((group) => (
                 /*MONTH CARD*/
                 <div key={group.month} className="transaction-month-card rounded-t-[3px] border-[1px] border-gray-500">
@@ -30,20 +30,20 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
                     <table className="w-full text-left p-3">
                         <tbody>
                         {group.transactions.map((t) => (
-                            <tr key={t.id} className="group border-b border-gray-500 last:border-0">
-                                <td className="py-1.5 px-3 text-[14px] text-left w-px whitespace-nowrap">{t.transactionDate}</td>
+                            <tr key={t.id} className="group border-b border-gray-500 last:border-0 text-[14px] max-sm:text-[12px]">
+                                <td className="py-1.5 px-3 max-xs:px-1.5 text-left w-px whitespace-nowrap max-xs:text-[10px]">{t.transactionDate}</td>
 
-                                <td className="py-1.5 w-[140px] flex items-center">
+                                <td className="py-1.5 max-w-[140px] max-sm:max-w-[100px] flex items-center">
                                         <CategoryLabel category={t.category} size={25}/>
                                 </td>
 
-                                <td className="p-1.5 text-[14px]">
+                                <td className="p-2 max-w-[170px] max-sm:max-w-[100px]">
                                     <Tooltip text={t.description}>
-                                        <span className="flex items-center truncate">{t.description}</span>
+                                        <span className="flex truncate">{t.description}</span>
                                     </Tooltip>
                                 </td>
 
-                                <td className={`p-1.5 text-right text-[14px] w-px whitespace-nowrap ${
+                                <td className={`p-1.5 text-right w-px whitespace-nowrap ${
                                     !t.category ? "text-gray-500" : t.category.type === "EXPENSE" ? "text-red-600" : "text-green-700"
                                 }`}>
                                     <span className="bg-white p-0.5">
@@ -52,7 +52,7 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
                                 </td>
 
                                 <td className="pr-2 text-right w-[52px]">
-                                    <div className="flex justify-center gap-1 opacity-0 group-hover:opacity-100">
+                                    <div className="flex justify-center gap-1 xl:opacity-0 group-hover:opacity-100">
                                         <button
                                             onClick={() => onEdit(t)}
                                         >

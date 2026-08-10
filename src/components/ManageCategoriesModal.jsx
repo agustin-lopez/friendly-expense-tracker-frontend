@@ -58,7 +58,7 @@ export default function ManageCategoriesModal({
                 onClose={onClose}
                 className="w-[30rem]"
             >
-                <div className="flex flex-col gap-5 w-full p-6">
+                <div className="flex flex-col gap-5 w-full p-6 max-xs:p-0">
                     {view === "list" ? (
                         <div className="border-1 border-gray-300">
                             <div className="h-100 overflow-y-auto p-4">

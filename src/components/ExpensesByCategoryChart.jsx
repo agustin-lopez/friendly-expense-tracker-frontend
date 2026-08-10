@@ -28,6 +28,7 @@ export default function ExpensesByCategoryChart({ categoryTotals }) {
                             cx="50%"
                             cy="50%"
                             outerRadius={100}
+                            animationDuration={100}
                             label={(entry) => {
                                 const percentage = ((entry.value / total) * 100).toFixed(1);
                                 return `${percentage}% ($${formatCurrency(entry.value)})`;
@@ -40,7 +41,7 @@ export default function ExpensesByCategoryChart({ categoryTotals }) {
                         <Tooltip formatter={(value) => `$${formatCurrency(value)}`}
                                  contentStyle={{
                                      backgroundColor: "#edead6",
-                                     border: "1px solid #6a7282"
+                                     border: "1px solid #6a7282",
                                  }}
                         />
                     </PieChart>

@@ -210,14 +210,14 @@ export default function Dashboard() {
     );
 
     return (
-        <div className="min-h-screen p-4 pt-20">
+        <div className="min-h-screen md:pt-20">
 
             {/*MAIN CONTAINER*/}
             <BlueWindow title={user ? (`FET - ${getGreeting()}, ${user.name}!`) : ("My transactions")}
                         className="max-w-[40rem]">
 
                 {/*WHITE BOX*/}
-                <div>
+                <div className="w-full">
                     {error && <p className="text-red-500 mb-4">{error}</p>}
 
                     {/* TOP TITLE */}
@@ -225,7 +225,7 @@ export default function Dashboard() {
                         <img src={Title}
                              alt="Friendly Expense Tracker title"
                              draggable="false"
-                             className="w-[70%]"
+                             className="object-scale-down w-[70%] max-xs:w-[60%]"
                         />
                         <DefaultButton onClickAction={() => setIsSettingsOpen(true)} fontSize="14">
                             <WindowsXPShell32Icon274 size={20} draggable="false"/>

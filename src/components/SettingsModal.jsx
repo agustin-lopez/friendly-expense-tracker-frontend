@@ -22,8 +22,8 @@ export default function SettingsModal({ isOpen, onClose }) {
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <BlueWindow title="Settings" closable={true} onClose={onClose}>
-                <div className="bg-white shadow-lg w-[650px] h-[600px] flex overflow-hidden">
-                    <div className="w-40 custom-bg-1 flex flex-col justify-between">
+                <div className="bg-white max-w-[650px] h-[600px] flex">
+                    <div className="w-40 max-xs:w-12 custom-bg-1 flex flex-col justify-between">
                         <div className="flex flex-col">
                             {SECTIONS.map((section) => {
                                 const Icon = section.icon;
@@ -31,14 +31,16 @@ export default function SettingsModal({ isOpen, onClose }) {
                                     <button
                                         key={section.id}
                                         onClick={() => setActiveSection(section.id)}
-                                        className={`flex items-center gap-3 px-3 py-2 text-m ${
+                                        className={`flex items-center gap-3 px-3 py-2 max-xs:p-1 text-m max-xs:justify-center ${
                                             activeSection === section.id
-                                                ? "bg-white text-blue-600 font-medium border-l-[3px] border-blue-600"
+                                                ? "bg-white text-blue-600 border-l-[3px] border-blue-600"
                                                 : "text-gray-600 hover:bg-slate-200"
                                         }`}
                                     >
                                         <Icon size={28} draggable="false" />
-                                        {section.label}
+                                        <span className="max-xs:hidden">
+                                            {section.label}
+                                        </span>
                                     </button>
                                 );
                             })}
@@ -46,11 +48,10 @@ export default function SettingsModal({ isOpen, onClose }) {
 
                         <button
                             onClick={logoutUser}
-                            /*className="flex items-center gap-2 px-3 py-2 text-sm bg-red-400 hover:bg-red-300 text-white"*/
-                            className="red-close flex items-center gap-2 px-3 py-2 text-sm text-white"
+                            className="red-close flex justify-center place-items-center gap-2 px-3 py-2 max-xs:p-1 text-sm text-white"
                         >
                             <WindowsXPShutDown size={28} draggable="false" />
-                            Log out
+                            <span className="max-xs:hidden">Log out</span>
                         </button>
                     </div>
 
@@ -59,7 +60,6 @@ export default function SettingsModal({ isOpen, onClose }) {
                         {activeSection === "profile" && <ProfileSettings />}
                         {activeSection === "appearance" && <AppearanceSettings />}
                     </div>
-
                 </div>
             </BlueWindow>
         </div>

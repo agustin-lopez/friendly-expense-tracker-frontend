@@ -48,51 +48,51 @@ export default function TransactionForm({
 
     return (
         <form onSubmit={handleSubmit}
-              className="flex flex-col gap-4 p-4 border-[1px] border-gray-300"
+              className="flex flex-col gap-4 p-4 max-xs:px-1.5 border-[1px] border-gray-300 text-sm max-xs:text-xs"
         >
 
             {error &&
                 <div className="w-full h-7 flex items-center">
-                    <p className="w-full px-3 py-1 text-white msg-bg-red text-sm text-center">{error}</p>
+                    <p className="w-full px-3 py-1 text-white msg-bg-red text-center">{error}</p>
                 </div>
             }
 
             <div className="flex flex-row items-center place-content-between">
-                <label className="text-sm">Category</label>
+                <label>Category</label>
                 <div className="w-[260px] flex flex-row place-content-between">
+                    <select
+                        value={draft.categoryId}
+                        onChange={(e) => updateDraft("categoryId", e.target.value)}
+                        className="w-[45%] border rounded-[2px] p-1 pr-4 h-[32.5px]"
+                        required
+                    >
+                        <option value="" disabled hidden>Select</option>
+                        <optgroup label="EXPENSES" className="text-xs">
+                            {sortCategories(categories).filter(c => c.type === "EXPENSE").map((c) => (
+                                <option key={c.id} value={c.id} className="text-sm max-sm:text-xs">{c.name}</option>
+                            ))}
+                        </optgroup>
+                        <optgroup label="INCOME" className="text-xs">
+                            {sortCategories(categories).filter(c => c.type === "INCOME").map((c) => (
+                                <option key={c.id} value={c.id} className="text-sm max-sm:text-xs">{c.name}</option>
+                            ))}
+                        </optgroup>
+                    </select>
                     <div className="w-[32.5px] h-[32.5px] border-1 flex items-center place-content-center">
                         {selectedCategory ? (<CategoryIcon name={selectedCategory.icon} size={24}/>)
                             : (
                                 <Windows31ProgmanIcon size={24}/>
                             )}
                     </div>
-                    <select
-                        value={draft.categoryId}
-                        onChange={(e) => updateDraft("categoryId", e.target.value)}
-                        className="w-[45%] border rounded-[2px] p-1 pr-4 text-[12.5px] h-[32.5px]"
-                        required
-                    >
-                        <option value="" disabled hidden>Uncategorized</option>
-                        <optgroup label="EXPENSES">
-                            {sortCategories(categories).filter(c => c.type === "EXPENSE").map((c) => (
-                                <option key={c.id} value={c.id}>{c.name}</option>
-                            ))}
-                        </optgroup>
-                        <optgroup label="INCOME">
-                            {sortCategories(categories).filter(c => c.type === "INCOME").map((c) => (
-                                <option key={c.id} value={c.id}>{c.name}</option>
-                            ))}
-                        </optgroup>
-                    </select>
+
                     <DefaultButton onClickAction={onCreateCategory}>
                         Add category
                     </DefaultButton>
                 </div>
-
             </div>
 
             <div className="flex flex-row items-center gap-3 place-content-between">
-                <label className="text-sm">Amount</label>
+                <label>Amount</label>
                 <div className="w-[260px] flex flex-row place-content-between">
                     <input
                         type="number"
@@ -109,7 +109,7 @@ export default function TransactionForm({
             </div>
 
             <div className="flex flex-row gap-3 place-content-between items-start">
-                <label className="text-sm">Description</label>
+                <label>Description</label>
                 <textarea
                     value={draft.description}
                     onChange={(e) => updateDraft("description", e.target.value)}
@@ -120,7 +120,7 @@ export default function TransactionForm({
             </div>
 
             <div className="flex flex-row items-center gap-3 place-content-between">
-                <label className="block text-sm font-medium">Date</label>
+                <label className="block font-medium">Date</label>
                 <input
                     id="dateInput"
                     type="date"

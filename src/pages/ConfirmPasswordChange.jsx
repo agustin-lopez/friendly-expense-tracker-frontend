@@ -37,7 +37,7 @@ export default function ConfirmPasswordChange() {
                     )}
                     {status === "error" && (
                         <div className="flex flex-col items-center">
-                            {status === "error" && <p className="text-red-500">{error}</p>}
+                            {status === "error" && <p className="text-center">{error}</p>}
                         </div>
                     )}
 

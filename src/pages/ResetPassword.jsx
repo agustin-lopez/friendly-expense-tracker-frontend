@@ -59,7 +59,7 @@ export default function ResetPassword() {
                                     value={newPassword}
                                     autoComplete="new-password"
                                     onChange={(e) => setNewPassword(e.target.value)}
-                                    className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                                    className="w-[260px] max-xs:w-[200px] border rounded-[2px] px-3 py-1 text-[15px]"
                                     required
                                 />
                             </div>
@@ -71,7 +71,7 @@ export default function ResetPassword() {
                                     value={confirmPassword}
                                     autoComplete="new-password"
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                                    className="w-[260px] max-xs:w-[200px] border rounded-[2px] px-3 py-1 text-[15px]"
                                     required
                                 />
                             </div>

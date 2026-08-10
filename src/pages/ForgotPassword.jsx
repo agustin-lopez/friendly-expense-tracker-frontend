@@ -24,21 +24,21 @@ export default function ForgotPassword() {
         <div className="flex items-center justify-center min-h-screen">
             <BlueWindow title="Password recovery">
                 {sent ? (
-                    <div className="w-100 p-6">
+                    <div className="p-6">
                         <p className="text-sm text-center"> You'll receive a link to reset your password. Please check your email!</p>
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit}
-                          className="bg-white p-6 pt-10 rounded-b-[3px] w-100 flex flex-col gap-5"
+                          className="bg-white p-6 pt-10 rounded-b-[3px] flex flex-col gap-5 text-sm"
                     >
 
-                        <div className="flex flex-row items-center gap-3 place-content-between">
-                            <label className="block text-sm font-medium">Email</label>
+                        <div className="flex flex-row items-center gap-6 place-content-between">
+                            <label>Email</label>
                             <input
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                                className="w-[260px] max-sm:w-[200px] border rounded-[2px] px-3 py-1 text-[15px]"
                                 required
                             />
                         </div>

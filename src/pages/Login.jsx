@@ -39,43 +39,42 @@ export default function Login() {
         try {
             await resendVerification(email);
             setResendStatus("We sent you a new verification email. Please check your inbox!");
-        } catch (err) {
+        } catch {
             setResendStatus("We couldn't send you a new verification email. Please try again later! x.x");
         }
     }
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <BlueWindow title="Login" className="w-[30rem]">
+            <BlueWindow title="Login" className="max-w-[30rem]">
                 <div
-                    className="flex flex-col place-content-center w-full h-50 custom-bg-3 border-b-4 border-[#0c3eb6] gap-3">
+                    className="flex flex-col place-content-center w-full h-50 max-xs:h-40 custom-bg-3 border-b-4 border-[#0c3eb6] gap-3">
                     <img src={Title} alt="Friendly Expense Tracker title" draggable="false"
-                         className="w-70 vertical-align middle place-self-center select-none"/>
-                    {/*<p className="text-white ml-4">by Agustín E. López</p>*/}
+                         className="w-70 max-xs:w-60 vertical-align middle place-self-center select-none"/>
                 </div>
 
                 <form
                     onSubmit={handleSubmit}
-                    className="bg-white p-6 pt-10 rounded-b-[3px] w-100 flex flex-col gap-5"
+                    className="bg-white p-6 pt-10 rounded-b-[3px] max-w-100 flex flex-col gap-5 text-sm"
                 >
-                    <div className="flex flex-row items-center gap-3 place-content-between">
-                        <label className="block text-sm font-medium">Email</label>
+                    <div className="flex flex-row items-center gap-6 place-content-between">
+                        <label>Email</label>
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                            className="w-[260px] max-xs:w-[200px] border rounded-[2px] px-3 py-1 text-[15px]"
                             required
                         />
                     </div>
 
-                    <div className="flex flex-row items-center gap-3 place-content-between">
-                        <label className="block text-sm font-medium">Password</label>
+                    <div className="flex flex-row items-center gap-6 place-content-between">
+                        <label>Password</label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                            className="w-[260px] max-xs:w-[200px] border rounded-[2px] px-3 py-1 text-[15px]"
                             required
                         />
                     </div>

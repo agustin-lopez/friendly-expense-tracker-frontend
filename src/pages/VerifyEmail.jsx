@@ -35,7 +35,7 @@ export default function VerifyEmail() {
         try {
             await resendVerification(emailForResend);
             setResendStatus("We sent you a new verification email. Please check your inbox!");
-        } catch (err) {
+        } catch {
             setResendStatus("We couldn't send you a new verification email. Please try again later! x.x");
         }
     }

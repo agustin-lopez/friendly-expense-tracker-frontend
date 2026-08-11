@@ -192,7 +192,7 @@ export default function Dashboard() {
         setTypeFilter(newType);
         const categoryTotalsData = await getExpensesByCategory(newType);
         setCategoryTotals(categoryTotalsData);
-        loadPage(0, newType, pageSize);
+        await loadPage(0, newType, pageSize);
     }
 
     function handlePageSizeChange(newSize) {

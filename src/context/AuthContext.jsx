@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
             if (token) {
                 try {
                     await refreshUser();
-                } catch (err) {
+                } catch {
                     localStorage.removeItem("token");
                     setToken(null);
                     setUser(null);

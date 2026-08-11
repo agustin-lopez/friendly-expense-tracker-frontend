@@ -28,15 +28,19 @@ export default function ForgotPassword() {
                         <p className="text-sm text-center"> You'll receive a link to reset your password. Please check your email!</p>
                     </div>
                 ) : (
-                    <form onSubmit={handleSubmit}
-                          className="bg-white p-6 pt-10 rounded-b-[3px] flex flex-col gap-5 text-sm"
+                    <form
+                        name="forgot-password"
+                        onSubmit={handleSubmit}
+                        className="bg-white p-6 pt-10 rounded-b-[3px] flex flex-col gap-5 text-sm"
                     >
 
                         <div className="flex flex-row items-center gap-6 place-content-between">
-                            <label>Email</label>
+                            <label htmlFor="email">Email</label>
                             <input
+                                id="email"
                                 type="email"
                                 value={email}
+                                autoComplete="off"
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="w-[260px] max-sm:w-[200px] border rounded-[2px] px-3 py-1 text-[15px]"
                                 required

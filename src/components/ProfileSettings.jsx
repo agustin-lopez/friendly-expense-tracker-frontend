@@ -41,7 +41,7 @@ export default function ProfileSettings() {
 
         try {
             await requestPasswordChange(currentPassword, newPassword);
-            setPasswordMessage("We've sent you a confirmation email. Please check your inbox to confirm the change!");
+            setPasswordMessage("We've sent you a confirmation email. Please check your inbox to confirm the update!");
             setCurrentPassword("");
             setNewPassword("");
             setConfirmPassword("");
@@ -51,20 +51,21 @@ export default function ProfileSettings() {
     }
 
     return (
-        <>
-            <form onSubmit={handleProfileSubmit} className="bg-white flex flex-col gap-5 m-6 text-sm max-xs:text-[12px]">
+        <div>
+            <form onSubmit={handleProfileSubmit} className="flex flex-col gap-5 m-6 text-sm max-xs:text-[12px]">
                 <div>
-                    <h3 className="text-base font-semibold text-gray-700">User data</h3>
+                    <h3 className="text-base font-bold text-gray-700">User data</h3>
                     <div className="custom-underline"></div>
                 </div>
 
 
                 <div className="flex flex-row items-center gap-3 place-content-between">
-                    <label className="font-medium">Name</label>
+                    <label className="font-medium" htmlFor="user-name">Name</label>
                     <input
+                        id="user-name"
                         type="text"
                         value={name}
-                        maxLength="100"
+                        maxLength="40"
                         onChange={(e) => setName(e.target.value)}
                         className="w-[260px] max-sm:w-[180px] max-xs:w-[150px] border rounded-[2px] px-3 py-1"
                         required
@@ -72,13 +73,13 @@ export default function ProfileSettings() {
                 </div>
 
                 <div className="flex flex-row items-center gap-3 place-content-between">
-                    <label className="font-medium">Email</label>
-                    <p>{email}</p>
+                    <span className="font-medium">Email</span>
+                    <span>{email}</span>
                 </div>
 
-                <div className="w-full h-7 flex items-center">
-                    {profileError && <p className="w-full px-3 py-1 text-white msg-bg-red text-sm text-center">{profileError}</p>}
-                    {profileMessage && <p className="w-full px-3 py-1 text-white msg-bg-green text-sm text-center">{profileMessage}</p>}
+                <div className="w-full h-7 flex items-center text-white text-sm text-center">
+                    {profileError && <p className="w-full px-3 py-1 msg-bg-red">{profileError}</p>}
+                    {profileMessage && <p className="w-full px-3 py-1 msg-bg-green">{profileMessage}</p>}
                 </div>
 
                 <div className="flex flex-row place-content-between items-center">
@@ -91,48 +92,51 @@ export default function ProfileSettings() {
 
             </form>
 
-            <form onSubmit={handlePasswordSubmit} className="bg-white flex flex-col gap-5 m-6 text-sm max-xs:text-[12px]">
+            <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-5 m-6 text-sm max-xs:text-[12px]">
                 <div>
-                    <h3 className="text-base font-semibold text-gray-700">Change password</h3>
+                    <h3 className="text-base font-bold text-gray-700">Change password</h3>
                     <div className="custom-underline"></div>
                 </div>
 
                 <div className="flex flex-row items-center gap-3 place-content-between">
-                    <label className="font-medium">Current password</label>
+                    <label className="font-medium" htmlFor="current-password">Current password</label>
                     <input
+                        id="current-password"
                         type="password"
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
-                        className="w-[260px] max-sm:w-[180px] max-xs:w-[150px] border rounded-[2px] px-3 py-1 text-[15px]"
+                        className="w-[260px] max-sm:w-[180px] max-xs:w-[150px] border rounded-[2px] px-3 py-1"
                         required
                     />
                 </div>
 
                 <div className="flex flex-row items-center gap-3 place-content-between">
-                    <label className="font-medium">Choose a new one</label>
+                    <label className="font-medium" htmlFor="new-password">Choose a new one</label>
                     <input
+                        id="new-password"
                         type="password"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
-                        className="w-[260px] max-sm:w-[180px] max-xs:w-[150px] border rounded-[2px] px-3 py-1 text-[15px]"
+                        className="w-[260px] max-sm:w-[180px] max-xs:w-[150px] border rounded-[2px] px-3 py-1"
                         required
                     />
                 </div>
 
                 <div className="flex flex-row items-center gap-3 place-content-between">
-                    <label className="font-medium">Re-type it</label>
+                    <label className="font-medium" htmlFor="repeat-new-password">Re-type it</label>
                     <input
+                        id="repeat-new-password"
                         type="password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="w-[260px] max-sm:w-[180px] max-xs:w-[150px] border rounded-[2px] px-3 py-1 text-[15px]"
+                        className="w-[260px] max-sm:w-[180px] max-xs:w-[150px] border rounded-[2px] px-3 py-1"
                         required
                     />
                 </div>
 
-                <div className="w-full h-7 flex items-center">
-                    {passwordError && <p className="w-full px-3 py-1 text-white msg-bg-red text-center">{passwordError}</p>}
-                    {passwordMessage && <p className="w-full px-3 py-1 text-white msg-bg-green text-center">{passwordMessage}</p>}
+                <div className="w-full h-7 flex items-center text-white text-center">
+                    {passwordError && <p className="w-full px-3 py-1 msg-bg-red ">{passwordError}</p>}
+                    {passwordMessage && <p className="w-full px-3 py-1 msg-bg-green">{passwordMessage}</p>}
                 </div>
 
                 <div className="flex flex-row place-content-between items-center">
@@ -142,8 +146,7 @@ export default function ProfileSettings() {
                         Save password
                     </DefaultButton>
                 </div>
-
             </form>
-        </>
+        </div>
     );
 }

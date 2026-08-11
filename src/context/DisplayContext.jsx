@@ -1,8 +1,10 @@
+// noinspection SpellCheckingInspection
+
 import { createContext, useContext, useState, useEffect } from "react";
 import { BACKGROUND_PRESETS } from "../constants/backgroundOptions.js";
 import { CURRENCY_OPTIONS } from "../constants/currencyOptions";
 
-const AppearanceContext = createContext(null);
+const DisplayContext = createContext(null);
 
 function loadSavedBackground() {
     const saved = localStorage.getItem("background");
@@ -25,7 +27,7 @@ function loadSavedCurrency() {
     return CURRENCY_OPTIONS[0];
 }
 
-export function AppearanceProvider({ children }) {
+export function DisplayProvider({ children }) {
     const [background, setBackgroundState] = useState(loadSavedBackground);
     const [currency, setCurrencyState] = useState(loadSavedCurrency);
 
@@ -66,9 +68,9 @@ export function AppearanceProvider({ children }) {
 
     const value = { background, setBackground, setCustomColor, currency, setCurrency };
 
-    return <AppearanceContext.Provider value={value}>{children}</AppearanceContext.Provider>;
+    return <DisplayContext.Provider value={value}>{children}</DisplayContext.Provider>;
 }
 
-export function useAppearance() {
-    return useContext(AppearanceContext);
+export function useDisplay() {
+    return useContext(DisplayContext);
 }

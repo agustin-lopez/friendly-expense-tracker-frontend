@@ -22,40 +22,45 @@ export default function CategoryForm({ onSubmit, onCancel, initialData }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}
-              className="flex flex-col gap-4 p-4 border-[1px] border-gray-300"
+        <form
+            name="new-category"
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 p-4 border-[1px] border-gray-300 text-sm"
         >
-            {error && <p className="text-sm text-white p-1 msg-bg-red w-full text-center">{error}</p>}
 
             <div className="flex flex-row items-center place-content-between">
-                <label className="text-sm">Name</label>
+                <label htmlFor="name">Name</label>
                 <input
+                    id="name"
                     type="text"
                     value={name}
+                    autoComplete="off"
                     maxLength="50"
                     onChange={(e) => setName(e.target.value)}
-                    className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                    className="w-[260px] border rounded-[2px] px-3 py-1"
                     required
                 />
             </div>
 
             <div className="flex flex-row items-center place-content-between">
-                <label className="text-sm">Type</label>
+                <label htmlFor="type-select">Type</label>
                 <select
+                    id="type-select"
                     value={type}
                     onChange={(e) => setType(e.target.value)}
-                    className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px] h-[32.5px]"
+                    className="w-[260px] border rounded-[2px] px-3 py-1"
                 >
                     <option value="EXPENSE">Expense</option>
                     <option value="INCOME">Income</option>
                 </select>
             </div>
 
-            <div className="flex flex-row place-content-between items-start">
-                <label className="text-sm inline-block align-top">Icon</label>
+            <div className="flex flex-row place-content-between">
+                <label htmlFor="icon-select" className="align-top">Icon</label>
                 <div className="w-[260px] grid grid-cols-4 gap-2 p-2 border rounded-[2px] max-h-32 overflow-y-auto">
                     {CATEGORY_ICONS.map((iconOption) => (
                         <button
+                            id="icon-select"
                             key={iconOption.name}
                             type="button"
                             onClick={() => setIcon(iconOption.name)}
@@ -77,10 +82,12 @@ export default function CategoryForm({ onSubmit, onCancel, initialData }) {
                     Cancel
                 </DefaultButton>
                 <DefaultButton submit={true}>
-                    <FloppyDriveXP size={20}/>
+                    <FloppyDriveXP size={20} draggable={false}/>
                     Save
                 </DefaultButton>
             </div>
+
+            {error && <p className="text-sm text-white p-1 msg-bg-red w-full text-center">{error}</p>}
 
         </form>
     );

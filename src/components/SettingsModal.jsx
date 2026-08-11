@@ -20,18 +20,21 @@ export default function SettingsModal({ isOpen, onClose }) {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center z-50">
             <BlueWindow title="Settings" closable={true} onClose={onClose}>
-                <div className="bg-white max-w-[650px] h-[600px] flex">
+                {/*MAIN WINDOW*/}
+                <div className="md:w-[650px] h-[600px] flex">
+                    {/*SIDEBAR*/}
                     <div className="w-40 max-xs:w-12 custom-bg-1 flex flex-col justify-between">
-                        <div className="flex flex-col">
+                        {/*SECTION SELECTOR*/}
+                        <div>
                             {SECTIONS.map((section) => {
                                 const Icon = section.icon;
                                 return (
                                     <button
                                         key={section.id}
                                         onClick={() => setActiveSection(section.id)}
-                                        className={`flex items-center gap-3 px-3 py-2 max-xs:p-1 text-m max-xs:justify-center ${
+                                        className={`w-full flex items-center gap-3 px-3 py-2 max-xs:p-1 max-xs:justify-center ${
                                             activeSection === section.id
                                                 ? "bg-white text-black"
                                                 : "text-gray-600 hover:bg-slate-200"
@@ -46,9 +49,10 @@ export default function SettingsModal({ isOpen, onClose }) {
                             })}
                         </div>
 
+                        {/*LOG OUT BUTTON*/}
                         <button
                             onClick={logoutUser}
-                            className="red-close flex justify-center place-items-center gap-2 px-3 py-2 max-xs:p-1 text-sm text-white"
+                            className="red-close flex justify-center place-items-center gap-2 px-3 py-2 max-xs:p-1 text-white"
                         >
                             <WindowsXPShutDown size={28} draggable="false" />
                             <span className="max-xs:hidden">Log out</span>

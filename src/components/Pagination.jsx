@@ -6,7 +6,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 
     return (
         <div className="flex justify-center items-center gap-2">
-
             <DefaultButton onClickAction={() => onPageChange(currentPage - 1)} disabled={currentPage < 1}>
                 ◀ Prev
             </DefaultButton>
@@ -18,7 +17,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
             <DefaultButton onClickAction={() => onPageChange(currentPage + 1)} disabled={currentPage >= totalPages - 1  }>
                 Next ▶
             </DefaultButton>
-
         </div>
     );
 }

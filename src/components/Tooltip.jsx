@@ -30,10 +30,10 @@ export default function Tooltip({ text, children }) {
     }, [isVisible, text]);
 
     return (
-        <>
+        <div>
             <div
                 ref={triggerRef}
-                className="inline-block max-w-full"
+                className="flex items-center max-w-full"
                 onMouseEnter={() => setIsVisible(true)}
                 onMouseLeave={() => setIsVisible(false)}
             >
@@ -44,16 +44,16 @@ export default function Tooltip({ text, children }) {
                 createPortal(
                     <div
                         ref={tooltipRef}
-                        className="fixed z-50"
+                        className="fixed z-50 flex"
                         style={{ top: coords.top, left: coords.left }}
                     >
-                        <div className="custom-bg-2 text-[14px] rounded-[2px] p-3 whitespace-normal break-words border-1 border-r-3 border-b-3 border-gray-500 w-max max-w-64">
+                        <div className="custom-bg-2 text-sm rounded-[2px] p-3 whitespace-normal break-words border-1 border-r-3 border-b-3 border-gray-500 w-max max-w-64">
                             {text}
                         </div>
                     </div>,
                     document.body
                 )}
-        </>
+        </div>
     );
 }
 

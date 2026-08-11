@@ -212,12 +212,10 @@ export default function Dashboard() {
     return (
         <div className="min-h-screen md:py-20">
 
-            <BlueWindow title={user ? (`FET - ${getGreeting()}, ${user.name}!`) : ("My transactions")}
-                        className="max-w-[40rem]">
+            <BlueWindow title={user ? (`FET - ${getGreeting()}, ${user.name}!`) : ("My transactions")} className="max-w-[40rem]">
 
                 {/*MAIN CONTAINER*/}
                 <div className="w-full">
-                    {error && <p className="text-red-500 mb-4">{error}</p>}
 
                     <header className="custom-bg-2 border-b-[3px] border-gray-300 p-4 flex flex-row place-content-between">
                         <img src={Title}
@@ -231,6 +229,10 @@ export default function Dashboard() {
                         </DefaultButton>
                     </header>
 
+                    {error && (
+                        <p className="w-full text-white msg-bg-red px-3 py-1 text-sm text-center">{error}</p>
+                    )}
+
                     <main>
                         {/*SUMMARY + PIE CHART*/}
                         <section aria-label="Financial sumary">
@@ -239,8 +241,8 @@ export default function Dashboard() {
 
                             {/*PIE CHART*/}
                             <div className="p-5">
-                                <h2 className="text-l mb-4 text-gray-500">
-                                    Now showing your <span className="font-bold text-gray-500">{typeFilter === "INCOME" ? "income" : "expenses"}</span>:
+                                <h2 className="text-l text-gray-500">
+                                    Now showing your <span className="font-bold">{typeFilter === "INCOME" ? "income" : "expenses"}</span>:
                                 </h2>
                                 <ExpensesByCategoryChart categoryTotals={categoryTotals}/>
                             </div>
@@ -248,6 +250,7 @@ export default function Dashboard() {
 
                         {/*TRANSACTIONS*/}
                         <section aria-label="Transactions history" className="bg-[#f0f0f0] pb-5 flex flex-col gap-4">
+
                             {/*FILTERS*/}
                             <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange}/>
                             {/*CUSTOM PAGINATION + CATEGORY MANAGEMENT*/}
@@ -267,19 +270,17 @@ export default function Dashboard() {
                             />
 
                             {/*NEW TRANSACTION BUTTON*/}
-                            <div className="flex flex-row items-center place-content-center gap-3">
-                                <button
-                                    onClick={() => {
-                                        setEditingTransaction(null);
-                                        setTransactionDraft(emptyDraft());
-                                        setIsModalOpen(true);
-                                    }}
-                                    className="blue-button flex flex-row gap-2"
-                                >
-                                    <OutlookExpressXP size={22} draggable="false"/>
-                                    New transaction
-                                </button>
-                            </div>
+                            <button
+                                onClick={() => {
+                                    setEditingTransaction(null);
+                                    setTransactionDraft(emptyDraft());
+                                    setIsModalOpen(true);
+                                }}
+                                className="blue-button flex flex-row gap-2 place-self-center"
+                            >
+                                <OutlookExpressXP size={22} draggable="false"/>
+                                New transaction
+                            </button>
 
                             {/*PAGE SELECTOR*/}
                             <Pagination
@@ -341,7 +342,7 @@ export default function Dashboard() {
                 message="Are you sure you want to delete this transaction?"
                 onConfirm={confirmDeleteTransaction}
                 onCancel={cancelDeleteTransaction}
-                confirmIcon="WindowsXPExplorer"
+                confirmIcon="WindowsRecycleBin2"
             />
         </div>
     );

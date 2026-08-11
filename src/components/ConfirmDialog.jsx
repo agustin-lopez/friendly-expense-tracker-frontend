@@ -18,7 +18,7 @@ export default function ConfirmDialog({
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center z-50">
             <BlueWindow title={title} closable={true} onClose={onCancel} className="w-100">
                 <div className="p-4">
                     <p className="text-sm text-gray-700 mb-6">{message}</p>
@@ -29,7 +29,7 @@ export default function ConfirmDialog({
                         </DefaultButton>
 
                         <DefaultButton onClickAction={onConfirm}>
-                            <CategoryIcon name={confirmIcon} size={20}/>
+                            <CategoryIcon name={confirmIcon} size={20} draggable={false}/>
                             {confirmLabel}
                         </DefaultButton>
                     </div>

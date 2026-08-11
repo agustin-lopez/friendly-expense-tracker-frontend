@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 import { useState } from "react";
 import {login, resendVerification} from "../services/authService";
 import { useAuth } from "../context/AuthContext";
@@ -54,14 +56,17 @@ export default function Login() {
                 </div>
 
                 <form
+                    name="login"
                     onSubmit={handleSubmit}
                     className="bg-white p-6 pt-10 rounded-b-[3px] max-w-100 flex flex-col gap-5 text-sm"
                 >
                     <div className="flex flex-row items-center gap-6 place-content-between">
-                        <label>Email</label>
+                        <label htmlFor="email">Email</label>
                         <input
+                            id="email"
                             type="email"
                             value={email}
+                            autoComplete="on"
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-[260px] max-xs:w-[198px] border rounded-[2px] px-3 py-1 text-[15px]"
                             required
@@ -69,10 +74,12 @@ export default function Login() {
                     </div>
 
                     <div className="flex flex-row items-center gap-6 place-content-between">
-                        <label>Password</label>
+                        <label htmlFor="password">Password</label>
                         <input
+                            id="password"
                             type="password"
                             value={password}
+                            autoComplete="on"
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-[260px] max-xs:w-[198px] border rounded-[2px] px-3 py-1 text-[15px]"
                             required

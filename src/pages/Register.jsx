@@ -54,15 +54,18 @@ export default function Register() {
                 ) : (
                     <>
                         <form
+                            name="sign-up"
                             onSubmit={handleSubmit}
                             className="bg-white p-8 pt-10 rounded-b-[3px] w-full flex flex-col gap-5 mx-auto"
                         >
 
                             <div className="flex flex-row items-center gap-6 place-content-between">
-                                <label className="block text-sm font-medium">Name</label>
+                                <label htmlFor="name" className="block text-sm font-medium">Name</label>
                                 <input
+                                    id="name"
                                     type="text"
                                     value={name}
+                                    autoComplete="off"
                                     onChange={(e) => setName(e.target.value)}
                                     className="w-[260px] max-sm:w-[200px] max-xs:w-[170px] border rounded-[2px] px-3 py-1 text-[15px]"
                                     required
@@ -70,8 +73,9 @@ export default function Register() {
                             </div>
 
                             <div className="flex flex-row items-center gap-6 place-content-between">
-                                <label className="block text-sm font-medium">Email</label>
+                                <label htmlFor="email" className="block text-sm font-medium">Email</label>
                                 <input
+                                    id="email"
                                     type="email"
                                     value={email}
                                     autoComplete="off"
@@ -82,8 +86,9 @@ export default function Register() {
                             </div>
 
                             <div className="flex flex-row items-center gap-6 place-content-between">
-                                <label className="block text-sm font-medium">Password</label>
+                                <label htmlFor="password" className="block text-sm font-medium">Password</label>
                                 <input
+                                    id="password"
                                     type="password"
                                     value={password}
                                     autoComplete="off"
@@ -94,8 +99,9 @@ export default function Register() {
                             </div>
 
                             <div className="flex flex-row items-center gap-6 place-content-between">
-                                <label className="block text-sm font-medium">Confirm password</label>
+                                <label htmlFor="confirm-password" className="block text-sm font-medium">Confirm password</label>
                                 <input
+                                    id="confirm-password"
                                     type="password"
                                     value={confirmPassword}
                                     autoComplete="off"

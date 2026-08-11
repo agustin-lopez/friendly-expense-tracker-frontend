@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 export const CATEGORY_ICONS = [
     { name: "WindowsXPFavorite", label: "Star" },
     { name: "WindowsXPmmcndmgr4", label: "Clock" },
@@ -48,4 +50,5 @@ export const CATEGORY_ICONS = [
 
 ];
 
+// noinspection JSUnusedGlobalSymbols
 export const NO_CATEGORY = { name: null, label: "Uncategorized", icon: "Windows31ProgmanIcon" };

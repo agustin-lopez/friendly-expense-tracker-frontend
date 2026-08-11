@@ -13,17 +13,13 @@ export default function TransactionForm({
                                             draft,
                                             onDraftChange,
                                         }) {
+
     const [error, setError] = useState("");
     const selectedCategory = categories.find((c) => c.id === draft.categoryId);
-/*    const [categoryId, setCategoryId] = useState(initialData?.category?.id || "");
-    const [amount, setAmount] = useState(initialData?.amount || "");
-    const [description, setDescription] = useState(initialData?.description || "");
-    const [date, setDate] = useState(initialData ? formatDateForInput(initialData.transactionDate) : getTodayForInput());*/
 
     function updateDraft(field, value) {
         onDraftChange({ ...draft, [field]: value });
     }
-
 
     function formatDateForApi(isoDate) {
         const [year, month, day] = isoDate.split("-");
@@ -47,23 +43,20 @@ export default function TransactionForm({
     }
 
     return (
-        <form onSubmit={handleSubmit}
-              className="flex flex-col gap-4 p-4 max-xs:px-1.5 border-[1px] border-gray-300 text-sm max-xs:text-xs"
+        <form
+            name="new-transaction"
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 p-4 max-xs:px-1.5 border-[1px] border-gray-300 text-sm max-xs:text-xs"
         >
 
-            {error &&
-                <div className="w-full h-7 flex items-center">
-                    <p className="w-full px-3 py-1 text-white msg-bg-red text-center">{error}</p>
-                </div>
-            }
-
             <div className="flex flex-row items-center place-content-between">
-                <label>Category</label>
+                <label htmlFor="category-select">Category</label>
                 <div className="w-[260px] max-xs:w-[240px] flex flex-row place-content-between">
                     <select
+                        id="category-select"
                         value={draft.categoryId}
                         onChange={(e) => updateDraft("categoryId", e.target.value)}
-                        className="w-[45%] border rounded-[2px] p-1 pr-4 h-[32.5px]"
+                        className="w-[45%] border rounded-[2px] p-1 pr-4"
                         required
                     >
                         <option value="" disabled hidden>Select</option>
@@ -78,7 +71,7 @@ export default function TransactionForm({
                             ))}
                         </optgroup>
                     </select>
-                    <div className="w-[32.5px] h-[32.5px] border-1 flex items-center place-content-center">
+                    <div className="w-[32.5px] h-[32.5px] border-1 rounded-[2px] flex items-center place-content-center">
                         {selectedCategory ? (<CategoryIcon name={selectedCategory.icon} size={24}/>)
                             : (
                                 <Windows31ProgmanIcon size={24}/>
@@ -92,25 +85,27 @@ export default function TransactionForm({
             </div>
 
             <div className="flex flex-row items-center gap-3 place-content-between">
-                <label>Amount</label>
+                <label htmlFor="amount">Amount</label>
                 <div className="w-[260px] max-xs:w-[240px] flex flex-row place-content-between">
                     <input
+                        id="amount"
                         type="number"
                         step="1"
                         min="0"
                         max="99999999"
                         value={draft.amount}
                         onChange={(e) => updateDraft("amount", e.target.value)}
-                        className="w-[83%] border rounded-[2px] px-3 py-1 text-[15px]"
+                        className="w-[83%] border rounded-[2px] px-3 py-1"
                         required
                     />
                     <CalculatorPopover currentValue={draft.amount} onApply={(result) => updateDraft("amount", result)}/>
                 </div>
             </div>
 
-            <div className="flex flex-row gap-3 place-content-between items-start">
-                <label>Description</label>
+            <div className="flex flex-row gap-3 place-content-between">
+                <label htmlFor="description">Description</label>
                 <textarea
+                    id="description"
                     value={draft.description}
                     onChange={(e) => updateDraft("description", e.target.value)}
                     rows={3}
@@ -120,13 +115,13 @@ export default function TransactionForm({
             </div>
 
             <div className="flex flex-row items-center gap-3 place-content-between">
-                <label className="block font-medium">Date</label>
+                <label htmlFor="date">Date</label>
                 <input
-                    id="dateInput"
+                    id="date"
                     type="date"
                     value={draft.date}
                     onChange={(e) => updateDraft("date", e.target.value)}
-                    className="w-[260px] max-xs:w-[240px] border rounded-[2px] px-3 py-1 text-[15px]"
+                    className="w-[260px] max-xs:w-[240px] border rounded-[2px] px-3 py-1"
                     required
                 />
             </div>
@@ -136,10 +131,12 @@ export default function TransactionForm({
                     Cancel
                 </DefaultButton>
                 <DefaultButton submit={true}>
-                    <FloppyDriveXP size={20}/>
+                    <FloppyDriveXP size={20} draggable={false}/>
                     {draft.id ? "Save changes" : "Save"}
                 </DefaultButton>
             </div>
+
+            {error && <p className="w-full px-3 py-1 text-white msg-bg-red text-center">{error}</p>}
         </form>
     );
 }

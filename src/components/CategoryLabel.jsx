@@ -5,7 +5,7 @@ export default function CategoryLabel({ category, size = 16 }) {
     if (!category) {
         return (
             <Tooltip text="Uncategorized">
-                <div className="flex flex-row h-full gap-3">
+                <div className="flex flex-row gap-2">
                     <CategoryIcon name="Windows31ProgmanIcon" size={size} />
                     <span className="flex items-center">Uncategorized</span>
                 </div>
@@ -15,7 +15,7 @@ export default function CategoryLabel({ category, size = 16 }) {
 
     return (
         <Tooltip text={category.name}>
-            <div className="flex flex-row h-full gap-3">
+            <div className="flex flex-row gap-2 items-center">
                 <CategoryIcon name={category.icon} size={size} />
                 <span className="flex truncate items-center w-30 max-xs:hidden">{category.name}</span>
             </div>

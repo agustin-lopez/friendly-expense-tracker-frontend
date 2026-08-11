@@ -23,7 +23,7 @@ export default function TransactionTypeFilter({ value, onChange }) {
     }, [value]);
 
     return (
-        <div className="relative w-[100%] rounded-t-[3px] flex items-center justify-left custom-bg-2 border-t-3 border-gray-300">
+        <div className="relative w-full flex items-center justify-left custom-bg-2 border-t-3 border-gray-300">
             <span
                 className="absolute button-pressed"
                 style={{
@@ -41,7 +41,7 @@ export default function TransactionTypeFilter({ value, onChange }) {
                     <button
                         ref={(el) => (buttonRefs.current[option.value] = el)}
                         onClick={() => onChange(option.value)}
-                        className={`relative z-10 text-sm font-medium text-center whitespace-nowrap transition-colors font-semibold px-4 py-1 ${
+                        className={`relative z-10 text-sm font-bold px-4 py-1 ${
                             value === option.value
                                 ? "text-gray-900"
                                 : "text-gray-600 hover:text-gray-800"

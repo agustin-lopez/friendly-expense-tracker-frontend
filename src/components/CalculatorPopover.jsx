@@ -56,7 +56,7 @@ export default function CalculatorPopover({ currentValue, onApply }) {
     return (
         <div className="relative inline-block">
             <DefaultButton onClickAction={handleToggle} className="h-full">
-                {isOpen ? <WindowsXPExplorer size={16} /> : <WindowsXPCalculator size={16}/>}
+                {isOpen ? <WindowsXPExplorer size={16} draggable={false}/> : <WindowsXPCalculator size={16} draggable={false}/>}
             </DefaultButton>
 
             {isOpen && (
@@ -85,18 +85,34 @@ export default function CalculatorPopover({ currentValue, onApply }) {
                             </div>
 
                         ))}
-                    </div>
 
-                    <div className="flex flex-row place-content-between">
-                        <DefaultButton onClickAction={handleBackspace} fontSize="10">
-                            Backspace
-                        </DefaultButton>
-                        <DefaultButton onClickAction={handleClear}>
-                            Clear
-                        </DefaultButton>
-                        <DefaultButton onClickAction={handleEquals}>
-                            =
-                        </DefaultButton>
+                        <div className="white-button-wrap w-full! col-span-3">
+                            <button
+                                type="button"
+                                onClick={handleEquals}
+                                className="white-button text-sm w-full flex justify-center"
+                            >
+                                =
+                            </button>
+                        </div>
+                        <div className="white-button-wrap w-full! col-span-2">
+                            <button
+                                type="button"
+                                onClick={handleClear}
+                                className="white-button w-full flex justify-center"
+                            >
+                                Clear
+                            </button>
+                        </div>
+                        <div className="white-button-wrap w-full! col-span-2">
+                            <button
+                                type="button"
+                                onClick={handleBackspace}
+                                className="white-button text-xs w-full flex justify-center"
+                            >
+                                Backspace
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

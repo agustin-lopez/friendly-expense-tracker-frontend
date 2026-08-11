@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 import defaultBackground from "../assets/backgrounds/background.jpg";
 import xpBackground from "../assets/backgrounds/background-xp.jpg"
 import vaporwaveBackground from "../assets/backgrounds/background-vaporwave.jpg";

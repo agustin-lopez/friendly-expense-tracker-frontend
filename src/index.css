@@ -132,7 +132,7 @@ html {
 
 /* BUTTONS */
 .blue-button {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     background-color: #124CFB;
     box-shadow: inset 0 23px 4px #2A5AFD;

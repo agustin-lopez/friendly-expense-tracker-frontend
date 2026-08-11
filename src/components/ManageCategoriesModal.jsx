@@ -3,7 +3,7 @@ import BlueWindow from "./BlueWindow";
 import CategoryForm from "./CategoryForm";
 import ConfirmDialog from "./ConfirmDialog";
 import CategoryIcon from "./CategoryIcon";
-import {WindowsRecycleBin2, WordpadXP} from "react-old-icons";
+import {WindowsRecycleBin2, WindowsXPFolder2, WordpadXP} from "react-old-icons";
 import Tooltip from "./Tooltip.jsx";
 import DefaultButton from "./DefaultButton.jsx";
 import { sortCategories } from "../utils/sortCategories";
@@ -51,7 +51,7 @@ export default function ManageCategoriesModal({
     }
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center z-50">
             <BlueWindow
                 title={view === "list" ? "Manage categories" : (editingCategory ? "Edit category" : "New category")}
                 closable={true}
@@ -70,17 +70,12 @@ export default function ManageCategoriesModal({
                                             key={c.id}
                                             className="group flex items-center justify-between py-2 px-3 border-b border-gray-300 last:border-0"
                                         >
-                                            <div className="flex items-center gap-4">
+                                            <div className="flex items-center gap-3">
                                                 <span
-                                                    className={`text-xs p-1 rounded-[2px] w-[65px] text-center bg-[#edead6] border-1 border-gray-300 ${
-                                                        c.type === "EXPENSE"
-                                                            ? "text-red-700"
-                                                            : "text-green-700"
-                                                    }`}
-                                                >
+                                                    className="text-xs p-1 rounded-[2px] w-[65px] text-center bg-[#edead6] font-bold border-1 border-gray-300">
                                                     {c.type}
                                                 </span>
-                                                <CategoryIcon name={c.icon} size={22}/>
+                                                <CategoryIcon name={c.icon} size={22} draggable={false}/>
                                                 <Tooltip text={c.name}>
                                                     <span className="flex text-m max-w-[180px] truncate overflow-hidden">{c.name}</span>
                                                 </Tooltip>
@@ -90,12 +85,12 @@ export default function ManageCategoriesModal({
                                                 <button
                                                     onClick={() => handleEditClick(c)}
                                                 >
-                                                    <WordpadXP size={20}/>
+                                                    <WordpadXP size={20} draggable={false}/>
                                                 </button>
                                                 <button
                                                     onClick={() => setCategoryToDelete(c.id)}
                                                 >
-                                                    <WindowsRecycleBin2 size={20}/>
+                                                    <WindowsRecycleBin2 size={20} draggable={false}/>
                                                 </button>
                                             </div>
                                         </div>
@@ -109,6 +104,7 @@ export default function ManageCategoriesModal({
                                 </DefaultButton>
 
                                 <DefaultButton onClickAction={handleAddClick}>
+                                    <WindowsXPFolder2 size={20} draggable={false}/>
                                     Add category
                                 </DefaultButton>
                             </div>
@@ -125,7 +121,7 @@ export default function ManageCategoriesModal({
 
             <ConfirmDialog
                 isOpen={categoryToDelete !== null}
-                title="Delete category"
+                title="Delete category?"
                 message="Are you sure you want to delete this category? Transactions using it wii be marked as 'Uncategorized' and won't affect your balance."
                 onConfirm={confirmDelete}
                 confirmIcon="WindowsRecycleBin2"

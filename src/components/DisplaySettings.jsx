@@ -1,9 +1,9 @@
-import { useAppearance } from "../context/AppearanceContext";
+import { useDisplay } from "../context/DisplayContext.jsx";
 import { BACKGROUND_PRESETS } from "../constants/backgroundOptions.js";
 import { CURRENCY_OPTIONS } from "../constants/currencyOptions";
 
 export default function DisplaySettings() {
-    const { background, setBackground, setCustomColor, currency, setCurrency } = useAppearance();
+    const { background, setBackground, setCustomColor, currency, setCurrency } = useDisplay();
 
     return (
         <div className="m-6 flex flex-col gap-5">
@@ -13,8 +13,9 @@ export default function DisplaySettings() {
             </div>
 
             <div className="flex flex-row place-content-between">
-                <label className="block text-sm font-medium">Custom color</label>
+                <label htmlFor="custom-color-picker" className="block text-sm font-medium">Custom color</label>
                 <input
+                    id="custom-color-picker"
                     type="color"
                     value={background.type === "color" ? background.value : "#1e3a8a"}
                     onChange={(e) => setCustomColor(e.target.value)}
@@ -52,6 +53,7 @@ export default function DisplaySettings() {
                 <div className="custom-underline"></div>
             </div>
             <select
+                id="currency-select"
                 value={currency.code}
                 onChange={(e) => {
                     const selected = CURRENCY_OPTIONS.find((c) => c.code === e.target.value);

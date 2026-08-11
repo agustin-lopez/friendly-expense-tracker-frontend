@@ -1,7 +1,7 @@
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import {PieChart, Pie, Cell, Tooltip, ResponsiveContainer} from "recharts";
 import FaceOverlay from "./FaceOverlay";
 import { formatCurrency } from "../utils/formatCurrency";
-import { useAppearance } from "../context/AppearanceContext";
+import { useDisplay } from "../context/DisplayContext.jsx";
 
 const COLORS = ["#ec6464", "#925df1", "#71bb99", "#79af57",
                         "#2d725c", "#8dbac4", "#d9f658", "#9a9ae6",
@@ -16,7 +16,7 @@ export default function ExpensesByCategoryChart({ categoryTotals }) {
     }));
 
     const total = chartData.reduce((sum, entry) => sum + entry.value, 0);
-    const { currency } = useAppearance();
+    const { currency } = useDisplay();
 
     return (
         <div>
@@ -30,7 +30,7 @@ export default function ExpensesByCategoryChart({ categoryTotals }) {
                             cx="50%"
                             cy="50%"
                             outerRadius={100}
-                            animationDuration={100}
+                            animationDuration={50}
                             label={(entry) => {
                                 const percentage = ((entry.value / total) * 100).toFixed(1);
                                 return `${percentage}% (${formatCurrency(entry.value, currency.symbol)})`;
@@ -57,7 +57,7 @@ export default function ExpensesByCategoryChart({ categoryTotals }) {
             <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
                 {chartData.map((entry) => (
                     <div key={entry.name} className="flex items-center gap-1.5 text-sm">
-                        <span className="w-3 h-3 rounded-sm" style={{backgroundColor: entry.color}}/>
+                        <span className="w-3 h-3 rounded-[2px]" style={{backgroundColor: entry.color}}/>
                         {entry.name}
                     </div>
                 ))}

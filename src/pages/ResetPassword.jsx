@@ -46,11 +46,13 @@ export default function ResetPassword() {
 
                     {success ? (
                         <p className="w-full px-3 py-1 text-white msg-bg-green text-sm text-center">
-                            Password updated succesfully!
+                            Password updated successfully!
                         </p>
                     ) : (
-                        <form onSubmit={handleSubmit}
-                              className="bg-white p-8 pt-10 rounded-b-[3px] w-full flex flex-col gap-5 mx-auto">
+                        <form
+                            name="reset-password"
+                            onSubmit={handleSubmit}
+                            className="bg-white p-8 pt-10 rounded-b-[3px] w-full flex flex-col gap-5 mx-auto">
 
                             <div className="flex flex-row items-center gap-3 place-content-between">
                                 <label className="block text-sm font-medium">New password</label>

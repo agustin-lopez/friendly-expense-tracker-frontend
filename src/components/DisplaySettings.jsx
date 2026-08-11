@@ -1,8 +1,9 @@
 import { useAppearance } from "../context/AppearanceContext";
-import { BACKGROUND_PRESETS } from "../constants/appearanceOptions";
+import { BACKGROUND_PRESETS } from "../constants/backgroundOptions.js";
+import { CURRENCY_OPTIONS } from "../constants/currencyOptions";
 
-export default function AppearanceSettings() {
-    const { background, setBackground, setCustomColor } = useAppearance();
+export default function DisplaySettings() {
+    const { background, setBackground, setCustomColor, currency, setCurrency } = useAppearance();
 
     return (
         <div className="m-6 flex flex-col gap-5">
@@ -45,6 +46,25 @@ export default function AppearanceSettings() {
                     />
                 ))}
             </div>
+
+            <div>
+                <h3 className="text-sl font-semibold text-gray-700">Currency</h3>
+                <div className="custom-underline"></div>
+            </div>
+            <select
+                value={currency.code}
+                onChange={(e) => {
+                    const selected = CURRENCY_OPTIONS.find((c) => c.code === e.target.value);
+                    setCurrency(selected);
+                }}
+                className="w-[80%] border rounded px-3 py-2 text-sm"
+            >
+                {CURRENCY_OPTIONS.map((c) => (
+                    <option key={c.code} value={c.code}>
+                        {c.label}
+                    </option>
+                ))}
+            </select>
         </div>
     );
 }

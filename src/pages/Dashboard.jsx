@@ -212,16 +212,14 @@ export default function Dashboard() {
     return (
         <div className="min-h-screen md:py-20">
 
-            {/*MAIN CONTAINER*/}
             <BlueWindow title={user ? (`FET - ${getGreeting()}, ${user.name}!`) : ("My transactions")}
                         className="max-w-[40rem]">
 
-                {/*WHITE BOX*/}
+                {/*MAIN CONTAINER*/}
                 <div className="w-full">
                     {error && <p className="text-red-500 mb-4">{error}</p>}
 
-                    {/* TOP TITLE */}
-                    <div className="custom-bg-2 border-b-[3px] border-gray-300 p-4 flex flex-row place-content-between">
+                    <header className="custom-bg-2 border-b-[3px] border-gray-300 p-4 flex flex-row place-content-between">
                         <img src={Title}
                              alt="Friendly Expense Tracker title"
                              draggable="false"
@@ -231,63 +229,66 @@ export default function Dashboard() {
                             <WindowsXPShell32Icon274 size={20} draggable="false"/>
                             Settings
                         </DefaultButton>
-                    </div>
+                    </header>
 
-                    {/*SUMMARY CONTAINER*/}
-                    <div className="bg-white rounded-b-[3px] shadow-md">
-                        {/*BALANCE*/}
-                        <BalanceSummary summary={summary}/>
+                    <main>
+                        {/*SUMMARY + PIE CHART*/}
+                        <section aria-label="Financial sumary">
+                            {/*BALANCE*/}
+                            <BalanceSummary summary={summary}/>
 
-                        {/*CHART*/}
-                        <div className="bg-white rounded-lg p-5">
-                            <h2 className="text-l mb-4 text-gray-500">
-                                Now showing your <span className="font-bold text-gray-500">{typeFilter === "INCOME" ? "income" : "expenses"}</span>:
-                            </h2>
-                            <ExpensesByCategoryChart categoryTotals={categoryTotals}/>
-                        </div>
-                    </div>
+                            {/*PIE CHART*/}
+                            <div className="p-5">
+                                <h2 className="text-l mb-4 text-gray-500">
+                                    Now showing your <span className="font-bold text-gray-500">{typeFilter === "INCOME" ? "income" : "expenses"}</span>:
+                                </h2>
+                                <ExpensesByCategoryChart categoryTotals={categoryTotals}/>
+                            </div>
+                        </section>
 
-                    {/*TRANSACTION LIST*/}
-                    <div className="bg-[#f0f0f0] pb-5 flex flex-col gap-4">
-                        {/*FILTERS*/}
-                        <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange}/>
-                        {/*CUSTOM PAGINATION + CATEGORY MANAGEMENT*/}
-                        <div className="w-full flex flex-row place-content-between px-4">
-                            <MonthsPerPageSelector value={pageSize} onChange={handlePageSizeChange}/>
-                            <DefaultButton onClickAction={() => setIsManageCategoriesOpen(true)}>
-                                <WindowsXPmmcndmgr7 size={20} draggable="false"/>
-                                Manage categories
-                            </DefaultButton>
-                        </div>
+                        {/*TRANSACTIONS*/}
+                        <section aria-label="Transactions history" className="bg-[#f0f0f0] pb-5 flex flex-col gap-4">
+                            {/*FILTERS*/}
+                            <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange}/>
+                            {/*CUSTOM PAGINATION + CATEGORY MANAGEMENT*/}
+                            <div className="w-full flex flex-row place-content-between px-4">
+                                <MonthsPerPageSelector value={pageSize} onChange={handlePageSizeChange}/>
+                                <DefaultButton onClickAction={() => setIsManageCategoriesOpen(true)}>
+                                    <WindowsXPmmcndmgr7 size={20} draggable="false"/>
+                                    Manage categories
+                                </DefaultButton>
+                            </div>
 
-                        <TransactionsByMonth
-                            monthGroups={monthGroups}
-                            onDelete={handleDeleteClick}
-                            onEdit={handleEditClick}
-                        />
+                            {/*TRANSACTIONS LIST*/}
+                            <TransactionsByMonth
+                                monthGroups={monthGroups}
+                                onDelete={handleDeleteClick}
+                                onEdit={handleEditClick}
+                            />
 
-                        {/*NEW TRANSACTION BUTTON*/}
-                        <div className="flex flex-row items-center place-content-center gap-3">
-                            <button
-                                onClick={() => {
-                                    setEditingTransaction(null);
-                                    setTransactionDraft(emptyDraft());
-                                    setIsModalOpen(true);
-                                }}
-                                className="blue-button flex flex-row gap-2"
-                            >
-                                <OutlookExpressXP size={22} draggable="false"/>
-                                New transaction
-                            </button>
-                        </div>
+                            {/*NEW TRANSACTION BUTTON*/}
+                            <div className="flex flex-row items-center place-content-center gap-3">
+                                <button
+                                    onClick={() => {
+                                        setEditingTransaction(null);
+                                        setTransactionDraft(emptyDraft());
+                                        setIsModalOpen(true);
+                                    }}
+                                    className="blue-button flex flex-row gap-2"
+                                >
+                                    <OutlookExpressXP size={22} draggable="false"/>
+                                    New transaction
+                                </button>
+                            </div>
 
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={(page) => loadPage(page)}
-                        />
-                    </div>
-
+                            {/*PAGE SELECTOR*/}
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={(page) => loadPage(page)}
+                            />
+                        </section>
+                    </main>
                 </div>
             </BlueWindow>
 

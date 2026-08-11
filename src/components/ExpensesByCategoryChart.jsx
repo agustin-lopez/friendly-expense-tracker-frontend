@@ -1,6 +1,7 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import FaceOverlay from "./FaceOverlay";
 import { formatCurrency } from "../utils/formatCurrency";
+import { useAppearance } from "../context/AppearanceContext";
 
 const COLORS = ["#ec6464", "#925df1", "#71bb99", "#79af57",
                         "#2d725c", "#8dbac4", "#d9f658", "#9a9ae6",
@@ -15,6 +16,7 @@ export default function ExpensesByCategoryChart({ categoryTotals }) {
     }));
 
     const total = chartData.reduce((sum, entry) => sum + entry.value, 0);
+    const { currency } = useAppearance();
 
     return (
         <div>
@@ -31,14 +33,14 @@ export default function ExpensesByCategoryChart({ categoryTotals }) {
                             animationDuration={100}
                             label={(entry) => {
                                 const percentage = ((entry.value / total) * 100).toFixed(1);
-                                return `${percentage}% ($${formatCurrency(entry.value)})`;
+                                return `${percentage}% (${formatCurrency(entry.value, currency.symbol)})`;
                             }}
                         >
                             {chartData.map((entry, index) => (
                                 <Cell key={index} fill={entry.color}/>
                             ))}
                         </Pie>
-                        <Tooltip formatter={(value) => `$${formatCurrency(value)}`}
+                        <Tooltip formatter={(value) => `${formatCurrency(value, currency.symbol)}`}
                                  contentStyle={{
                                      backgroundColor: "#edead6",
                                      border: "1px solid #6a7282",

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { BACKGROUND_PRESETS } from "../constants/appearanceOptions";
+import { BACKGROUND_PRESETS } from "../constants/backgroundOptions.js";
+import { CURRENCY_OPTIONS } from "../constants/currencyOptions";
 
 const AppearanceContext = createContext(null);
 
@@ -15,8 +16,18 @@ function loadSavedBackground() {
     return BACKGROUND_PRESETS[0];
 }
 
+function loadSavedCurrency() {
+    const saved = localStorage.getItem("currency");
+    if (saved) {
+        const found = CURRENCY_OPTIONS.find((c) => c.code === saved);
+        if (found) return found;
+    }
+    return CURRENCY_OPTIONS[0];
+}
+
 export function AppearanceProvider({ children }) {
     const [background, setBackgroundState] = useState(loadSavedBackground);
+    const [currency, setCurrencyState] = useState(loadSavedCurrency);
 
     useEffect(() => {
         const html = document.documentElement;
@@ -43,12 +54,17 @@ export function AppearanceProvider({ children }) {
         localStorage.setItem("background", JSON.stringify(option));
     }
 
+    function setCurrency(currencyOption) {
+        setCurrencyState(currencyOption);
+        localStorage.setItem("currency", currencyOption.code);
+    }
+
     function setCustomColor(hexColor) {
         const custom = { id: "custom", type: "color", value: hexColor, label: "Custom" };
         setBackground(custom);
     }
 
-    const value = { background, setBackground, setCustomColor };
+    const value = { background, setBackground, setCustomColor, currency, setCurrency };
 
     return <AppearanceContext.Provider value={value}>{children}</AppearanceContext.Provider>;
 }

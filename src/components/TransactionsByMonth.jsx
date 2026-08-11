@@ -2,15 +2,20 @@ import Tooltip from "./Tooltip";
 import {WindowsRecycleBin2, WordpadXP} from "react-old-icons";
 import { formatCurrency } from "../utils/formatCurrency";
 import CategoryLabel from "./CategoryLabel";
+import { useAppearance } from "../context/AppearanceContext";
 
 function formatMonthLabel(monthKey) {
     const [year, month] = monthKey.split("-");
     const date = new Date(year, month - 1);
     const label = date.toLocaleDateString("en", { month: "long", year: "numeric" });
+
     return label.charAt(0).toUpperCase() + label.slice(1);
 }
 
 export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
+
+    const { currency } = useAppearance();
+
     if (monthGroups.length === 0) return <p className="text-gray-500 m-auto my-4 text-center">Your transactions will show up here X)</p>;
 
     return (
@@ -23,7 +28,7 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
                             {formatMonthLabel(group.month)}
                         </h3>
                         <span className={"font-semibold text-[#153CB2]"}>
-                            {group.total >= 0 ? "+" : "-"}${formatCurrency(Math.abs(group.total))}
+                            {group.total >= 0 ? "+" : "-"}{formatCurrency(Math.abs(group.total), currency.symbol)}
                         </span>
                     </div>
 
@@ -47,7 +52,7 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
                                     !t.category ? "text-gray-500" : t.category.type === "EXPENSE" ? "text-red-600" : "text-green-700"
                                 }`}>
                                     <span className="bg-white p-0.5">
-                                        {t.category ? (t.category.type === "EXPENSE" ? "-" : "+") : ""}${formatCurrency(t.amount)}
+                                        {t.category ? (t.category.type === "EXPENSE" ? "-" : "+") : ""}{formatCurrency(t.amount, currency.symbol)}
                                     </span>
                                 </td>
 

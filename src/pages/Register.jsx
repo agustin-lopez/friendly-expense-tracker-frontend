@@ -86,7 +86,7 @@ export default function Register() {
                                 <input
                                     type="password"
                                     value={password}
-                                    autoComplete="new-password"
+                                    autoComplete="off"
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="w-[260px] max-sm:w-[200px] max-xs:w-[170px] border rounded-[2px] px-3 py-1 text-[15px]"
                                     required
@@ -98,7 +98,7 @@ export default function Register() {
                                 <input
                                     type="password"
                                     value={confirmPassword}
-                                    autoComplete="new-password"
+                                    autoComplete="off"
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     className="w-[260px] max-sm:w-[200px] max-xs:w-[170px] border rounded-[2px] px-3 py-1 text-[15px]"
                                     required

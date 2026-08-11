@@ -24,6 +24,7 @@ input:-webkit-autofill:focus {
 
 html {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {

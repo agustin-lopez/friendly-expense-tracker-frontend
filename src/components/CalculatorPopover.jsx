@@ -48,8 +48,8 @@ export default function CalculatorPopover({ currentValue, onApply }) {
             const rounded = Math.round(result * 100) / 100;
             onApply(rounded);
             setExpression(String(rounded));
-        } catch (err) {
-            setError("Invalid expression");
+        } catch {
+            setError("Syntax error");
         }
     }
 
@@ -60,7 +60,7 @@ export default function CalculatorPopover({ currentValue, onApply }) {
             </DefaultButton>
 
             {isOpen && (
-                <div className="flex flex-col gap-3 absolute left-full top-0 ml-2 z-30  custom-bg-2 border rounded-[2px] shadow-lg p-4 w-50">
+                <div className="flex flex-col gap-3 absolute left-full max-lg:-left-42.5 max-lg:top-10 top-0 ml-2 z-30 custom-bg-2 border rounded-[2px] shadow-lg p-4 w-50">
                     <input
                         autoFocus
                         type="text"
@@ -69,7 +69,7 @@ export default function CalculatorPopover({ currentValue, onApply }) {
                         className="w-full border rounded-[2px] bg-white px-2 py-0.5 text-right font-mono"
                     />
 
-                    {/*{error && <p className="text-red-500 text-xs">{error}</p>}*/}
+                    {error && <p className="text-red-500 text-xs">{error}</p>}
 
                     {/*BUTTONS*/}
                     <div className="grid grid-cols-4 gap-1">
@@ -78,7 +78,7 @@ export default function CalculatorPopover({ currentValue, onApply }) {
                                 <button
                                     type="button"
                                     onClick={() => handleButtonClick(btn)}
-                                    className="white-button text-sm w-full"
+                                    className="white-button text-sm w-full flex justify-center"
                                 >
                                     {btn}
                                 </button>
@@ -97,20 +97,6 @@ export default function CalculatorPopover({ currentValue, onApply }) {
                         <DefaultButton onClickAction={handleEquals}>
                             =
                         </DefaultButton>
-                        {/*<button
-                            type="button"
-                            onClick={handleBackspace}
-                            className="border rounded py-1.5 text-sm hover:bg-gray-100"
-                        >
-                            ⌫
-                        </button>*/}
-                        {/*<button
-                            type="button"
-                            onClick={handleEquals}
-                            className="border rounded py-1.5 text-sm bg-blue-600 text-white hover:bg-blue-700"
-                        >
-                            =
-                        </button>*/}
                     </div>
                 </div>
             )}

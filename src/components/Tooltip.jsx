@@ -1,20 +1,33 @@
-import {useState, useRef, useLayoutEffect} from "react";
-import {createPortal} from "react-dom";
+import { useState, useRef, useLayoutEffect } from "react";
+import { createPortal } from "react-dom";
 
-export default function Tooltip({text, children = true}) {
+export default function Tooltip({ text, children }) {
     const [isVisible, setIsVisible] = useState(false);
-    const [coords, setCoords] = useState({top: 0, left: 0});
+    const [coords, setCoords] = useState({ top: -9999, left: -9999 });
     const triggerRef = useRef(null);
+    const tooltipRef = useRef(null);
 
     useLayoutEffect(() => {
-        if (isVisible && triggerRef.current) {
-            const rect = triggerRef.current.getBoundingClientRect();
-            setCoords({
-                top: rect.top,
-                left: rect.left + rect.width / 2,
-            });
+        if (!isVisible || !triggerRef.current || !tooltipRef.current) return;
+
+        const margin = 8;
+        const gap = 8;
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+        const tooltipRect = tooltipRef.current.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        let left = triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2;
+        left = Math.max(margin, Math.min(left, viewportWidth - tooltipRect.width - margin));
+
+        let top = triggerRect.top - tooltipRect.height - gap;
+        if (top < margin) {
+            top = triggerRect.bottom + gap;
         }
-    }, [isVisible]);
+        top = Math.max(margin, Math.min(top, viewportHeight - tooltipRect.height - margin));
+
+        setCoords({ top, left });
+    }, [isVisible, text]);
 
     return (
         <>
@@ -26,19 +39,22 @@ export default function Tooltip({text, children = true}) {
             >
                 {children}
             </div>
-            {isVisible && createPortal(
-                <div
-                    className="fixed z-50 -translate-x-1/2 -translate-y-full -mt-2"
-                    style={{ top: coords.top, left: coords.left }}
-                >
-                    <div className="custom-bg-2 text-[14px] rounded-[2px] p-3 whitespace-normal break-words border-1 border-r-3 border-b-3 border-gray-500 w-max max-w-64">
-                        {text}
-                    </div>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-500"/>
-                </div>,
-                document.body
-            )}
 
+            {isVisible &&
+                createPortal(
+                    <div
+                        ref={tooltipRef}
+                        className="fixed z-50"
+                        style={{ top: coords.top, left: coords.left }}
+                    >
+                        <div className="custom-bg-2 text-[14px] rounded-[2px] p-3 whitespace-normal break-words border-1 border-r-3 border-b-3 border-gray-500 w-max max-w-64">
+                            {text}
+                        </div>
+                    </div>,
+                    document.body
+                )}
         </>
     );
 }
+
+

@@ -59,7 +59,7 @@ export default function TransactionForm({
 
             <div className="flex flex-row items-center place-content-between">
                 <label>Category</label>
-                <div className="w-[260px] flex flex-row place-content-between">
+                <div className="w-[260px] max-xs:w-[240px] flex flex-row place-content-between">
                     <select
                         value={draft.categoryId}
                         onChange={(e) => updateDraft("categoryId", e.target.value)}
@@ -93,7 +93,7 @@ export default function TransactionForm({
 
             <div className="flex flex-row items-center gap-3 place-content-between">
                 <label>Amount</label>
-                <div className="w-[260px] flex flex-row place-content-between">
+                <div className="w-[260px] max-xs:w-[240px] flex flex-row place-content-between">
                     <input
                         type="number"
                         step="1"
@@ -115,7 +115,7 @@ export default function TransactionForm({
                     onChange={(e) => updateDraft("description", e.target.value)}
                     rows={3}
                     maxLength={120}
-                    className="w-[260px] text-sm border rounded-[2px] px-3 py-2 resize-none"
+                    className="w-[260px] max-xs:w-[240px] text-sm border rounded-[2px] px-3 py-2 resize-none"
                 />
             </div>
 
@@ -126,7 +126,7 @@ export default function TransactionForm({
                     type="date"
                     value={draft.date}
                     onChange={(e) => updateDraft("date", e.target.value)}
-                    className="w-[260px] border rounded-[2px] px-3 py-1 text-[15px]"
+                    className="w-[260px] max-xs:w-[240px] border rounded-[2px] px-3 py-1 text-[15px]"
                     required
                 />
             </div>

@@ -42,6 +42,9 @@ export default function ExpensesByCategoryChart({ categoryTotals }) {
                                  contentStyle={{
                                      backgroundColor: "#edead6",
                                      border: "1px solid #6a7282",
+                                     maxWidth: "220px",
+                                     whiteSpace: "normal",
+                                     wordBreak: "break-word",
                                  }}
                         />
                     </PieChart>

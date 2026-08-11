@@ -63,7 +63,7 @@ export default function Login() {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-[260px] max-xs:w-[200px] border rounded-[2px] px-3 py-1 text-[15px]"
+                            className="w-[260px] max-xs:w-[198px] border rounded-[2px] px-3 py-1 text-[15px]"
                             required
                         />
                     </div>
@@ -74,7 +74,7 @@ export default function Login() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-[260px] max-xs:w-[200px] border rounded-[2px] px-3 py-1 text-[15px]"
+                            className="w-[260px] max-xs:w-[198px] border rounded-[2px] px-3 py-1 text-[15px]"
                             required
                         />
                     </div>

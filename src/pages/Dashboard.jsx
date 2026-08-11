@@ -210,7 +210,7 @@ export default function Dashboard() {
     );
 
     return (
-        <div className="min-h-screen md:pt-20">
+        <div className="min-h-screen md:py-20">
 
             {/*MAIN CONTAINER*/}
             <BlueWindow title={user ? (`FET - ${getGreeting()}, ${user.name}!`) : ("My transactions")}

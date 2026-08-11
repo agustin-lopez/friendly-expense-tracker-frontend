@@ -103,7 +103,7 @@ export default function ManageCategoriesModal({
                                 )}
                             </div>
 
-                            <div className="flex flex-row justify-center gap-4 p-4 border-t border-gray-300">
+                            <div className="flex flex-row justify-center gap-4 p-4">
                                 <DefaultButton onClickAction={onClose}>
                                     Close
                                 </DefaultButton>
@@ -128,7 +128,7 @@ export default function ManageCategoriesModal({
                 title="Delete category"
                 message="Are you sure you want to delete this category? Transactions using it wii be marked as 'Uncategorized' and won't affect your balance."
                 onConfirm={confirmDelete}
-                confirmIcon="WindowsXPExplorer"
+                confirmIcon="WindowsRecycleBin2"
                 onCancel={() => setCategoryToDelete(null)}
             />
         </div>

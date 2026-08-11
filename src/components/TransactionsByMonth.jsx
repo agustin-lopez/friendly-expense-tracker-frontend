@@ -37,7 +37,7 @@ export default function TransactionsByMonth({ monthGroups, onDelete, onEdit }) {
                                         <CategoryLabel category={t.category} size={25}/>
                                 </td>
 
-                                <td className="p-2 max-w-[170px] max-sm:max-w-[100px]">
+                                <td className="p-2 max-w-[170px] max-sm:max-w-[90px]">
                                     <Tooltip text={t.description}>
                                         <span className="flex truncate">{t.description}</span>
                                     </Tooltip>

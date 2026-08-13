@@ -32,7 +32,7 @@ export default function Register() {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <BlueWindow title="Sign up" className="max-w-[30rem]">
+            <BlueWindow title="Sign up" className="sm:max-w-[30rem]">
                 <div
                     className="flex flex-col place-content-center w-full h-50 max-xs:h-40 custom-bg-3 border-b-4 border-[#0c3eb6] gap-3">
                     <img src={Title} alt="Friendly Expense Tracker title" draggable="false"

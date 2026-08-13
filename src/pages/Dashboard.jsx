@@ -217,7 +217,7 @@ export default function Dashboard() {
                 {/*MAIN CONTAINER*/}
                 <div className="w-full">
 
-                    <header className="custom-bg-2 border-b-[3px] border-gray-300 p-4 flex flex-row place-content-between">
+                    <header className="custom-bg-2 border-b-[2px] border-gray-300 p-4 flex flex-row place-content-between">
                         <img src={Title}
                              alt="Friendly Expense Tracker title"
                              draggable="false"

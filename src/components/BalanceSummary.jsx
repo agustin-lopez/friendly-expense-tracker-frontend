@@ -6,7 +6,7 @@ export default function BalanceSummary({ summary }) {
     const { currency } = useCurrency();
 
     return (
-        <div className="w-[100%] flex flex-row justify-center gap-4 px-2 py-3 custom-bg-2
+        <div className="w-[100%] flex flex-row justify-center gap-4 px-2 py-3 custom-bg-2 border-b-[3px] border-gray-300
                         text-sm font-bold text-gray-500 text-center">
             <div className="w-[30%] max-md:w-[25%]">
                 <p>Income</p>

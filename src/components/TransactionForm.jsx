@@ -92,7 +92,7 @@ export default function TransactionForm({
                         type="number"
                         step="1"
                         min="0"
-                        max="99999999"
+                        max="9999999"
                         value={draft.amount}
                         onChange={(e) => updateDraft("amount", e.target.value)}
                         className="w-[83%] border rounded-[2px] px-3 py-1"

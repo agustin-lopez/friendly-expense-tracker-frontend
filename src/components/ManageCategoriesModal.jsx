@@ -6,7 +6,6 @@ import CategoryIcon from "./CategoryIcon";
 import {WindowsRecycleBin2, WindowsXPFolder2, WordpadXP} from "react-old-icons";
 import Tooltip from "./Tooltip.jsx";
 import DefaultButton from "./DefaultButton.jsx";
-import { sortCategories } from "../utils/sortCategories";
 import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 
 export default function ManageCategoriesModal({
@@ -56,7 +55,7 @@ export default function ManageCategoriesModal({
                 title={view === "list" ? "Manage categories" : (editingCategory ? "Edit category" : "New category")}
                 closable={true}
                 onClose={onClose}
-                className="w-[30rem]"
+                className="w-[32rem]"
             >
                 <div className="flex flex-col gap-5 w-full p-6 max-xs:p-0">
                     {view === "list" ? (
@@ -65,36 +64,68 @@ export default function ManageCategoriesModal({
                                 {categories.length === 0 ? (
                                     <p className="text-gray-500 text-center text-sm">You have no categories yet :o </p>
                                 ) : (
-                                    sortCategories(categories).map((c) => (
-                                        <div
-                                            key={c.id}
-                                            className="group flex items-center justify-between py-2 px-3 border-b border-gray-300 last:border-0"
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <span
-                                                    className="text-xs p-1 rounded-[2px] w-[65px] text-center bg-[#edead6] font-bold border-1 border-gray-300">
-                                                    {c.type}
-                                                </span>
-                                                <CategoryIcon name={c.icon} size={22} draggable={false}/>
-                                                <Tooltip text={c.name}>
-                                                    <span className="flex text-m max-w-[180px] truncate overflow-hidden">{c.name}</span>
-                                                </Tooltip>
-                                            </div>
-                                            <div
-                                                className="flex justify-center gap-1 opacity-0 group-hover:opacity-100">
-                                                <button
-                                                    onClick={() => handleEditClick(c)}
-                                                >
-                                                    <WordpadXP size={20} draggable={false}/>
-                                                </button>
-                                                <button
-                                                    onClick={() => setCategoryToDelete(c.id)}
-                                                >
-                                                    <WindowsRecycleBin2 size={20} draggable={false}/>
-                                                </button>
-                                            </div>
+                                    <div className="space-y-5">
+                                        <div>
+                                            <h3 className="font-bold">EXPENSES</h3>
+                                            {categories.map((c) => c.type == 'EXPENSE' && (
+                                                <div
+                                                    className="group flex items-center justify-between py-2 px-3 border-b border-gray-300 last:border-0"
+                                                    key={c.id}>
+                                                    <div className="flex items-center gap-3">
+                                                        <CategoryIcon name={c.icon} size={22}/>
+                                                        <Tooltip text={c.name}>
+                                                            <span className="flex text-m max-w-[200px] truncate overflow-hidden">
+                                                                {c.name}
+                                                            </span>
+                                                        </Tooltip>
+                                                    </div>
+                                                    <div
+                                                        className="flex justify-center gap-1 md:opacity-0 group-hover:opacity-100">
+                                                        <button
+                                                            onClick={() => handleEditClick(c)}
+                                                        >
+                                                            <WordpadXP size={20} draggable={false}/>
+                                                        </button>
+                                                        <button
+                                                            onClick={() => setCategoryToDelete(c.id)}
+                                                        >
+                                                            <WindowsRecycleBin2 size={20} draggable={false}/>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
-                                    ))
+                                        <div>
+                                            <h3 className="font-bold">INCOME</h3>
+                                            {categories.map((c) => c.type == 'INCOME' && (
+                                                <div
+                                                    className="group flex items-center justify-between py-2 px-3 border-b border-gray-300 last:border-0"
+                                                    key={c.id}>
+                                                    <div className="flex items-center gap-3">
+                                                        <CategoryIcon name={c.icon} size={22}/>
+                                                        <Tooltip text={c.name}>
+                                                            <span className="flex text-m max-w-[200px] truncate overflow-hidden">
+                                                                {c.name}
+                                                            </span>
+                                                        </Tooltip>
+                                                    </div>
+                                                    <div
+                                                        className="flex justify-center gap-1 md:opacity-0 group-hover:opacity-100">
+                                                        <button
+                                                            onClick={() => handleEditClick(c)}
+                                                        >
+                                                            <WordpadXP size={20} draggable={false}/>
+                                                        </button>
+                                                        <button
+                                                            onClick={() => setCategoryToDelete(c.id)}
+                                                        >
+                                                            <WindowsRecycleBin2 size={20} draggable={false}/>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
                                 )}
                             </div>
 

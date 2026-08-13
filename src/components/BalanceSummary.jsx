@@ -1,9 +1,9 @@
 import { formatCurrency } from "../utils/formatCurrency";
-import { useDisplay } from "../context/DisplayContext.jsx";
+import { useCurrency } from "../context/CurrencyContext.jsx";
 
 export default function BalanceSummary({ summary }) {
     const { totalIncome, totalExpenses, balance } = summary;
-    const { currency } = useDisplay();
+    const { currency } = useCurrency();
 
     return (
         <div className="w-[100%] flex flex-row justify-center gap-4 px-2 py-3 custom-bg-2

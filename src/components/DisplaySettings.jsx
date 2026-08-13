@@ -1,9 +1,11 @@
-import { useDisplay } from "../context/DisplayContext.jsx";
+import { useBackground } from "../context/BackgroundContext.jsx";
+import { useCurrency } from "../context/CurrencyContext.jsx";
 import { BACKGROUND_PRESETS } from "../constants/backgroundOptions.js";
 import { CURRENCY_OPTIONS } from "../constants/currencyOptions";
 
 export default function DisplaySettings() {
-    const { background, setBackground, setCustomColor, currency, setCurrency } = useDisplay();
+    const { background, setBackground, setCustomColor } = useBackground();
+    const { currency, setCurrency } = useCurrency();
 
     return (
         <div className="m-6 flex flex-col gap-5">

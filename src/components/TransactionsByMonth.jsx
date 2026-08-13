@@ -2,7 +2,7 @@ import Tooltip from "./Tooltip";
 import {WindowsRecycleBin2, WordpadXP} from "react-old-icons";
 import {formatCurrency} from "../utils/formatCurrency";
 import CategoryLabel from "./CategoryLabel";
-import {useDisplay} from "../context/DisplayContext.jsx";
+import { useCurrency } from "../context/CurrencyContext.jsx";
 
 function formatMonthLabel(monthKey) {
     const [year, month] = monthKey.split("-");
@@ -14,7 +14,7 @@ function formatMonthLabel(monthKey) {
 
 export default function TransactionsByMonth({monthGroups, onDelete, onEdit}) {
 
-    const {currency} = useDisplay();
+    const {currency} = useCurrency();
 
     if (monthGroups.length === 0) return <p className="text-gray-500 m-auto my-4 text-center">Your transactions will
         show up here X)</p>;

@@ -25,6 +25,11 @@ input:-webkit-autofill:focus {
 html {
     overflow-y: scroll;
     overflow-x: hidden;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 ::-webkit-scrollbar {

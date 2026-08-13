@@ -1,7 +1,8 @@
 import {PieChart, Pie, Cell, Tooltip, ResponsiveContainer} from "recharts";
 import FaceOverlay from "./FaceOverlay";
 import { formatCurrency } from "../utils/formatCurrency";
-import { useDisplay } from "../context/DisplayContext.jsx";
+import { useCurrency } from "../context/CurrencyContext.jsx";
+import { useIsResizing } from "../hooks/useIsResizing";
 
 const COLORS = ["#ec6464", "#925df1", "#71bb99", "#79af57",
                         "#2d725c", "#8dbac4", "#d9f658", "#9a9ae6",
@@ -9,6 +10,9 @@ const COLORS = ["#ec6464", "#925df1", "#71bb99", "#79af57",
                         "#ed5c88", "#768c77", "#d9f1ab", "#5b7bf3"];
 
 export default function ExpensesByCategoryChart({ categoryTotals }) {
+
+    const isResizing = useIsResizing(200);
+
     const chartData = categoryTotals.map((c, index) => ({
         name: c.categoryName,
         value: parseFloat(c.total),
@@ -16,40 +20,43 @@ export default function ExpensesByCategoryChart({ categoryTotals }) {
     }));
 
     const total = chartData.reduce((sum, entry) => sum + entry.value, 0);
-    const { currency } = useDisplay();
+    const { currency } = useCurrency();
+
 
     return (
         <div>
             <div className="relative">
                 <ResponsiveContainer width="100%" height={300}>
-                    <PieChart>
-                        <Pie
-                            data={chartData}
-                            dataKey="value"
-                            nameKey="name"
-                            cx="50%"
-                            cy="50%"
-                            outerRadius={100}
-                            animationDuration={50}
-                            label={(entry) => {
-                                const percentage = ((entry.value / total) * 100).toFixed(1);
-                                return `${percentage}% (${formatCurrency(entry.value, currency.symbol)})`;
-                            }}
-                        >
-                            {chartData.map((entry, index) => (
-                                <Cell key={index} fill={entry.color}/>
-                            ))}
-                        </Pie>
-                        <Tooltip formatter={(value) => `${formatCurrency(value, currency.symbol)}`}
-                                 contentStyle={{
-                                     backgroundColor: "#edead6",
-                                     border: "1px solid #6a7282",
-                                     maxWidth: "220px",
-                                     whiteSpace: "normal",
-                                     wordBreak: "break-word",
-                                 }}
-                        />
-                    </PieChart>
+                    {!isResizing && (
+                        <PieChart>
+                            <Pie
+                                data={chartData}
+                                dataKey="value"
+                                nameKey="name"
+                                cx="50%"
+                                cy="50%"
+                                outerRadius={100}
+                                isAnimationActive={false}
+                                label={(entry) => {
+                                    const percentage = ((entry.value / total) * 100).toFixed(1);
+                                    return `${percentage}% (${formatCurrency(entry.value, currency.symbol)})`;
+                                }}
+                            >
+                                {chartData.map((entry, index) => (
+                                    <Cell key={index} fill={entry.color}/>
+                                ))}
+                            </Pie>
+                            <Tooltip formatter={(value) => `${formatCurrency(value, currency.symbol)}`}
+                                     contentStyle={{
+                                         backgroundColor: "#edead6",
+                                         border: "1px solid #6a7282",
+                                         maxWidth: "220px",
+                                         whiteSpace: "normal",
+                                         wordBreak: "break-word",
+                                     }}
+                            />
+                        </PieChart>
+                    )}
                 </ResponsiveContainer>
                 <FaceOverlay/>
             </div>

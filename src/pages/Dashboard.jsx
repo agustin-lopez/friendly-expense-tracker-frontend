@@ -27,6 +27,10 @@ import {WindowsXPShell32Icon274, WindowsXPmmcndmgr7, OutlookExpressXP} from "rea
 import MonthsPerPageSelector from "../components/MonthsPerPageSelector.jsx";
 import DefaultButton from "../components/DefaultButton.jsx";
 import {useAuth} from "../context/AuthContext.jsx";
+import { useDebouncedValue } from "../hooks/useDebouncedValue";
+import { searchTransactions } from "../services/transactionService";
+import SearchResults from "../components/SearchResults";
+import { Search } from "lucide-react";
 
 function formatDateForInput(apiDate) {
     if (!apiDate) return "";
@@ -66,6 +70,21 @@ export default function Dashboard() {
     const [transactionToDelete, setTransactionToDelete] = useState(null);
     const [isManageCategoriesOpen, setIsManageCategoriesOpen] = useState(false);
     const { user  } = useAuth();
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const debouncedQuery = useDebouncedValue(searchQuery, 200);
+    const isSearching = debouncedQuery.trim() !== "";
+
+    useEffect(() => {
+        if (!isSearching) return;
+
+        async function runSearch() {
+            const results = await searchTransactions(debouncedQuery, typeFilter);
+            setSearchResults(results);
+        }
+
+        runSearch();
+    }, [debouncedQuery, typeFilter]);
 
     const [pageSize, setPageSize] = useState(() => {
         const saved = localStorage.getItem("monthsPerPage");
@@ -244,6 +263,7 @@ export default function Dashboard() {
                                 <h2 className="text-l text-gray-500">
                                     Now showing your <span className="font-bold">{typeFilter === "INCOME" ? "income" : "expenses"}</span>:
                                 </h2>
+                                <div className="custom-underline"/>
                                 <ExpensesByCategoryChart categoryTotals={categoryTotals}/>
                             </div>
                         </section>
@@ -254,8 +274,20 @@ export default function Dashboard() {
                             {/*FILTERS*/}
                             <TransactionTypeFilter value={typeFilter} onChange={handleFilterChange}/>
                             {/*CUSTOM PAGINATION + CATEGORY MANAGEMENT*/}
-                            <div className="w-full flex flex-row place-content-between px-4">
+                            <div className="w-full flex items-center place-content-between px-4">
                                 <MonthsPerPageSelector value={pageSize} onChange={handlePageSizeChange}/>
+                                <div className="relative w-[170px] max-sm:w-[110px]">
+                                    <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                                    <input
+                                        id="search"
+                                        type="text"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        placeholder="Search"
+                                        className="w-full border rounded-[2px] pl-7 py-1 text-sm"
+                                    />
+                                </div>
+
                                 <DefaultButton onClickAction={() => setIsManageCategoriesOpen(true)}>
                                     <WindowsXPmmcndmgr7 size={20} draggable="false"/>
                                     Manage categories
@@ -263,11 +295,15 @@ export default function Dashboard() {
                             </div>
 
                             {/*TRANSACTIONS LIST*/}
-                            <TransactionsByMonth
-                                monthGroups={monthGroups}
-                                onDelete={handleDeleteClick}
-                                onEdit={handleEditClick}
-                            />
+                            {isSearching ? (
+                                <SearchResults results={searchResults} onEdit={handleEditClick} onDelete={handleDeleteClick} query={debouncedQuery} />
+                            ) : (
+                                <TransactionsByMonth
+                                    monthGroups={monthGroups}
+                                    onDelete={handleDeleteClick}
+                                    onEdit={handleEditClick}
+                                />
+                            )}
 
                             {/*NEW TRANSACTION BUTTON*/}
                             <button

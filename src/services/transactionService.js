@@ -19,3 +19,8 @@ export function getGroupedTransactions(page, type, size = 2) {
     const typeParam = type && type !== "ALL" ? `&type=${type}` : "";
     return apiClient.get(`/transactions/grouped?page=${page}&size=${size}${typeParam}`);
 }
+
+export function searchTransactions(query, type) {
+    const typeParam = type && type !== "ALL" ? `&type=${type}` : "";
+    return apiClient.get(`/transactions/search?query=${encodeURIComponent(query)}${typeParam}`);
+}

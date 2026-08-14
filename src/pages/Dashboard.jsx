@@ -276,6 +276,7 @@ export default function Dashboard() {
                             {/*CUSTOM PAGINATION + CATEGORY MANAGEMENT*/}
                             <div className="w-full flex items-center place-content-between px-4">
                                 <MonthsPerPageSelector value={pageSize} onChange={handlePageSizeChange}/>
+                                {/*SEARCH BAR*/}
                                 <div className="relative w-[170px] max-sm:w-[110px]">
                                     <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                                     <input
@@ -284,7 +285,7 @@ export default function Dashboard() {
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         placeholder="Search"
-                                        className="w-full border rounded-[2px] pl-7 py-1 text-sm"
+                                        className="w-full border rounded-[2px] pl-8.5 py-1 text-sm"
                                     />
                                 </div>
 

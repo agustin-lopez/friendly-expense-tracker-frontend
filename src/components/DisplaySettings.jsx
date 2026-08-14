@@ -31,7 +31,7 @@ export default function DisplaySettings() {
                         key={option.id}
                         type="button"
                         onClick={() => setBackground(option)}
-                        className={`h-20 max-sm:h-18 w-30 max-sm:w-24  max-xs:w-21 rounded border-2 ${
+                        className={`h-20 max-sm:h-18 w-35 max-sm:w-25  max-xs:w-21 rounded border-2 ${
                             background.id === option.id ? "border-blue-500" : "border-gray-200"
                         }`}
                         title={option.label}

@@ -4,7 +4,7 @@ import Tooltip from "./Tooltip";
 export default function XPWindow({ title, closable = false, onClose, children, className = "" }) {
     return (
         <div className={`blue-window mx-auto ${className}`}>
-            <div className="blue-window-bar w-100% flex flex-row justify-between content-center items-center py-2 px-3">
+            <div className="blue-window-bar w-100% flex flex-row justify-between items-center py-2 px-3">
                 <h2 className="text-white max-sm:max-w-[400px] max-xs:max-w-[310px] truncate">{title}</h2>
 
                 {closable ? (

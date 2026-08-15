@@ -45,7 +45,7 @@ export default function Register() {
                             Account created! Please check your email to verify it before logging in.
                         </p>
                         <div className="white-button-wrap">
-                            <Link to="/login" className="white-button">
+                            <Link to="/login" className="white-button text-[12px]">
                                 Back to login
                             </Link>
                         </div>
@@ -91,6 +91,7 @@ export default function Register() {
                                     id="password"
                                     type="password"
                                     value={password}
+                                    minLength={8}
                                     autoComplete="off"
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="w-[260px] max-sm:w-[200px] max-xs:w-[170px] border rounded-[2px] px-3 py-1 text-[15px]"
@@ -104,6 +105,7 @@ export default function Register() {
                                     id="confirm-password"
                                     type="password"
                                     value={confirmPassword}
+                                    minLength={8}
                                     autoComplete="off"
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     className="w-[260px] max-sm:w-[200px] max-xs:w-[170px] border rounded-[2px] px-3 py-1 text-[15px]"

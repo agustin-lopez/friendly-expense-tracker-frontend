@@ -59,6 +59,7 @@ export default function ResetPassword() {
                                 <input
                                     type="password"
                                     value={newPassword}
+                                    minLength={8}
                                     autoComplete="new-password"
                                     onChange={(e) => setNewPassword(e.target.value)}
                                     className="w-[260px] max-xs:w-[200px] border rounded-[2px] px-3 py-1 text-[15px]"
@@ -71,6 +72,7 @@ export default function ResetPassword() {
                                 <input
                                     type="password"
                                     value={confirmPassword}
+                                    minLength={8}
                                     autoComplete="new-password"
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     className="w-[260px] max-xs:w-[200px] border rounded-[2px] px-3 py-1 text-[15px]"

@@ -1,14 +1,16 @@
 import { useState } from "react";
-import {WindowsXPShutDown, WindowsXPUsers, SystemControlPanel} from 'react-old-icons';
+import {WindowsXPShutDown, WindowsXPUsers, SystemControlPanel, WindowsXPHelp} from 'react-old-icons';
 import { useAuth } from "../context/AuthContext";
 import ProfileSettings from "./ProfileSettings";
+import DisplaySettings from "./DisplaySettings.jsx";
+import AboutSettings from "./InfoSettings.jsx";
 import BlueWindow from "../components/BlueWindow.jsx";
 import {useLockBodyScroll} from "../hooks/useLockBodyScroll.js";
-import DisplaySettings from "./DisplaySettings.jsx";
 
 const SECTIONS = [
     { id: "profile", label: "Profile", icon: WindowsXPUsers },
     { id: "display", label: "Display", icon: SystemControlPanel },
+    { id: "info", label: "Info", icon: WindowsXPHelp },
 ];
 
 export default function SettingsModal({ isOpen, onClose }) {
@@ -37,7 +39,7 @@ export default function SettingsModal({ isOpen, onClose }) {
                                         className={`w-full flex items-center gap-3 px-3 py-2 max-xs:p-1 max-xs:justify-center ${
                                             activeSection === section.id
                                                 ? "bg-white text-black"
-                                                : "text-gray-600 hover:bg-slate-200"
+                                                : "text-gray-800 hover:bg-slate-200"
                                         }`}
                                     >
                                         <Icon size={28} draggable="false" />
@@ -63,6 +65,7 @@ export default function SettingsModal({ isOpen, onClose }) {
                     <div className="flex-1 overflow-y-auto">
                         {activeSection === "profile" && <ProfileSettings />}
                         {activeSection === "display" && <DisplaySettings />}
+                        {activeSection === "info" && <AboutSettings />}
                     </div>
                 </div>
             </BlueWindow>
